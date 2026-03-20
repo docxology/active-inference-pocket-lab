@@ -1,0 +1,112 @@
+/*
+ * ProficiencyMapPage.css — Proficiency Map Styles
+ */
+
+.proficiency-map-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.proficiency-map-page__header {
+  padding-top: var(--space-5);
+}
+
+.proficiency-map-page__header h1 {
+  font-size: var(--font-size-2xl);
+}
+
+.proficiency-map-page__header p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ─── Legend ─── */
+.proficiency-map-page__legend {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.proficiency-map-page__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.proficiency-map-page__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ─── Grid ─── */
+.proficiency-map-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.proficiency-map-page__module {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.proficiency-map-page__module.locked {
+  opacity: 0.4;
+}
+
+.proficiency-map-page__module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proficiency-map-page__module-icon {
+  font-size: 1.25rem;
+}
+
+.proficiency-map-page__module-number {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.proficiency-map-page__module-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.proficiency-map-page__streams {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: var(--space-1);
+}
+
+.proficiency-map-page__stream-bar {
+  height: 3px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.proficiency-map-page__stream-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+@media (min-width: 768px) {
+  .proficiency-map-page__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

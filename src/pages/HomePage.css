@@ -1,0 +1,157 @@
+/*
+ * HomePage.css — Home Page Styles
+ */
+
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-page .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-10);
+}
+
+/* ─── Hero ─── */
+.home-page__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.home-page__logo {
+  font-size: 4rem;
+  animation: spin 8s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 184, 107, 0.4));
+}
+
+.home-page__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  background: var(--gradient-spin);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-page__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.home-page__tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  max-width: 300px;
+}
+
+/* ─── Resume Card ─── */
+.home-page__resume {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  border-radius: var(--radius-lg);
+}
+
+.home-page__resume-icon {
+  font-size: 2rem;
+}
+
+.home-page__resume-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.home-page__resume-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.home-page__resume-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.home-page__resume-arrow {
+  font-size: var(--font-size-xl);
+  color: var(--color-accent);
+}
+
+/* ─── Start Button ─── */
+.home-page__start {
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-4) var(--space-6);
+  background: var(--gradient-pulse);
+  color: white;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 20px var(--color-pulse-glow);
+  min-height: var(--touch-target-comfortable);
+}
+
+.home-page__start:hover {
+  box-shadow: 0 8px 32px var(--color-pulse-glow);
+}
+
+/* ─── Stats ─── */
+.home-page__stats {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.home-page__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.home-page__stat-value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.home-page__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ─── Quote ─── */
+.home-page__quote {
+  max-width: 320px;
+  padding: var(--space-4);
+  border-left: 2px solid var(--color-accent);
+}
+
+.home-page__quote p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+}

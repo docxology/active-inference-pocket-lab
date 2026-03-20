@@ -1,0 +1,133 @@
+/*
+ * InferenceSlider.css — Touch-Optimized Slider Styles
+ * 
+ * Minimum 48px touch target. Generous spacing. Glow feedback.
+ */
+
+.inference-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4) 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── Value Display ─── */
+.inference-slider__value-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--slider-color);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--slider-color) 20%, transparent);
+  transition: box-shadow var(--transition-normal);
+}
+
+.inference-slider.interacting .inference-slider__value-display {
+  box-shadow: 0 0 40px color-mix(in srgb, var(--slider-color) 40%, transparent);
+}
+
+.inference-slider__value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--slider-color);
+}
+
+/* ─── Label ─── */
+.inference-slider__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ─── Track ─── */
+.inference-slider__track-container {
+  position: relative;
+  width: 100%;
+  padding: var(--space-4) 0;
+}
+
+.inference-slider__track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.inference-slider__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--slider-percentage);
+  background: var(--slider-color);
+  border-radius: var(--radius-full);
+  transition: width 0.05s linear;
+}
+
+.inference-slider__thumb-glow {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--slider-color);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+/* ─── Native Input (overlaid) ─── */
+.inference-slider__track-container input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ─── Customize range input for better touch ─── */
+.inference-slider__track-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  border-radius: var(--radius-full);
+  background: transparent;
+  cursor: pointer;
+}
+
+.inference-slider__track-container input[type="range"]::-moz-range-thumb {
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* ─── Range Labels ─── */
+.inference-slider__range-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--space-1);
+}
+
+.inference-slider__range-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}

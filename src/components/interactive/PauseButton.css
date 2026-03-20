@@ -1,0 +1,56 @@
+/*
+ * PauseButton.css — Pause/Rest Button Styles
+ */
+
+.pause-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+}
+
+.pause-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid rgba(184, 169, 232, 0.2);
+  border-radius: var(--radius-xl);
+  color: var(--color-pause);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+  min-height: var(--touch-target-comfortable);
+}
+
+.pause-button:hover {
+  background: var(--color-bg-elevated);
+  border-color: rgba(184, 169, 232, 0.4);
+  box-shadow: 0 0 24px rgba(184, 169, 232, 0.15);
+}
+
+.pause-button.paused {
+  background: linear-gradient(135deg, rgba(184, 169, 232, 0.15), rgba(255, 184, 107, 0.1));
+  border-color: rgba(255, 184, 107, 0.3);
+  color: var(--color-accent);
+}
+
+.pause-button__icon {
+  font-size: 1.5rem;
+}
+
+.pause-button__text {
+  letter-spacing: 0.02em;
+}
+
+.pause-button__message {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  max-width: 280px;
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+}

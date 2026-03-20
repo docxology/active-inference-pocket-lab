@@ -1,0 +1,56 @@
+/*
+ * BottomNav.css — Bottom Navigation Styles
+ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: var(--nav-height);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) 0;
+  position: relative;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+  min-height: var(--touch-target-min);
+  border-radius: 0;
+}
+
+.bottom-nav__item.active {
+  color: var(--color-text-primary);
+}
+
+.bottom-nav__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.bottom-nav__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.02em;
+}
+
+.bottom-nav__dot {
+  position: absolute;
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+}

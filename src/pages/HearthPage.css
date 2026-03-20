@@ -1,0 +1,122 @@
+/*
+ * HearthPage.css — Hearth Community Styles
+ */
+
+.hearth-page .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.hearth-page__header {
+  padding-top: var(--space-5);
+}
+
+.hearth-page__header h1 {
+  font-size: var(--font-size-2xl);
+}
+
+.hearth-page__header p {
+  color: var(--color-text-muted);
+}
+
+.hearth-page__flame {
+  font-size: 4rem;
+  filter: drop-shadow(0 0 30px rgba(255, 184, 107, 0.5));
+}
+
+/* ─── Stats ─── */
+.hearth-page__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.hearth-page__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+}
+
+.hearth-page__stat-value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-hearth);
+}
+
+.hearth-page__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+}
+
+/* ─── Sections ─── */
+.hearth-page__section {
+  width: 100%;
+  text-align: left;
+}
+
+.hearth-page__section h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-2);
+}
+
+.hearth-page__section-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.hearth-page__empty-state {
+  padding: var(--space-6);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.hearth-page__empty-state p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ─── Badges ─── */
+.hearth-page__badges {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.hearth-page__badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  opacity: 0.4;
+  min-width: 100px;
+}
+
+.hearth-page__badge.earned {
+  opacity: 1;
+  border-color: rgba(255, 184, 107, 0.3);
+  box-shadow: 0 0 16px rgba(255, 184, 107, 0.1);
+}
+
+.hearth-page__badge-icon {
+  font-size: 1.5rem;
+}
+
+.hearth-page__badge-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}

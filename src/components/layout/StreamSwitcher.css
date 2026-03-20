@@ -1,0 +1,63 @@
+/*
+ * StreamSwitcher.css — Triple-Stream Selector Styles
+ */
+
+.stream-switcher {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-xl);
+  position: relative;
+}
+
+.stream-switcher__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+  transition: color var(--transition-fast);
+  min-height: 44px;
+}
+
+.stream-switcher__tab.active {
+  color: var(--color-text-primary);
+}
+
+.stream-switcher__tab.stream-pulse.active {
+  color: var(--color-pulse);
+}
+
+.stream-switcher__tab.stream-vision.active {
+  color: var(--color-vision);
+}
+
+.stream-switcher__tab.stream-core.active {
+  color: var(--color-core);
+}
+
+.stream-switcher__indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  box-shadow: var(--shadow-sm);
+}
+
+.stream-switcher__emoji {
+  font-size: 1rem;
+}
+
+.stream-switcher__label {
+  font-family: var(--font-family-display);
+  letter-spacing: 0.02em;
+}

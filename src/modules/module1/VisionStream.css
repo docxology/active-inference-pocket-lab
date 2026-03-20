@@ -1,0 +1,60 @@
+/*
+ * VisionStream.css — Module 1 Vision Styles
+ */
+
+.vision-stream {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-4);
+}
+
+/* ─── Canvas ─── */
+.vision-stream__canvas-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 400px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(124, 107, 255, 0.15);
+  box-shadow: 0 0 32px var(--color-vision-glow);
+}
+
+.vision-stream__canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vision-stream__canvas-label {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-vision-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+/* ─── Controls ─── */
+.vision-stream__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Hint ─── */
+.vision-stream__hint {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-vision-soft);
+  padding: var(--space-3);
+}

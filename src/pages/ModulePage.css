@@ -1,0 +1,111 @@
+/*
+ * ModulePage.css — Module View Styles
+ */
+
+.module-page {
+  padding-top: 0 !important;
+}
+
+.module-page__header {
+  padding: var(--space-4) 0 var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: var(--space-4);
+}
+
+.module-page__back {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-2) 0;
+  min-height: auto;
+  margin-bottom: var(--space-3);
+}
+
+.module-page__back:hover {
+  color: var(--color-text-primary);
+}
+
+.module-page__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.module-page__icon {
+  font-size: 2rem;
+}
+
+.module-page__title {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+.module-page__subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.module-page__content {
+  flex: 1;
+  padding: var(--space-4) 0;
+}
+
+.module-page__placeholder {
+  text-align: center;
+  padding: var(--space-10) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.module-page__placeholder p {
+  font-size: var(--font-size-lg);
+}
+
+/* Progress Bar */
+.module-page__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+}
+
+.module-page__progress-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.module-page__progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.module-page__progress-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-display);
+}
+
+.module-page__progress-value {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+}
+
+.module-page__progress-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.module-page__progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  min-width: 0;
+}

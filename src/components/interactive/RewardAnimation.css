@@ -1,0 +1,47 @@
+/*
+ * RewardAnimation.css — Orbital Burst Styles
+ */
+
+.reward-animation {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+}
+
+.reward-animation__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-spin);
+  box-shadow: 0 0 60px rgba(255, 184, 107, 0.4);
+}
+
+.reward-animation__message {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-inverse);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.reward-animation__particle {
+  position: absolute;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.reward-animation__ring {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-accent);
+  pointer-events: none;
+}

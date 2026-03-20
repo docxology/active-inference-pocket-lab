@@ -1,0 +1,136 @@
+/*
+ * ModuleListPage.css — Module Catalog Styles
+ */
+
+.module-list-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.module-list-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-5);
+}
+
+.module-list-page__header h1 {
+  font-size: var(--font-size-3xl);
+}
+
+.module-list-page__header p {
+  color: var(--color-text-muted);
+}
+
+/* ─── Grid ─── */
+.module-list-page__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ─── Module Card ─── */
+.module-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  text-align: left;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.module-card:hover:not(.locked) {
+  background: rgba(35, 40, 57, 0.8);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.module-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.module-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.module-card__number {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.module-card__icon {
+  font-size: 1.5rem;
+}
+
+.module-card__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.module-card__subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.module-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ─── Progress ─── */
+.module-card__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.module-card__progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.module-card__progress-fill {
+  height: 100%;
+  background: var(--gradient-spin);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+.module-card__progress-text {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  min-width: 32px;
+  text-align: right;
+}
+
+.module-card__coming-soon {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .module-list-page__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}

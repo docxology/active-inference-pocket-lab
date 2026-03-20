@@ -1,0 +1,91 @@
+/*
+ * PausePage.css — Pause Page Styles
+ */
+
+.pause-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pause-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+  padding-top: var(--space-10);
+}
+
+.pause-page__moon {
+  font-size: 4rem;
+  animation: breathe 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(184, 169, 232, 0.4));
+}
+
+.pause-page__content h1 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-pause);
+}
+
+.pause-page__content > p {
+  max-width: 300px;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ─── Bookmark ─── */
+.pause-page__bookmark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+}
+
+.pause-page__bookmark-icon {
+  font-size: 2rem;
+}
+
+.pause-page__bookmark-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pause-page__bookmark-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pause-page__bookmark-title {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.pause-page__bookmark-stream {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.pause-page__resume-link {
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-2);
+  min-height: auto;
+  min-width: auto;
+}
+
+.pause-page__since {
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-text-muted) !important;
+  font-style: italic;
+}

@@ -1,0 +1,88 @@
+/*
+ * CoreStream.css — Module 1 Core (Academic) Styles
+ */
+
+.core-stream {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5);
+}
+
+.core-stream__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.core-stream__intro h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+}
+
+.core-stream__intro p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.core-stream__intro strong {
+  color: var(--color-core);
+}
+
+/* ─── Sandbox Toggle ─── */
+.core-stream__sandbox-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background: var(--gradient-core);
+  color: var(--color-text-inverse);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 16px var(--color-core-glow);
+  min-height: var(--touch-target-comfortable);
+}
+
+.core-stream__sandbox-toggle:hover {
+  box-shadow: 0 6px 24px var(--color-core-glow);
+}
+
+/* ─── Sandbox (in Drawer) ─── */
+.core-stream__sandbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.core-stream__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.core-stream__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.core-stream__metric-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.core-stream__metric-value {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
