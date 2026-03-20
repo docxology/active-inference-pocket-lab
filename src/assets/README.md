@@ -5,6 +5,7 @@ Build-processed static assets (images, fonts, etc.).
 ## Usage
 
 Unlike `public/`, files in `src/assets/` are processed by Vite's build pipeline:
+
 - Hashed filenames for cache busting
 - Optimized and bundled
 

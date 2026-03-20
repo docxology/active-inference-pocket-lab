@@ -4,16 +4,20 @@ Logging conventions and component prefixes for Spin.
 
 ## Convention
 
-All console logs use a **bracketed component prefix** for traceability:
+All logging in Spin is routed through the central `src/utils/logger.js` utility, which provides a **bracketed component prefix** and enables test-environment silencing.
 
 ```js
-console.log('[ComponentName] Message', data);
+import { createLogger } from '../utils/logger';
+
+const log = createLogger('ComponentName');
+log.debug('Loaded', data);
 ```
 
 This convention enables:
 - Quick identification of log sources in browser DevTools
-- Filtering logs by component name
-- Understanding state change flow across the app
+- Centralized filtering by log level (`debug`, `info`, `warn`, `error`)
+- Automatic history collection (when enabled)
+- Clean test output (suppressed by default in tests)
 
 ## Component Log Prefixes
 

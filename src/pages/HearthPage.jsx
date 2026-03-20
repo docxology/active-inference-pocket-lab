@@ -3,7 +3,7 @@
  * @description Replaces the 'Arena' (leaderboards) with the 'Hearth.'
  * Celebrates clarity, support, and 'Good Questions.'
  * Uses animations as emotional rewards for consistency (the 'Spin').
- * 
+ *
  * @module pages/HearthPage
  */
 import { motion } from 'framer-motion';
@@ -40,15 +40,30 @@ export default function HearthPage() {
 
         {/* Stats */}
         <div className="hearth-page__stats">
-          <motion.div className="hearth-page__stat glass" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          <motion.div
+            className="hearth-page__stat glass"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
             <span className="hearth-page__stat-value">{totalMinutes}</span>
             <span className="hearth-page__stat-label">Minutes of Active Learning</span>
           </motion.div>
-          <motion.div className="hearth-page__stat glass" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+          <motion.div
+            className="hearth-page__stat glass"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
             <span className="hearth-page__stat-value">{sessions.length}</span>
             <span className="hearth-page__stat-label">Sessions Completed</span>
           </motion.div>
-          <motion.div className="hearth-page__stat glass" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+          <motion.div
+            className="hearth-page__stat glass"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <span className="hearth-page__stat-value">{currentStreak}</span>
             <span className="hearth-page__stat-label">Day Streak (Spins)</span>
           </motion.div>

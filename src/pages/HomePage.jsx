@@ -2,7 +2,7 @@
  * @file HomePage.jsx — Landing / Home Page
  * @description The first screen users see. Introduces Spin and provides
  * quick access to resume or begin a module.
- * 
+ *
  * @module pages/HomePage
  */
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +30,9 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="home-page__logo" aria-hidden="true">🌀</div>
+          <div className="home-page__logo" aria-hidden="true">
+            🌀
+          </div>
           <h1 className="home-page__title">Spin</h1>
           <p className="home-page__subtitle">The Active Inference Pocket Lab</p>
           <p className="home-page__tagline">
@@ -99,9 +101,7 @@ export default function HomePage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          <p>
-            "You are an architect of a world in formation."
-          </p>
+          <p>"You are an architect of a world in formation."</p>
         </motion.blockquote>
       </div>
     </div>

@@ -4,19 +4,19 @@ Shared utility modules for Spin.
 
 ## Modules
 
-| Module | File | Purpose |
-| --- | --- | --- |
-| Haptics | `haptics.js` | Vibration API wrapper with 4 intensity patterns |
-| Logger | `logger.js` | Configurable structured logging with component prefixes |
+| Module  | File         | Purpose                                                 |
+| ------- | ------------ | ------------------------------------------------------- |
+| Haptics | `haptics.js` | Vibration API wrapper with 4 intensity patterns         |
+| Logger  | `logger.js`  | Configurable structured logging with component prefixes |
 
 ## Haptic Patterns
 
-| Function | Duration | Use Case |
-| --- | --- | --- |
-| `hapticLight()` | 10ms | Slider change, button press |
-| `hapticMedium()` | 25ms | Step advance, stream switch |
-| `hapticSuccess()` | 5-pulse | Module completion |
-| `hapticReward()` | 7-pulse | Spin animation celebration |
+| Function          | Duration | Use Case                    |
+| ----------------- | -------- | --------------------------- |
+| `hapticLight()`   | 10ms     | Slider change, button press |
+| `hapticMedium()`  | 25ms     | Step advance, stream switch |
+| `hapticSuccess()` | 5-pulse  | Module completion           |
+| `hapticReward()`  | 7-pulse  | Spin animation celebration  |
 
 ## Logger API
 

@@ -2,7 +2,7 @@
  * @file BottomNav.jsx — Mobile Bottom Navigation
  * @description Five-tab bottom navigation: Home, Modules, Hearth, Map, Pause.
  * Touch-optimized with 48px minimum targets.
- * 
+ *
  * @module components/layout/BottomNav
  */
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,11 +10,11 @@ import { motion } from 'framer-motion';
 import './BottomNav.css';
 
 const NAV_ITEMS = [
-  { path: '/',          label: 'Home',    icon: '🌀' },
-  { path: '/modules',   label: 'Modules', icon: '📚' },
-  { path: '/hearth',    label: 'Hearth',  icon: '🔥' },
-  { path: '/map',       label: 'Map',     icon: '🗺️' },
-  { path: '/pause',     label: 'Pause',   icon: '🌙' },
+  { path: '/', label: 'Home', icon: '🌀' },
+  { path: '/modules', label: 'Modules', icon: '📚' },
+  { path: '/hearth', label: 'Hearth', icon: '🔥' },
+  { path: '/map', label: 'Map', icon: '🗺️' },
+  { path: '/pause', label: 'Pause', icon: '🌙' },
 ];
 
 /**
@@ -28,7 +28,8 @@ export default function BottomNav() {
   return (
     <nav className="bottom-nav glass" role="navigation" aria-label="Main navigation">
       {NAV_ITEMS.map((item) => {
-        const isActive = location.pathname === item.path ||
+        const isActive =
+          location.pathname === item.path ||
           (item.path !== '/' && location.pathname.startsWith(item.path));
 
         return (

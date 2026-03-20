@@ -2,7 +2,7 @@
  * @file RewardAnimation.jsx — Orbital Reward Burst
  * @description The "Spin" animation — orbiting particles that burst on completion.
  * Used as emotional rewards for consistency rather than competition.
- * 
+ *
  * @module components/interactive/RewardAnimation
  */
 import { useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ function generateParticles(count = 12) {
 
 /**
  * RewardAnimation — Orbiting particle burst for completions.
- * 
+ *
  * @param {Object} props
  * @param {boolean} props.active - Whether to show the animation
  * @param {Function} [props.onComplete] - Callback when animation finishes

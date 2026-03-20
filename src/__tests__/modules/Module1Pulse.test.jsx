@@ -13,9 +13,7 @@ function renderWithProviders(ui) {
   return render(
     <BrowserRouter>
       <AppProvider>
-        <ActivityBankProvider>
-          {ui}
-        </ActivityBankProvider>
+        <ActivityBankProvider>{ui}</ActivityBankProvider>
       </AppProvider>
     </BrowserRouter>,
   );
@@ -35,7 +33,7 @@ describe('Module 1 — PulseStream', () => {
   it('shows continue button after slider interaction', () => {
     renderWithProviders(<PulseStream />);
     const slider = screen.getByLabelText('Your Prior Belief');
-    
+
     act(() => {
       fireEvent.change(slider, { target: { value: '30' } });
     });

@@ -3,9 +3,9 @@
  * @description The primary interaction element of Spin.
  * Every module starts with a physical action — this slider is that action.
  * Large touch target, visual feedback, real-time value display.
- * 
+ *
  * Philosophy: "The First Threshold" — no walls of text, start with action.
- * 
+ *
  * @module components/interactive/InferenceSlider
  */
 import { useState, useCallback, useRef } from 'react';
@@ -14,7 +14,7 @@ import './InferenceSlider.css';
 
 /**
  * InferenceSlider — Touch-optimized range slider with visual feedback.
- * 
+ *
  * @param {Object} props
  * @param {number} [props.min=0] - Minimum value
  * @param {number} [props.max=100] - Maximum value

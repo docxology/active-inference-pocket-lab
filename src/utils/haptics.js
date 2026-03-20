@@ -2,7 +2,7 @@
  * @file haptics.js — Haptic feedback utility
  * @description Provides touch feedback via the Vibration API.
  * Degrades gracefully on devices without vibration support.
- * 
+ *
  * @module utils/haptics
  */
 

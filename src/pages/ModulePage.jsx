@@ -3,7 +3,7 @@
  * @description Container for a module's three streams with the StreamSwitcher.
  * Routes to the active stream component based on AppContext state.
  * Includes a progress bar showing per-stream completion.
- * 
+ *
  * @module pages/ModulePage
  */
 import { useEffect } from 'react';
@@ -164,9 +164,7 @@ export default function ModulePage() {
                 exit={{ opacity: 0 }}
               >
                 <p>✨ This stream is being built. Check back soon!</p>
-                <p className="text-label">
-                  {mod.streams[activeStream]}
-                </p>
+                <p className="text-label">{mod.streams[activeStream]}</p>
               </motion.div>
             )}
           </AnimatePresence>

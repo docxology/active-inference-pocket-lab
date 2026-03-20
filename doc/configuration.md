@@ -106,6 +106,14 @@ Configure your host to redirect all routes to `index.html` (since we use Browser
 | Key | Context | Data |
 | --- | --- | --- |
 | `spin_activity_bank` | ActivityBankContext | Pause state, bookmarks, sessions, streak |
+| `spin_module_progress` | AppContext | Progress per module per stream (0-100) |
+
+## Orchestration (`run.sh`)
+
+Use the `run.sh` thin orchestrator at the repository root as the primary command interface:
+- `./run.sh` - Full pipeline (install, test, dev server)
+- `./run.sh test` - Execute tests
+- `./run.sh build` - Production bundle
 
 ## Future Configuration TODOs
 
@@ -113,4 +121,3 @@ Configure your host to redirect all routes to `index.html` (since we use Browser
 - [ ] Service worker for offline support
 - [ ] IndexedDB for larger data storage
 - [ ] Dark/light theme toggle (currently dark-only)
-- [ ] Module progress persistence to localStorage

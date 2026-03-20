@@ -5,13 +5,16 @@ Test infrastructure and setup for Vitest.
 ## Files
 
 ### `setup.js`
+
 Test setup file loaded before every test suite (configured in `vite.config.js`):
+
 - **localStorage polyfill** for jsdom environments
 - **Jest DOM matchers** via `@testing-library/jest-dom`
 
 ## Configuration
 
 Testing is configured in `vite.config.js`:
+
 ```js
 test: {
   globals: true,           // No need to import describe/it/expect

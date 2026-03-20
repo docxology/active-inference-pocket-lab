@@ -2,7 +2,7 @@
  * @file StreamSwitcher.jsx — Triple-Stream Selector
  * @description Segmented control for switching between Pulse, Vision, and Core streams.
  * Uses animated indicator with stream-specific colors.
- * 
+ *
  * @module components/layout/StreamSwitcher
  */
 import { motion } from 'framer-motion';

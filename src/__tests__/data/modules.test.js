@@ -3,7 +3,12 @@
  * @description Tests the module data layer.
  */
 import { describe, it, expect } from 'vitest';
-import modules, { getAllModules, getModuleById, getModuleBySlug, getAvailableModules } from '../../data/modules';
+import modules, {
+  getAllModules,
+  getModuleById,
+  getModuleBySlug,
+  getAvailableModules,
+} from '../../data/modules';
 
 describe('Module Registry', () => {
   it('exports 10 modules', () => {

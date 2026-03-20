@@ -23,6 +23,7 @@ Manages the Triple-Stream Architecture state and module progress.
 | `updateProgress(moduleId, stream, progress)` | number, string, number | Update stream progress |
 
 **Exported Constants:**
+
 - `STREAMS` — `{ PULSE: 'pulse', VISION: 'vision', CORE: 'core' }`
 
 ### ActivityBankContext (`ActivityBankContext.jsx`)

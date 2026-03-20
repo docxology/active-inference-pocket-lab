@@ -4,14 +4,14 @@ Route-level page components for Spin.
 
 ## Pages
 
-| Page | File | Route | Description |
-| --- | --- | --- | --- |
-| Home | `HomePage.jsx` | `/` | Landing page with hero, resume card, quick start, stats, quote |
-| Module List | `ModuleListPage.jsx` | `/modules` | Catalog of all 10 modules with progress bars |
-| Module View | `ModulePage.jsx` | `/modules/:moduleId` | Active module with StreamSwitcher + stream content |
-| Map | `ProficiencyMapPage.jsx` | `/map` | Visual progress grid across all modules × 3 streams |
-| Hearth | `HearthPage.jsx` | `/hearth` | Community celebration, stats, clarity badges |
-| Pause | `PausePage.jsx` | `/pause` | Planned pause page with bookmark display |
+| Page        | File                     | Route                | Description                                                    |
+| ----------- | ------------------------ | -------------------- | -------------------------------------------------------------- |
+| Home        | `HomePage.jsx`           | `/`                  | Landing page with hero, resume card, quick start, stats, quote |
+| Module List | `ModuleListPage.jsx`     | `/modules`           | Catalog of all 10 modules with progress bars                   |
+| Module View | `ModulePage.jsx`         | `/modules/:moduleId` | Active module with StreamSwitcher + stream content             |
+| Map         | `ProficiencyMapPage.jsx` | `/map`               | Visual progress grid across all modules × 3 streams            |
+| Hearth      | `HearthPage.jsx`         | `/hearth`            | Community celebration, stats, clarity badges                   |
+| Pause       | `PausePage.jsx`          | `/pause`             | Planned pause page with bookmark display                       |
 
 ## Routing
 
@@ -20,6 +20,7 @@ All pages are children of `<AppShell>` (which renders `<Outlet>`). Routes define
 ## Key Page: ModulePage
 
 `ModulePage.jsx` is the most complex page. It:
+
 1. Reads `moduleId` from URL params
 2. Looks up module data via `getModuleById()`
 3. Resolves stream component from `MODULE_STREAMS` map
@@ -27,6 +28,7 @@ All pages are children of `<AppShell>` (which renders `<Outlet>`). Routes define
 5. Includes `PauseButton` for bookmarking
 
 ### MODULE_STREAMS Registry
+
 ```js
 const MODULE_STREAMS = {
   1: {

@@ -2,7 +2,13 @@
  * @file haptics.test.js — Tests for haptic feedback utility
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { isHapticSupported, hapticLight, hapticMedium, hapticSuccess, hapticReward } from '../../utils/haptics';
+import {
+  isHapticSupported,
+  hapticLight,
+  hapticMedium,
+  hapticSuccess,
+  hapticReward,
+} from '../../utils/haptics';
 
 describe('Haptics utility', () => {
   let vibrateSpy;

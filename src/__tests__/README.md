@@ -1,4 +1,4 @@
-# __tests__/
+# **tests**/
 
 Unit and integration test suites for Spin.
 
@@ -20,14 +20,14 @@ __tests__/
 
 ## Test Results (31/31 ✅)
 
-| Suite | Tests | Focus |
-| --- | --- | --- |
-| App.test.jsx | 3 | Home page render, nav, quick start |
-| InferenceSlider.test.jsx | 6 | Value, onChange, labels, format, ARIA |
-| StreamSwitcher.test.jsx | 4 | Tabs, default active, switching, roles |
-| ActivityBank.test.jsx | 5 | Pause, resume, bookmarks, sessions, persistence |
-| modules.test.js | 8 | 10 modules, required fields, IDs, lookups |
-| Module1Pulse.test.jsx | 5 | Opening text, slider, continue, dots, ARIA |
+| Suite                    | Tests | Focus                                           |
+| ------------------------ | ----- | ----------------------------------------------- |
+| App.test.jsx             | 3     | Home page render, nav, quick start              |
+| InferenceSlider.test.jsx | 6     | Value, onChange, labels, format, ARIA           |
+| StreamSwitcher.test.jsx  | 4     | Tabs, default active, switching, roles          |
+| ActivityBank.test.jsx    | 5     | Pause, resume, bookmarks, sessions, persistence |
+| modules.test.js          | 8     | 10 modules, required fields, IDs, lookups       |
+| Module1Pulse.test.jsx    | 5     | Opening text, slider, continue, dots, ARIA      |
 
 ## Running
 

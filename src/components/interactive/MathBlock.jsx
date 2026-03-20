@@ -2,7 +2,7 @@
  * @file MathBlock.jsx — LaTeX Equation Renderer
  * @description Renders mathematical equations using KaTeX.
  * Supports collapsible derivation steps for the Core stream.
- * 
+ *
  * @module components/interactive/MathBlock
  */
 import { useEffect, useRef, useState } from 'react';
@@ -12,7 +12,7 @@ import './MathBlock.css';
 
 /**
  * MathBlock — Renders a LaTeX equation with optional derivation steps.
- * 
+ *
  * @param {Object} props
  * @param {string} props.latex - LaTeX string to render
  * @param {boolean} [props.displayMode=true] - Display mode (block) vs inline
@@ -21,13 +21,7 @@ import './MathBlock.css';
  * @param {Array<{latex: string, note: string}>} [props.steps] - Derivation steps
  * @returns {JSX.Element}
  */
-export default function MathBlock({
-  latex,
-  displayMode = true,
-  label,
-  description,
-  steps,
-}) {
+export default function MathBlock({ latex, displayMode = true, label, description, steps }) {
   const mathRef = useRef(null);
   const [stepsOpen, setStepsOpen] = useState(false);
   const [renderError, setRenderError] = useState(null);
@@ -63,14 +57,10 @@ export default function MathBlock({
       />
 
       {/* Render Error */}
-      {renderError && (
-        <p className="math-block__error">⚠️ Render error: {renderError}</p>
-      )}
+      {renderError && <p className="math-block__error">⚠️ Render error: {renderError}</p>}
 
       {/* Description */}
-      {description && (
-        <p className="math-block__description">{description}</p>
-      )}
+      {description && <p className="math-block__description">{description}</p>}
 
       {/* Derivation Steps */}
       {steps && steps.length > 0 && (
@@ -83,7 +73,7 @@ export default function MathBlock({
             {stepsOpen ? '▾ Hide derivation' : '▸ Show derivation steps'}
             <span className="math-block__step-count">({steps.length} steps)</span>
           </button>
-          
+
           {stepsOpen && (
             <ol className="math-block__steps-list">
               {steps.map((step, i) => (

@@ -88,15 +88,18 @@ No props. Reads `activeStream` from `AppContext` and renders tab bar.
 
 ```js
 const {
-  activeStream,    // 'pulse' | 'vision' | 'core'
-  currentModule,   // number | null
-  moduleProgress,  // { [moduleId]: { pulse, vision, core } }
-  setStream,       // (stream: string) => void
-  setModule,       // (moduleId: number) => void
-  updateProgress,  // (moduleId: number, stream: string, progress: number) => void
+  activeStream,         // 'pulse' | 'vision' | 'core'
+  currentModule,        // number | null
+  moduleProgress,       // { [moduleId]: { pulse, vision, core } }
+  setStream,            // (stream: string) => void
+  setModule,            // (moduleId: number) => void
+  updateProgress,       // (moduleId: number, stream: string, progress: number) => void
+  getModuleProgress,    // (moduleId: number) => number (0-100 average)
+  getOverallProgress,   // () => number (0-100 overall)
 } = useApp();
 ```
 
+**localStorage key**: `spin_module_progress`
 **Constants**: `STREAMS.PULSE`, `STREAMS.VISION`, `STREAMS.CORE`
 
 ---
@@ -122,6 +125,40 @@ const {
 ```
 
 **localStorage key**: `spin_activity_bank`
+
+---
+
+## Utilities
+
+### Haptics
+
+**Path**: `src/utils/haptics.js`
+
+Provides safe wrappers around the `navigator.vibrate` API with graceful degradation.
+
+| Export | Signature | Description |
+| --- | --- | --- |
+| `hapticLight` | `() => void` | 10ms tap (slider interactions) |
+| `hapticMedium` | `() => void` | 25ms tap (step advances) |
+| `hapticSuccess` | `() => void` | `[20, 50, 20]` pattern (module complete) |
+| `hapticReward` | `() => void` | `[30, 50, 30, 50, 50]` pattern (easter egg) |
+
+---
+
+### Logger
+
+**Path**: `src/utils/logger.js`
+
+Structured, prefix-based logging utility with optional history collection.
+
+| Export | Signature | Description |
+| --- | --- | --- |
+| `createLogger` | `(prefix: string) => Logger` | Returns logger instance `[Prefix]` |
+| `configureLogger` | `(options: { level, collect }) => void` | Set global level/collection |
+| `getLogHistory` | `() => Array` | Retrieve collected logs |
+| `clearLogHistory` | `() => void` | Clear collected logs |
+
+Usage: `const log = createLogger('PulseStream'); log.debug('step', 1);`
 
 ---
 

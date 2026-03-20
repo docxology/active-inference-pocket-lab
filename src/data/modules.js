@@ -1,12 +1,12 @@
 /**
  * @file modules.js — Module Registry
  * @description Defines all 10 learning modules mapped to the Active Inference textbook.
- * 
+ *
  * Each module includes metadata for the Triple-Stream Architecture:
  * - Pulse: Conversational, high-emotion, micro-inference path
  * - Vision: Interactive animation and generative art
  * - Core: Academic, LaTeX equations, sandbox
- * 
+ *
  * @module data/modules
  */
 
@@ -31,7 +31,8 @@ const modules = [
     slug: 'the-first-orbit',
     title: 'The First Orbit',
     subtitle: 'Chapter 1 — Overview',
-    description: 'Your brain is a prediction machine. Discover how expectations shape reality through one simple slider.',
+    description:
+      'Your brain is a prediction machine. Discover how expectations shape reality through one simple slider.',
     icon: '🌀',
     color: 'var(--color-pulse)',
     firstAction: 'Move the slider to set your first prior belief',
@@ -47,14 +48,15 @@ const modules = [
     slug: 'the-low-road',
     title: 'The Low Road',
     subtitle: 'Chapter 2 — The Low Road to Active Inference',
-    description: 'Start from the ground up: prediction errors, Bayesian updating, and the mechanics of belief.',
+    description:
+      'Start from the ground up: prediction errors, Bayesian updating, and the mechanics of belief.',
     icon: '🛤️',
     color: 'var(--color-vision)',
     firstAction: 'Drag to create a prediction error',
     streams: {
       pulse: 'Feel how your brain constantly generates and corrects predictions.',
       vision: 'Visualize prediction errors as waves propagating through layers.',
-      core: 'Derive Bayes\' theorem and predictive coding step by step.',
+      core: "Derive Bayes' theorem and predictive coding step by step.",
     },
     available: false,
   },
@@ -63,7 +65,8 @@ const modules = [
     slug: 'the-high-road',
     title: 'The High Road',
     subtitle: 'Chapter 3 — The High Road to Active Inference',
-    description: 'Zoom out to the big picture: variational inference, free energy, and surprise minimization.',
+    description:
+      'Zoom out to the big picture: variational inference, free energy, and surprise minimization.',
     icon: '🏔️',
     color: 'var(--color-core)',
     firstAction: 'Tilt to navigate the free energy landscape',
@@ -148,7 +151,7 @@ const modules = [
     color: 'var(--color-accent)',
     firstAction: 'Slide to control the flow of continuous dynamics',
     streams: {
-      pulse: 'Life doesn\'t happen in steps — learn inference that flows continuously.',
+      pulse: "Life doesn't happen in steps — learn inference that flows continuously.",
       vision: 'Watch smooth trajectories emerge from continuous active inference.',
       core: 'Explore generalized coordinates of motion and Langevin dynamics.',
     },
@@ -180,7 +183,7 @@ const modules = [
     color: 'var(--color-vision)',
     firstAction: 'Expand the concept map to see all connections',
     streams: {
-      pulse: 'Active inference isn\'t just a theory — it\'s a way of being in the world.',
+      pulse: "Active inference isn't just a theory — it's a way of being in the world.",
       vision: 'Explore an interactive concept map connecting all 9 previous modules.',
       core: 'Review the mathematical unification of perception, action, and learning.',
     },

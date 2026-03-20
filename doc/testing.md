@@ -33,7 +33,24 @@ test: {
 3. **`renderWithProviders()`** helper wraps components in `BrowserRouter` + `AppProvider` + `ActivityBankProvider`
 4. **ARIA first** — Prefer `getByLabelText`, `getByRole` over `getByText`
 
-## Test Inventory (31 tests, 6 suites)
+## Test Inventory (52 tests, 9 suites)
+
+### AppContext.test.jsx (9 tests)
+- Switches streams
+- Sets current module
+- Updates module progress
+- Clamps progress to 0-100
+- Persists progress to localStorage
+- Computes averages
+
+### haptics.test.js (7 tests)
+- Safe fallback when navigator.vibrate is missing
+- Patterns for light, medium, success, and reward
+
+### logger.test.js (5 tests)
+- Creates logger with component prefix
+- Collects entries when enabled
+- Respects log level filtering
 
 ### App.test.jsx (3 tests)
 - Renders home page by default

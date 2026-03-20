@@ -1,11 +1,11 @@
 /**
  * @file AppContext.jsx — Global application state
  * @description Provides app-wide state: current module, active stream, progress.
- * 
+ *
  * The AppContext manages the "Triple-Stream Architecture" state, allowing
  * users to switch between Pulse/Vision/Core streams at any time.
  * Module progress is persisted to localStorage for cross-session continuity.
- * 
+ *
  * @module contexts/AppContext
  */
 import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
@@ -141,12 +141,15 @@ export function AppProvider({ children }) {
    * @param {number|string} moduleId
    * @returns {number} Average progress (0-100)
    */
-  const getModuleProgress = useCallback((moduleId) => {
-    const mp = state.moduleProgress[moduleId];
-    if (!mp) return 0;
-    const values = [mp.pulse || 0, mp.vision || 0, mp.core || 0];
-    return Math.round(values.reduce((a, b) => a + b, 0) / 3);
-  }, [state.moduleProgress]);
+  const getModuleProgress = useCallback(
+    (moduleId) => {
+      const mp = state.moduleProgress[moduleId];
+      if (!mp) return 0;
+      const values = [mp.pulse || 0, mp.vision || 0, mp.core || 0];
+      return Math.round(values.reduce((a, b) => a + b, 0) / 3);
+    },
+    [state.moduleProgress],
+  );
 
   /**
    * Calculate overall progress across all modules.

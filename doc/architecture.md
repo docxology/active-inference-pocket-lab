@@ -70,10 +70,12 @@ Spin's system architecture for the Active Inference Pocket Lab.
 
 ## State Management
 
-### AppContext (ephemeral)
+### AppContext (persisted to localStorage)
 - `activeStream` — `'pulse' | 'vision' | 'core'`
 - `currentModule` — active module ID
 - `moduleProgress` — `{ [moduleId]: { pulse: 0-100, vision: 0-100, core: 0-100 } }`
+- Computed: `getModuleProgress()`, `getOverallProgress()`
+- **Key**: `spin_module_progress`
 
 ### ActivityBankContext (persisted to localStorage)
 - `isPaused` — boolean
@@ -81,6 +83,7 @@ Spin's system architecture for the Active Inference Pocket Lab.
 - `sessions` — activity records array
 - `totalMinutes` — cumulative active time
 - `currentStreak` — consecutive day count
+- **Key**: `spin_activity_bank`
 
 ## Module Architecture
 

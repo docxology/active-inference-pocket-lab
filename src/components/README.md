@@ -5,14 +5,18 @@ Reusable UI components for Spin, organized into two categories.
 ## Subdirectories
 
 ### `interactive/`
+
 Touch-optimized components for user interaction:
+
 - **InferenceSlider** — Primary slider with glow feedback, ARIA labels, custom formatting
 - **MathBlock** — KaTeX LaTeX renderer with collapsible derivation steps
 - **PauseButton** — Validates rest, saves bookmark, displays warm messaging
 - **RewardAnimation** — "Spin" orbital particle burst for celebrating completions
 
 ### `layout/`
+
 Application structure and navigation:
+
 - **AppShell** — Root layout wrapper with content area + bottom nav
 - **BottomNav** — Five-tab mobile bottom navigation with animated indicator
 - **StreamSwitcher** — Segmented control for Pulse / Vision / Core streams

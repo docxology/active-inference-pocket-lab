@@ -3,7 +3,7 @@
  * @description Visual map showing progress across all 10 modules × 3 streams.
  * Clear thresholds: what's needed to reach the next level.
  * No hidden requirements.
- * 
+ *
  * @module pages/ProficiencyMapPage
  */
 import { motion } from 'framer-motion';
@@ -37,10 +37,7 @@ export default function ProficiencyMapPage() {
         <div className="proficiency-map-page__legend">
           {STREAM_META.map((s) => (
             <div key={s.key} className="proficiency-map-page__legend-item">
-              <span
-                className="proficiency-map-page__legend-dot"
-                style={{ background: s.color }}
-              />
+              <span className="proficiency-map-page__legend-dot" style={{ background: s.color }} />
               <span>{s.label}</span>
             </div>
           ))}

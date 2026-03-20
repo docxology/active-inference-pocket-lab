@@ -2,7 +2,7 @@
  * @file logger.js — Structured logging utility
  * @description Provides a configurable logging system with component prefixes,
  * log levels, and optional log collection for debugging.
- * 
+ *
  * @module utils/logger
  */
 

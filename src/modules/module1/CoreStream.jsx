@@ -1,11 +1,11 @@
 /**
  * @file CoreStream.jsx — Module 1 Core Experience
  * @description "The Academic" stream for Module 1: The First Orbit.
- * 
+ *
  * Clean LaTeX equations, sandbox environments, derivation steps.
  * Hidden in a drawer by default — user opens when ready for math.
  * Focus: deriving Free Energy with immediate visual feedback.
- * 
+ *
  * @module modules/module1/CoreStream
  */
 import { useState, useCallback, useMemo } from 'react';
@@ -26,16 +26,17 @@ import './CoreStream.css';
 function computeMetrics(observation, prior, precision) {
   // Gaussian model: surprise = -log p(o|m) ≈ (o - μ)² / (2σ²) + const
   const variance = 1 / (Math.max(precision, 0.01) / 50);
-  const surprise = ((observation - prior) ** 2) / (2 * variance) + 0.5 * Math.log(2 * Math.PI * variance);
-  
+  const surprise =
+    (observation - prior) ** 2 / (2 * variance) + 0.5 * Math.log(2 * Math.PI * variance);
+
   // Free energy ≥ surprise (equality when q = p)
   // F = E_q[-log p(o,s)] + H[q] = surprise + KL
   const kl = Math.max(0, Math.abs(observation - prior) * 0.02);
   const freeEnergy = surprise + kl;
 
-  return { 
-    surprise: Math.max(0, surprise).toFixed(2), 
-    freeEnergy: Math.max(0, freeEnergy).toFixed(2), 
+  return {
+    surprise: Math.max(0, surprise).toFixed(2),
+    freeEnergy: Math.max(0, freeEnergy).toFixed(2),
     kl: kl.toFixed(3),
   };
 }
@@ -55,11 +56,13 @@ const FE_DERIVATION_STEPS = [
     note: 'Introduce an approximate posterior q(s).',
   },
   {
-    latex: 'F \\geq \\underbrace{\\mathbb{E}_q[-\\ln p(o, s \\mid m)]}_{\\text{Energy}} + \\underbrace{\\mathbb{E}_q[\\ln q(s)]}_{-\\text{Entropy}}',
-    note: 'Apply Jensen\'s inequality to get the variational free energy bound.',
+    latex:
+      'F \\geq \\underbrace{\\mathbb{E}_q[-\\ln p(o, s \\mid m)]}_{\\text{Energy}} + \\underbrace{\\mathbb{E}_q[\\ln q(s)]}_{-\\text{Entropy}}',
+    note: "Apply Jensen's inequality to get the variational free energy bound.",
   },
   {
-    latex: 'F = \\underbrace{D_{\\text{KL}}[q(s) \\| p(s \\mid o, m)]}_{\\text{Complexity}} + \\underbrace{(-\\ln p(o \\mid m))}_{\\text{Surprise}}',
+    latex:
+      'F = \\underbrace{D_{\\text{KL}}[q(s) \\| p(s \\mid o, m)]}_{\\text{Complexity}} + \\underbrace{(-\\ln p(o \\mid m))}_{\\text{Surprise}}',
     note: 'Free Energy = KL divergence + Surprise. Minimizing F means making q close to the true posterior.',
   },
 ];
@@ -95,9 +98,9 @@ export default function CoreStream() {
       <div className="core-stream__intro">
         <h2>The Mathematics of Surprise</h2>
         <p>
-          Active Inference rests on a single principle: living systems minimize 
-          <strong> variational free energy</strong>. Explore the equations below, 
-          or open the sandbox to see the math respond to your inputs.
+          Active Inference rests on a single principle: living systems minimize
+          <strong> variational free energy</strong>. Explore the equations below, or open the
+          sandbox to see the math respond to your inputs.
         </p>
       </div>
 
@@ -122,18 +125,17 @@ export default function CoreStream() {
       </motion.button>
 
       {/* Sandbox Drawer */}
-      <Drawer
-        isOpen={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        title="Free Energy Sandbox"
-      >
+      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} title="Free Energy Sandbox">
         <div className="core-stream__sandbox">
           {/* Sliders */}
           <InferenceSlider
             min={0}
             max={100}
             value={prior}
-            onChange={(v) => { setPrior(v); handleInteraction(); }}
+            onChange={(v) => {
+              setPrior(v);
+              handleInteraction();
+            }}
             label="Prior Mean (μ)"
             color="var(--color-core)"
           />
@@ -141,7 +143,10 @@ export default function CoreStream() {
             min={1}
             max={100}
             value={precision}
-            onChange={(v) => { setPrecision(v); handleInteraction(); }}
+            onChange={(v) => {
+              setPrecision(v);
+              handleInteraction();
+            }}
             label="Precision (π)"
             leftLabel="Low"
             rightLabel="High"
@@ -151,7 +156,10 @@ export default function CoreStream() {
             min={0}
             max={100}
             value={observation}
-            onChange={(v) => { setObservation(v); handleInteraction(); }}
+            onChange={(v) => {
+              setObservation(v);
+              handleInteraction();
+            }}
             label="Observation (o)"
             color="var(--color-pulse)"
           />

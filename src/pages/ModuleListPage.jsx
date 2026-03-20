@@ -2,7 +2,7 @@
  * @file ModuleListPage.jsx — Module Catalog
  * @description Displays all 10 modules as cards with progress indicators.
  * Visible Pathing: every user sees exactly what is required.
- * 
+ *
  * @module pages/ModuleListPage
  */
 import { useNavigate } from 'react-router-dom';
@@ -68,9 +68,7 @@ export default function ModuleListPage() {
                   </div>
                 )}
 
-                {!mod.available && (
-                  <span className="module-card__coming-soon">Coming Soon</span>
-                )}
+                {!mod.available && <span className="module-card__coming-soon">Coming Soon</span>}
               </motion.button>
             );
           })}

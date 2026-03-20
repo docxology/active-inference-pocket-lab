@@ -19,10 +19,10 @@ moduleN/
 
 ## Module Status
 
-| Module | Directory | Status |
-| --- | --- | --- |
-| 1 — The First Orbit | `module1/` | ✅ Implemented |
-| 2–10 | — | 📋 Scaffolded in `data/modules.js` |
+| Module              | Directory  | Status                             |
+| ------------------- | ---------- | ---------------------------------- |
+| 1 — The First Orbit | `module1/` | ✅ Implemented                     |
+| 2–10                | —          | 📋 Scaffolded in `data/modules.js` |
 
 ## Adding a Module
 

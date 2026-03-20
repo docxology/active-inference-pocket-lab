@@ -33,13 +33,7 @@ describe('InferenceSlider', () => {
   });
 
   it('uses custom formatValue function', () => {
-    render(
-      <InferenceSlider
-        label="Custom"
-        value={42}
-        formatValue={(v) => `Level ${v}`}
-      />,
-    );
+    render(<InferenceSlider label="Custom" value={42} formatValue={(v) => `Level ${v}`} />);
     expect(screen.getByText('Level 42')).toBeInTheDocument();
   });
 

@@ -1,11 +1,11 @@
 /**
  * @file ActivityBankContext.jsx — Activity Banking System
  * @description Manages user energy, planned pauses, and bookmark state.
- * 
+ *
  * Philosophy: "Seasonal Rhythms" — Design for capacity fluctuations.
  * If a user needs to hibernate, the interface holds their place like
  * a bookmark in a heavy stone book. No penalties for rest.
- * 
+ *
  * @module contexts/ActivityBankContext
  */
 import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
@@ -32,7 +32,7 @@ function loadPersistedState() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
-      console.log('[ActivityBank] Restored persisted state', { 
+      console.log('[ActivityBank] Restored persisted state', {
         sessionCount: parsed.sessions?.length || 0,
         isPaused: parsed.isPaused,
       });
@@ -46,12 +46,12 @@ function loadPersistedState() {
 
 /** @type {Object} Default activity bank state */
 const defaultState = {
-  sessions: [],          // Array of { startTime, endTime, moduleId, stream, duration }
+  sessions: [], // Array of { startTime, endTime, moduleId, stream, duration }
   isPaused: false,
   pausedAt: null,
-  bookmark: null,        // { moduleId, stream, position, timestamp }
-  totalMinutes: 0,       // Total active time in minutes
-  currentStreak: 0,      // Consecutive days with activity ("Spin" count)
+  bookmark: null, // { moduleId, stream, position, timestamp }
+  totalMinutes: 0, // Total active time in minutes
+  currentStreak: 0, // Consecutive days with activity ("Spin" count)
   lastActiveDate: null,
 };
 
@@ -120,16 +120,13 @@ const ActivityBankContext = createContext(null);
 /**
  * ActivityBankProvider — Wraps app with activity tracking state.
  * Automatically persists to localStorage on state changes.
- * 
+ *
  * @param {Object} props
  * @param {React.ReactNode} props.children
  */
 export function ActivityBankProvider({ children }) {
   const persisted = loadPersistedState();
-  const [state, dispatch] = useReducer(
-    activityReducer,
-    persisted || defaultState,
-  );
+  const [state, dispatch] = useReducer(activityReducer, persisted || defaultState);
 
   // Persist state changes to localStorage
   useEffect(() => {
@@ -175,11 +172,7 @@ export function ActivityBankProvider({ children }) {
     clearBookmark,
   };
 
-  return (
-    <ActivityBankContext.Provider value={value}>
-      {children}
-    </ActivityBankContext.Provider>
-  );
+  return <ActivityBankContext.Provider value={value}>{children}</ActivityBankContext.Provider>;
 }
 
 /**

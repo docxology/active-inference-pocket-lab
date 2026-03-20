@@ -3,7 +3,7 @@
  * @description Implements the "Physics of the Drawer" philosophy.
  * Uses spring animations for spatial reality — never teleports the user.
  * Used for Core math content, settings, and detailed information.
- * 
+ *
  * @module components/layout/Drawer
  */
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,7 +11,7 @@ import './Drawer.css';
 
 /**
  * Drawer — Slide-up drawer with physics-based spring animation.
- * 
+ *
  * @param {Object} props
  * @param {boolean} props.isOpen - Whether drawer is visible
  * @param {Function} props.onClose - Callback to close the drawer
@@ -60,20 +60,14 @@ export default function Drawer({ isOpen, onClose, title, children }) {
             {title && (
               <header className="drawer__header">
                 <h3 className="drawer__title">{title}</h3>
-                <button
-                  className="drawer__close"
-                  onClick={onClose}
-                  aria-label="Close drawer"
-                >
+                <button className="drawer__close" onClick={onClose} aria-label="Close drawer">
                   ✕
                 </button>
               </header>
             )}
 
             {/* Content */}
-            <div className="drawer__content">
-              {children}
-            </div>
+            <div className="drawer__content">{children}</div>
           </motion.div>
         </>
       )}

@@ -2,7 +2,7 @@
  * @file App.jsx — Root Application Component
  * @description Sets up React Router and wraps the app with context providers.
  * Routes map to the five-tab navigation plus module detail views.
- * 
+ *
  * @module App
  */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

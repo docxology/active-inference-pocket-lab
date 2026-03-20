@@ -18,6 +18,7 @@ The centralized module registry defining all 10 Active Inference modules.
 | `getAvailableModules()` | function | Returns only `available: true` modules |
 
 **Module Shape:**
+
 ```js
 {
   id: number,         // 1-10

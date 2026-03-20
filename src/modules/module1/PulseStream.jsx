@@ -1,13 +1,13 @@
 /**
  * @file PulseStream.jsx — Module 1 Pulse Experience
  * @description "The Enthusiast" stream for Module 1: The First Orbit.
- * 
+ *
  * High emotional content, conversational language.
  * Teaches what a generative model is through ONE interactive slider.
  * Math simplified to high-school levels.
- * 
+ *
  * The First Threshold: starts with a physical action (the slider).
- * 
+ *
  * @module modules/module1/PulseStream
  */
 import { useState, useCallback } from 'react';
@@ -18,7 +18,7 @@ import { useApp } from '../../contexts/AppContext';
 import { hapticLight, hapticMedium, hapticSuccess } from '../../utils/haptics';
 import './PulseStream.css';
 
-/** 
+/**
  * Steps for the Pulse micro-inference experience.
  * Each step is a singular, generous screen — no walls of text.
  */
@@ -29,8 +29,8 @@ const STEPS = [
       <>
         <h2>What if your brain is a prediction machine?</h2>
         <p>
-          Right now, your brain is generating expectations about what comes next — 
-          before you even finish reading this sentence.
+          Right now, your brain is generating expectations about what comes next — before you even
+          finish reading this sentence.
         </p>
         <p className="pulse-hint">
           👇 Move the slider below to set your first <strong>prior belief</strong>.
@@ -44,12 +44,10 @@ const STEPS = [
       <>
         <h2>You just made a prediction.</h2>
         <p>
-          That number you chose? That's your brain's <strong>best guess</strong> about 
-          what it expects to see. In Active Inference, we call this a <em>prior</em>.
+          That number you chose? That's your brain's <strong>best guess</strong> about what it
+          expects to see. In Active Inference, we call this a <em>prior</em>.
         </p>
-        <p>
-          Now watch what happens when reality doesn't match your prediction...
-        </p>
+        <p>Now watch what happens when reality doesn't match your prediction...</p>
       </>
     ),
   },
@@ -57,14 +55,16 @@ const STEPS = [
     id: 'surprise',
     content: (
       <>
-        <h2>That gap? That's <em>surprise</em>.</h2>
+        <h2>
+          That gap? That's <em>surprise</em>.
+        </h2>
         <p>
-          The difference between what you predicted and what actually happened — 
-          that's the engine of learning. Your brain is always trying to <strong>minimize this gap</strong>.
+          The difference between what you predicted and what actually happened — that's the engine
+          of learning. Your brain is always trying to <strong>minimize this gap</strong>.
         </p>
         <p>
-          This is the core of Active Inference: you either update your beliefs 
-          or act to change the world. 🌀
+          This is the core of Active Inference: you either update your beliefs or act to change the
+          world. 🌀
         </p>
       </>
     ),
@@ -86,14 +86,17 @@ export default function PulseStream() {
   const surprise = Math.abs(priorValue - observedValue);
   const normalizedSurprise = surprise / 100;
 
-  const handleSliderChange = useCallback((value) => {
-    setPriorValue(value);
-    hapticLight();
-    if (!hasInteracted) {
-      setHasInteracted(true);
-      console.log('[PulseStream] First interaction — threshold crossed');
-    }
-  }, [hasInteracted]);
+  const handleSliderChange = useCallback(
+    (value) => {
+      setPriorValue(value);
+      hapticLight();
+      if (!hasInteracted) {
+        setHasInteracted(true);
+        console.log('[PulseStream] First interaction — threshold crossed');
+      }
+    },
+    [hasInteracted],
+  );
 
   const advanceStep = useCallback(() => {
     if (step < STEPS.length - 1) {
@@ -157,17 +160,22 @@ export default function PulseStream() {
                 animate={{ width: `${normalizedSurprise * 100}%` }}
                 transition={{ type: 'spring', stiffness: 200 }}
                 style={{
-                  background: surprise > 50
-                    ? 'var(--color-error)'
-                    : surprise > 25
-                      ? 'var(--color-warning)'
-                      : 'var(--color-success)',
+                  background:
+                    surprise > 50
+                      ? 'var(--color-error)'
+                      : surprise > 25
+                        ? 'var(--color-warning)'
+                        : 'var(--color-success)',
                 }}
               />
             </div>
             <p className="pulse-stream__surprise-hint">
-              Observed value: <strong>{observedValue}</strong> — 
-              {surprise < 10 ? ' Almost no surprise!' : surprise > 50 ? ' High surprise! Your brain wants to update.' : ' Some surprise. A learning opportunity.'}
+              Observed value: <strong>{observedValue}</strong> —
+              {surprise < 10
+                ? ' Almost no surprise!'
+                : surprise > 50
+                  ? ' High surprise! Your brain wants to update.'
+                  : ' Some surprise. A learning opportunity.'}
             </p>
           </motion.div>
         )}
@@ -177,10 +185,7 @@ export default function PulseStream() {
       <div className="pulse-stream__footer">
         <div className="pulse-stream__progress">
           {STEPS.map((s, i) => (
-            <span
-              key={s.id}
-              className={`pulse-stream__dot ${i <= step ? 'active' : ''}`}
-            />
+            <span key={s.id} className={`pulse-stream__dot ${i <= step ? 'active' : ''}`} />
           ))}
         </div>
 

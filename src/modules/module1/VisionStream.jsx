@@ -1,13 +1,13 @@
 /**
  * @file VisionStream.jsx — Module 1 Vision Experience
  * @description "The Artist" stream for Module 1: The First Orbit.
- * 
+ *
  * Interactive canvas with orbiting particles whose behavior changes
  * based on slider values (the "Variable Hearth").
- * 
+ *
  * Focus: generative art + real-time response to active inference parameters.
  * Completion triggers the "Spin" reward animation.
- * 
+ *
  * @module modules/module1/VisionStream
  */
 import { useState, useRef, useEffect, useCallback } from 'react';
@@ -20,7 +20,7 @@ import './VisionStream.css';
 /**
  * Draw orbiting particles on a canvas.
  * Particles orbit with radius and speed affected by the prior belief parameter.
- * 
+ *
  * @param {CanvasRenderingContext2D} ctx - Canvas context
  * @param {number} width - Canvas width
  * @param {number} height - Canvas height
@@ -108,19 +108,22 @@ export default function VisionStream() {
   const [interactionCount, setInteractionCount] = useState(0);
   const { updateProgress } = useApp();
 
-  const handlePriorChange = useCallback((value) => {
-    setPrior(value);
-    setInteractionCount((c) => {
-      const next = c + 1;
-      if (next >= 10 && !hasExplored) {
-        setHasExplored(true);
-        setShowReward(true);
-        updateProgress(1, 'vision', 100);
-        console.log('[VisionStream] Exploration threshold reached — reward!');
-      }
-      return next;
-    });
-  }, [hasExplored, updateProgress]);
+  const handlePriorChange = useCallback(
+    (value) => {
+      setPrior(value);
+      setInteractionCount((c) => {
+        const next = c + 1;
+        if (next >= 10 && !hasExplored) {
+          setHasExplored(true);
+          setShowReward(true);
+          updateProgress(1, 'vision', 100);
+          console.log('[VisionStream] Exploration threshold reached — reward!');
+        }
+        return next;
+      });
+    },
+    [hasExplored, updateProgress],
+  );
 
   // Canvas animation loop
   useEffect(() => {

@@ -2,10 +2,10 @@
  * @file PauseButton.jsx — Validated Rest Button
  * @description Celebrates the user's need to step away.
  * Saves a bookmark and displays warm, non-judgmental messaging.
- * 
+ *
  * Philosophy: "Seasonal Rhythms" — No penalties for rest.
  * The interface holds your place like a bookmark in a heavy stone book.
- * 
+ *
  * @module components/interactive/PauseButton
  */
 import { useState } from 'react';
@@ -26,7 +26,7 @@ const PAUSE_MESSAGES = [
 
 /**
  * PauseButton — Validates rest and bookmarks progress.
- * 
+ *
  * @param {Object} props
  * @param {string} [props.moduleId] - Current module to bookmark
  * @param {string} [props.position] - Current position in the module
@@ -67,9 +67,7 @@ export default function PauseButton({ moduleId, position }) {
         whileTap={{ scale: 0.95 }}
         aria-label={isPaused ? 'Resume learning' : 'Pause and rest'}
       >
-        <span className="pause-button__icon">
-          {isPaused ? '☀️' : '🌙'}
-        </span>
+        <span className="pause-button__icon">{isPaused ? '☀️' : '🌙'}</span>
         <span className="pause-button__text">
           {isPaused ? 'Resume Your Orbit' : 'Take a Pause'}
         </span>

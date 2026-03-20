@@ -2,7 +2,7 @@
  * @file PausePage.jsx — Planned Pause / Hibernate Screen
  * @description A full-page pause experience that validates rest.
  * The user can see their bookmark and resume when ready.
- * 
+ *
  * @module pages/PausePage
  */
 import { useNavigate } from 'react-router-dom';
@@ -31,10 +31,7 @@ export default function PausePage() {
         >
           <div className="pause-page__moon">🌙</div>
           <h1>Your Orbit Pauses</h1>
-          <p>
-            Rest is not stopping. It's what lets the inference continue 
-            beneath the surface.
-          </p>
+          <p>Rest is not stopping. It's what lets the inference continue beneath the surface.</p>
 
           {/* Bookmark */}
           {bookmarkedModule && (
@@ -66,7 +63,8 @@ export default function PausePage() {
           {/* Pause time */}
           {isPaused && pausedAt && (
             <p className="pause-page__since">
-              Paused since {new Date(pausedAt).toLocaleDateString(undefined, {
+              Paused since{' '}
+              {new Date(pausedAt).toLocaleDateString(undefined, {
                 weekday: 'long',
                 month: 'long',
                 day: 'numeric',

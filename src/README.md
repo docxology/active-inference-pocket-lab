@@ -4,17 +4,17 @@ Source directory for the Spin Active Inference Pocket Lab.
 
 ## Directory Structure
 
-| Directory | Purpose |
-| --- | --- |
+| Directory     | Purpose                                                       |
+| ------------- | ------------------------------------------------------------- |
 | `components/` | Reusable UI components (interactive elements + layout shells) |
-| `contexts/` | React Context providers for global state management |
-| `data/` | Static data and module registry |
-| `modules/` | Per-module stream implementations (Pulse / Vision / Core) |
-| `pages/` | Route-level page components |
-| `styles/` | Design token system and global CSS |
-| `test/` | Test setup and configuration |
-| `__tests__/` | Unit and integration test files |
-| `assets/` | Static assets (images, fonts) |
+| `contexts/`   | React Context providers for global state management           |
+| `data/`       | Static data and module registry                               |
+| `modules/`    | Per-module stream implementations (Pulse / Vision / Core)     |
+| `pages/`      | Route-level page components                                   |
+| `styles/`     | Design token system and global CSS                            |
+| `test/`       | Test setup and configuration                                  |
+| `__tests__/`  | Unit and integration test files                               |
+| `assets/`     | Static assets (images, fonts)                                 |
 
 ## Entry Points
 
