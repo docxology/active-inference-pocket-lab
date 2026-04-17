@@ -1,0 +1,64 @@
+/* DataFitter.css */
+
+.data-fitter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.data-fitter__canvas {
+  align-self: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+}
+
+.data-fitter__sliders {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.data-fitter__slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.data-fitter__slider input[type='range'] {
+  accent-color: var(--color-accent);
+}
+
+.data-fitter__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.data-fitter__metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2);
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.data-fitter__metrics span {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.data-fitter__metrics strong {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+}

@@ -1,0 +1,123 @@
+/* GridWorld.css — discrete-time grid agent */
+
+.grid-world {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.grid-world__board {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.grid-world__cell {
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  transition: background var(--transition-normal), transform var(--transition-normal);
+}
+
+.grid-world__cell.trail {
+  background: rgba(124, 107, 255, 0.18);
+}
+
+.grid-world__cell.goal {
+  background: rgba(107, 203, 119, 0.25);
+  color: var(--color-success);
+}
+
+.grid-world__cell.fog {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.grid-world__cell.agent {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(255, 184, 107, 0.4);
+}
+
+.grid-world__icon {
+  font-weight: var(--font-weight-bold);
+}
+
+.grid-world__policy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.grid-world__policy-title {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.grid-world__policy-bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.grid-world__policy-item {
+  display: grid;
+  grid-template-columns: 24px 1fr 40px;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.grid-world__policy-label {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.grid-world__policy-track {
+  height: 6px;
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.grid-world__policy-fill {
+  height: 100%;
+  background: var(--gradient-vision);
+  transition: width var(--transition-normal);
+}
+
+.grid-world__policy-value {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-align: right;
+}
+
+.grid-world__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+}
+
+.grid-world__reset {
+  color: var(--color-accent);
+  text-decoration: underline;
+}

@@ -18,7 +18,8 @@
 }
 
 html {
-  font-size: 16px;
+  /* 16px base × Settings font-scale (0.9, 1.0, 1.1, 1.25) */
+  font-size: calc(16px * var(--font-scale, 1));
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -282,6 +283,29 @@ input[type='range'] {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
+
+/* Buttons: primary / secondary helpers */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.06);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  min-height: var(--touch-target-min);
+}
+.button:hover { background: rgba(255,255,255,0.1); color: var(--color-text-primary); }
+.button--primary {
+  background: var(--gradient-pulse);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 20px var(--color-pulse-glow);
+}
+.button--primary:hover { color: white; }
 
 /* ─── Responsive Breakpoints ─── */
 @media (min-width: 768px) {

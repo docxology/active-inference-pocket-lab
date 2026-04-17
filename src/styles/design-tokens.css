@@ -126,4 +126,47 @@
   --content-max-width: 480px;
   --nav-height: 72px;
   --header-height: 56px;
+
+  /* ─── User-tunable scale (driven by SettingsContext) ─── */
+  --font-scale: 1;
+
+  /* ─── Semantic aliases (used by newer components) ─── */
+  --color-background: var(--color-bg-primary);
+  --color-surface: var(--color-bg-surface);
+  --color-text: var(--color-text-primary);
+  --color-text-tertiary: var(--color-text-muted);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --font-mono: var(--font-family-mono);
+  --font-size-md: var(--font-size-base);
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-5);
+  --space-xl: var(--space-6);
+  --space-2xl: var(--space-8);
+}
+
+/* ─── High-contrast mode (Settings toggle) ─── */
+html[data-high-contrast="true"] {
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e9e6ff;
+  --color-text-muted: #c9c4df;
+  --color-border: rgba(255, 255, 255, 0.35);
+  --color-bg-secondary: #1a1d2a;
+  --color-bg-surface: #2a3048;
+}
+
+/* ─── Reduced motion (user pref OR Settings toggle) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-reduced-motion="true"] *, html[data-reduced-motion="true"] *::before, html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
 }

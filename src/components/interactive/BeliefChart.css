@@ -1,0 +1,45 @@
+/* BeliefChart.css — gaussians overlay */
+
+.belief-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.belief-chart canvas {
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.belief-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.belief-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.belief-chart__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  border: 2px solid currentColor;
+}
+
+.belief-chart__legend-values {
+  color: var(--color-text-muted);
+  font-family: var(--font-family-mono);
+}

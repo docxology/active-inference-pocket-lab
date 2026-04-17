@@ -7,6 +7,7 @@
  */
 import { Outlet } from 'react-router-dom';
 import BottomNav from './BottomNav';
+import TopBar from './TopBar';
 import './AppShell.css';
 
 /**
@@ -16,6 +17,7 @@ import './AppShell.css';
 export default function AppShell() {
   return (
     <div className="app-shell">
+      <TopBar />
       <main className="app-shell__content">
         <Outlet />
       </main>

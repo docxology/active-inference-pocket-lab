@@ -134,3 +134,80 @@
     gap: var(--space-4);
   }
 }
+
+.module-list-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.module-list-page__tag {
+  padding: 6px 12px;
+  border: 1px solid var(--color-border, rgba(255,255,255,0.08));
+  background: transparent;
+  color: var(--color-text-muted);
+  border-radius: 999px;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  text-transform: lowercase;
+}
+.module-list-page__tag.is-active {
+  background: var(--color-accent);
+  color: white;
+  border-color: transparent;
+}
+
+.module-card__minutes {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  padding: 2px 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+}
+.module-card__outcomes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+.module-card__outcomes li { position: relative; padding-left: 14px; }
+.module-card__outcomes li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+.module-card__pips {
+  display: inline-flex;
+  flex: 1;
+  gap: 4px;
+}
+.module-card__pip {
+  display: block;
+  flex: 1;
+}
+.module-card__pip-track {
+  display: block;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.module-card__pip-fill {
+  display: block;
+  height: 100%;
+  transition: width 300ms ease;
+}
+.module-card.is-done {
+  border-color: rgba(255, 184, 107, 0.4);
+}
+.module-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: 1.2rem;
+}
+.module-card { position: relative; }

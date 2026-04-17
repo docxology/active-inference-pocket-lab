@@ -137,6 +137,20 @@ export function AppProvider({ children }) {
   }, []);
 
   /**
+   * Wipe all module progress — used by Settings' "Clear all progress" action.
+   * Also clears persisted ActivityBank state so the Hearth resets.
+   */
+  const resetApp = useCallback(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem('spin_activity_bank');
+    } catch {}
+    dispatch({ type: ACTIONS.RESTORE_PROGRESS, payload: {} });
+    // Full reload ensures hooks that cached persisted state reinitialize.
+    if (typeof window !== 'undefined') window.location.reload();
+  }, []);
+
+  /**
    * Calculate the total progress for a module across all streams.
    * @param {number|string} moduleId
    * @returns {number} Average progress (0-100)
@@ -169,6 +183,7 @@ export function AppProvider({ children }) {
     updateProgress,
     getModuleProgress,
     getOverallProgress,
+    resetApp,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

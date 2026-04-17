@@ -1,0 +1,119 @@
+/* StreamTemplate.css — shared stream shell for Modules 2-10 */
+
+.stream-t {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5);
+  min-height: calc(100vh - var(--nav-height) - 140px);
+}
+
+.stream-t__beat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.stream-t__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stream-t__content h2 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.stream-t__content p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.stream-t__content strong {
+  color: var(--color-text-primary);
+}
+
+.stream-t__content em {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+/* Stream-specific accent colour for italics */
+.stream-t--pulse .stream-t__content em {
+  color: var(--color-pulse);
+}
+.stream-t--vision .stream-t__content em {
+  color: var(--color-vision);
+}
+.stream-t--core .stream-t__content em {
+  color: var(--color-core);
+}
+
+.stream-t__interactive {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer */
+
+.stream-t__footer {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.stream-t__dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.stream-t__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-elevated);
+  transition: background var(--transition-normal),
+    box-shadow var(--transition-normal);
+  padding: 0;
+  min-height: unset;
+}
+
+.stream-t--pulse .stream-t__dot.active {
+  background: var(--color-pulse);
+  box-shadow: 0 0 10px var(--color-pulse-glow, rgba(255, 107, 107, 0.6));
+}
+.stream-t--vision .stream-t__dot.active {
+  background: var(--color-vision);
+  box-shadow: 0 0 10px rgba(124, 107, 255, 0.6);
+}
+.stream-t--core .stream-t__dot.active {
+  background: var(--color-core);
+  box-shadow: 0 0 10px rgba(107, 203, 119, 0.6);
+}
+
+.stream-t__continue {
+  min-width: 200px;
+  min-height: var(--touch-target-comfortable);
+  padding: var(--space-3) var(--space-6);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  background: var(--gradient-vision);
+}
+
+.stream-t--pulse .stream-t__continue {
+  background: var(--gradient-pulse);
+}
+.stream-t--core .stream-t__continue {
+  background: var(--gradient-core, linear-gradient(135deg, #6bcb77, #3aa355));
+}
+
+.stream-t__continue:disabled {
+  opacity: 0.5;
+}

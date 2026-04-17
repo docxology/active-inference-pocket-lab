@@ -1,0 +1,45 @@
+/* MessagePassingCircuit.css */
+
+.mp-circuit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  align-items: center;
+}
+
+.mp-circuit__canvas {
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.mp-circuit__legend {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.mp-circuit__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.mp-circuit__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mp-circuit__dot.down {
+  background: var(--color-vision);
+}
+
+.mp-circuit__dot.up {
+  background: var(--color-pulse);
+}

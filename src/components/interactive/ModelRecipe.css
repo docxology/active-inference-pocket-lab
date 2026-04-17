@@ -1,0 +1,106 @@
+/* ModelRecipe.css */
+
+.model-recipe {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.model-recipe__tabs {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-1);
+}
+
+.model-recipe__tab {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color var(--transition-normal), color var(--transition-normal);
+}
+
+.model-recipe__tab.active {
+  color: var(--color-text-primary);
+  border-color: var(--color-vision);
+  background: rgba(124, 107, 255, 0.1);
+}
+
+.model-recipe__tab-symbol {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.model-recipe__tab-name {
+  font-size: var(--font-size-xs);
+}
+
+.model-recipe__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.model-recipe__title {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+}
+
+.model-recipe__title-symbol {
+  font-family: var(--font-family-mono);
+  color: var(--color-accent);
+  font-size: var(--font-size-xl);
+}
+
+.model-recipe__plain {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.model-recipe__formal {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.model-recipe__matrix {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.model-recipe__matrix th,
+.model-recipe__matrix td {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: var(--space-2);
+  text-align: center;
+  min-width: 48px;
+}
+
+.model-recipe__matrix th {
+  background: var(--color-bg-surface);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-semibold);
+}
+
+.model-recipe__matrix td {
+  color: var(--color-text-primary);
+}

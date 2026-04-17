@@ -6,28 +6,41 @@
  *
  * @module pages/ModulePage
  */
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getModuleById } from '../data/modules';
 import { useApp, STREAMS } from '../contexts/AppContext';
 import StreamSwitcher from '../components/layout/StreamSwitcher';
 import PauseButton from '../components/interactive/PauseButton';
-import { PulseStream, VisionStream, CoreStream } from '../modules/module1';
+import RouteFallback from '../components/layout/RouteFallback';
 import { hapticMedium } from '../utils/haptics';
 import './ModulePage.css';
 
 /**
- * Map of module IDs to their stream components.
- * TODO: Expand as Modules 2-10 are implemented.
+ * Lazy registry of module stream components — one chunk per module.
+ * This keeps the initial bundle minimal; each module's code only ships
+ * when the learner actually opens it. Inside each chunk, the three
+ * streams (Pulse/Vision/Core) are grouped together so switching streams
+ * within a module is instant (no extra network round-trip).
  */
+const bindLazy = (loader) => ({
+  [STREAMS.PULSE]: lazy(() => loader().then((m) => ({ default: m.PulseStream }))),
+  [STREAMS.VISION]: lazy(() => loader().then((m) => ({ default: m.VisionStream }))),
+  [STREAMS.CORE]: lazy(() => loader().then((m) => ({ default: m.CoreStream }))),
+});
+
 const MODULE_STREAMS = {
-  1: {
-    [STREAMS.PULSE]: PulseStream,
-    [STREAMS.VISION]: VisionStream,
-    [STREAMS.CORE]: CoreStream,
-  },
-  // Modules 2-10: Add stream components here as they are built
+  1: bindLazy(() => import('../modules/module1')),
+  2: bindLazy(() => import('../modules/module2')),
+  3: bindLazy(() => import('../modules/module3')),
+  4: bindLazy(() => import('../modules/module4')),
+  5: bindLazy(() => import('../modules/module5')),
+  6: bindLazy(() => import('../modules/module6')),
+  7: bindLazy(() => import('../modules/module7')),
+  8: bindLazy(() => import('../modules/module8')),
+  9: bindLazy(() => import('../modules/module9')),
+  10: bindLazy(() => import('../modules/module10')),
 };
 
 /**
@@ -136,6 +149,34 @@ export default function ModulePage() {
         <ProgressBar progress={progress} />
       </div>
 
+      {/* Overview */}
+      {(mod.outcomes?.length > 0 || mod.glossary?.length > 0) && (
+        <div className="container">
+          <section className="module-page__overview" aria-label="Module overview">
+            {mod.outcomes?.length > 0 && (
+              <div className="module-page__overview-card">
+                <h3>You'll leave able to…</h3>
+                <ul>
+                  {mod.outcomes.map((o, i) => (
+                    <li key={i}>{o}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {mod.glossary?.length > 0 && (
+              <div className="module-page__overview-card">
+                <h3>Vocabulary lit up</h3>
+                <div className="module-page__overview-tags">
+                  {mod.glossary.map((g) => (
+                    <span key={g} className="module-page__overview-tag">{g}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        </div>
+      )}
+
       {/* Stream Switcher */}
       <div className="container">
         <StreamSwitcher />
@@ -153,7 +194,9 @@ export default function ModulePage() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
-                <StreamComponent />
+                <Suspense fallback={<RouteFallback />}>
+                  <StreamComponent />
+                </Suspense>
               </motion.div>
             ) : (
               <motion.div
