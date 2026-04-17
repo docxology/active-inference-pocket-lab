@@ -6,7 +6,7 @@
  *
  * @module components/interactive/FreeEnergyField
  */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { makeFreeEnergyField, gradientStep, sampleField } from '../../utils/activeInference';
 import './FreeEnergyField.css';
 
@@ -20,17 +20,10 @@ function colorFor(v, min, max) {
 }
 
 /**
- * FreeEnergyField — animated heatmap + descending particle.
- *
- * @param {Object} props
- * @param {number} [props.attractorX=0.5]
- * @param {number} [props.attractorY=0.5]
- * @param {number} [props.noise=0] - stochastic descent amplitude
- * @param {number} [props.spread=0.25] - width of the well
- * @param {number} [props.size=360]
- * @param {boolean} [props.running=true]
+ * Inner implementation remounted when attractor parameters change so the particle
+ * re-seeds without syncing state inside an effect (keeps React hook lint clean).
  */
-export default function FreeEnergyField({
+function FreeEnergyFieldInner({
   attractorX = 0.5,
   attractorY = 0.5,
   noise = 0,
@@ -40,15 +33,14 @@ export default function FreeEnergyField({
 }) {
   const canvasRef = useRef(null);
   const rafRef = useRef(0);
-  const [particle, setParticle] = useState({ x: 0.12, y: 0.12 });
-  const [field, setField] = useState(() =>
-    makeFreeEnergyField({ size: 40, muX: attractorX, muY: attractorY, spread }),
+  const field = useMemo(
+    () => makeFreeEnergyField({ size: 40, muX: attractorX, muY: attractorY, spread }),
+    [attractorX, attractorY, spread],
   );
-
-  useEffect(() => {
-    setField(makeFreeEnergyField({ size: 40, muX: attractorX, muY: attractorY, spread }));
-    setParticle({ x: Math.random() * 0.8 + 0.1, y: Math.random() * 0.8 + 0.1 });
-  }, [attractorX, attractorY, spread]);
+  const [particle, setParticle] = useState(() => ({
+    x: Math.random() * 0.8 + 0.1,
+    y: Math.random() * 0.8 + 0.1,
+  }));
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -69,7 +61,6 @@ export default function FreeEnergyField({
         if (v > max) max = v;
       }
     }
-    // Draw heatmap cells
     for (let y = 0; y < field.length; y++) {
       for (let x = 0; x < field[0].length; x++) {
         ctx.fillStyle = colorFor(field[y][x], min, max);
@@ -77,7 +68,6 @@ export default function FreeEnergyField({
       }
     }
 
-    // Draw contours (simple iso-lines every 0.25σ)
     ctx.strokeStyle = 'rgba(255,255,255,0.12)';
     ctx.lineWidth = 0.5;
     for (let y = 0; y < field.length; y++) {
@@ -88,7 +78,6 @@ export default function FreeEnergyField({
       }
     }
 
-    // Draw attractor marker
     ctx.fillStyle = 'rgba(255,255,255,0.9)';
     ctx.beginPath();
     ctx.arc(attractorX * size, attractorY * size, 4, 0, Math.PI * 2);
@@ -96,7 +85,6 @@ export default function FreeEnergyField({
     ctx.strokeStyle = 'rgba(0,0,0,0.4)';
     ctx.stroke();
 
-    // Draw particle
     ctx.fillStyle = '#ffb86b';
     ctx.beginPath();
     ctx.arc(particle.x * size, particle.y * size, 7, 0, Math.PI * 2);
@@ -146,5 +134,26 @@ export default function FreeEnergyField({
         </span>
       </div>
     </div>
+  );
+}
+
+/**
+ * FreeEnergyField — animated heatmap + descending particle.
+ *
+ * @param {Object} props
+ * @param {number} [props.attractorX=0.5]
+ * @param {number} [props.attractorY=0.5]
+ * @param {number} [props.noise=0] - stochastic descent amplitude
+ * @param {number} [props.spread=0.25] - width of the well
+ * @param {number} [props.size=360]
+ * @param {boolean} [props.running=true]
+ */
+export default function FreeEnergyField(props) {
+  const { attractorX, attractorY, spread, size } = props;
+  return (
+    <FreeEnergyFieldInner
+      key={`${attractorX}-${attractorY}-${spread}-${size}`}
+      {...props}
+    />
   );
 }

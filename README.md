@@ -73,7 +73,7 @@ Or use individual commands:
 ```bash
 npm install
 npm run dev      # → http://localhost:5173 (mobile viewport recommended)
-npm test         # Run all 52 tests
+npm test         # Run all tests (module registry + 10 module bundles + UI)
 npm run build    # Production build
 ```
 

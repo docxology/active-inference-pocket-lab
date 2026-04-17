@@ -14,6 +14,7 @@ import { useApp, STREAMS } from '../contexts/AppContext';
 import StreamSwitcher from '../components/layout/StreamSwitcher';
 import PauseButton from '../components/interactive/PauseButton';
 import RouteFallback from '../components/layout/RouteFallback';
+import StreamErrorBoundary from '../components/layout/StreamErrorBoundary';
 import { hapticMedium } from '../utils/haptics';
 import './ModulePage.css';
 
@@ -196,9 +197,11 @@ export default function ModulePage() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
-                <Suspense fallback={<RouteFallback />}>
-                  <StreamComponent />
-                </Suspense>
+                <StreamErrorBoundary>
+                  <Suspense fallback={<RouteFallback />}>
+                    <StreamComponent />
+                  </Suspense>
+                </StreamErrorBoundary>
               </motion.div>
             ) : (
               <motion.div

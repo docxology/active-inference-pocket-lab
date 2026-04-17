@@ -54,8 +54,12 @@ export default function CoreStream() {
       interactive: (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <MathBlock
+            latex={`\\pi_{post} = \\pi_p + \\pi_o = ${piPost.toFixed(2)}`}
+            label="Posterior precision"
+          />
+          <MathBlock
             latex={`\\mu_{post} = \\frac{${piO.toFixed(1)} \\cdot ${o.toFixed(1)} + ${piP.toFixed(1)} \\cdot ${muP.toFixed(1)}}{${(piP + piO).toFixed(1)}} = ${muPost.toFixed(2)}`}
-            label="Precision-weighted posterior"
+            label="Precision-weighted posterior mean"
           />
           <InferenceSlider
             min={-5}

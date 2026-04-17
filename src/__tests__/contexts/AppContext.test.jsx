@@ -1,7 +1,7 @@
 /**
  * @file AppContext.test.jsx — Tests for AppContext with persistence
  */
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { AppProvider, useApp, STREAMS } from '../../contexts/AppContext';
 

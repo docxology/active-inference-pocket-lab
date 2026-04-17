@@ -8,7 +8,7 @@ Route-level page components rendered by React Router inside AppShell.
 
 - `HomePage.jsx` — `/` — Landing with resume card, quick start
 - `ModuleListPage.jsx` — `/modules` — All 10 module cards with progress
-- `ModulePage.jsx` — `/modules/:moduleId` — Active module + StreamSwitcher
+- `ModulePage.jsx` — `/modules/:moduleId` — Lazy triple streams + `StreamErrorBoundary` + `StreamSwitcher`
 - `ProficiencyMapPage.jsx` — `/map` — Progress grid
 - `HearthPage.jsx` — `/hearth` — Celebration, badges
 - `PausePage.jsx` — `/pause` — Planned pause with bookmark

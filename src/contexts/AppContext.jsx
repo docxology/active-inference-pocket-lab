@@ -144,7 +144,9 @@ export function AppProvider({ children }) {
     try {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem('spin_activity_bank');
-    } catch {}
+    } catch {
+      /* ignore storage unavailable / quota */
+    }
     dispatch({ type: ACTIONS.RESTORE_PROGRESS, payload: {} });
     // Full reload ensures hooks that cached persisted state reinitialize.
     if (typeof window !== 'undefined') window.location.reload();

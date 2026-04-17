@@ -1,0 +1,31 @@
+.stream-error-boundary {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.stream-error-boundary__title {
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+}
+
+.stream-error-boundary__detail {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-4);
+  word-break: break-word;
+}
+
+.stream-error-boundary__retry {
+  min-height: 48px;
+  min-width: 48px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-pulse);
+  color: var(--color-bg);
+  font-weight: 600;
+  cursor: pointer;
+}

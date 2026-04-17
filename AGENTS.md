@@ -20,7 +20,7 @@ The project originates from a single creative brief: `doc/initial-pocket-lab-pro
 ### Architecture
 - `src/contexts/` — Global state (AppContext for streams, ActivityBankContext for pause/bookmark, SettingsContext)
 - `src/components/interactive/` — Reusable interactive elements (InferenceSlider, MathBlock, etc.)
-- `src/components/layout/` — Layout shells (AppShell, TopBar, BottomNav, StreamSwitcher, Drawer)
+- `src/components/layout/` — Layout shells (AppShell, TopBar, BottomNav, StreamSwitcher, Drawer, StreamErrorBoundary, StreamTemplate)
 - `src/modules/module1` … `module10/` — Per-module triple streams (lazy-loaded from `ModulePage.jsx` → `MODULE_STREAMS`)
 - `src/pages/` — Route-level page components
 - `src/data/modules.js` — Module registry (10 modules, metadata; all `available: true`)

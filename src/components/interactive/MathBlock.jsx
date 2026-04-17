@@ -5,7 +5,7 @@
  *
  * @module components/interactive/MathBlock
  */
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import './MathBlock.css';
@@ -22,50 +22,42 @@ import './MathBlock.css';
  * @returns {JSX.Element}
  */
 export default function MathBlock({ latex, displayMode = true, label, description, steps }) {
-  const mathRef = useRef(null);
   const [stepsOpen, setStepsOpen] = useState(false);
-  const [renderError, setRenderError] = useState(null);
 
-  // Render the main equation
-  useEffect(() => {
-    if (mathRef.current && latex) {
-      try {
-        katex.render(latex, mathRef.current, {
-          displayMode,
-          throwOnError: false,
-          errorColor: 'var(--color-error)',
-          trust: true,
-        });
-        setRenderError(null);
-      } catch (err) {
-        console.error('[MathBlock] KaTeX render error:', err.message);
-        setRenderError(err.message);
-      }
+  const { html: mainHtml, error: mainError } = useMemo(() => {
+    if (!latex) return { html: '', error: null };
+    try {
+      const html = katex.renderToString(latex, {
+        displayMode,
+        throwOnError: false,
+        errorColor: 'var(--color-error)',
+        trust: true,
+      });
+      return { html, error: null };
+    } catch (err) {
+      console.error('[MathBlock] KaTeX render error:', err.message);
+      return { html: '', error: err.message };
     }
   }, [latex, displayMode]);
 
   return (
     <div className="math-block">
-      {/* Label */}
       {label && <span className="math-block__label">{label}</span>}
 
-      {/* Main Equation */}
       <div
         className="math-block__equation"
-        ref={mathRef}
         aria-label={`Mathematical equation: ${description || latex}`}
+        dangerouslySetInnerHTML={{ __html: mainHtml }}
       />
 
-      {/* Render Error */}
-      {renderError && <p className="math-block__error">⚠️ Render error: {renderError}</p>}
+      {mainError && <p className="math-block__error">⚠️ Render error: {mainError}</p>}
 
-      {/* Description */}
       {description && <p className="math-block__description">{description}</p>}
 
-      {/* Derivation Steps */}
       {steps && steps.length > 0 && (
         <div className="math-block__steps">
           <button
+            type="button"
             className="math-block__steps-toggle"
             onClick={() => setStepsOpen(!stepsOpen)}
             aria-expanded={stepsOpen}
@@ -94,24 +86,22 @@ export default function MathBlock({ latex, displayMode = true, label, descriptio
  * @param {number} props.index - Step index
  */
 function DerivationStep({ step, index }) {
-  const stepRef = useRef(null);
-
-  useEffect(() => {
-    if (stepRef.current && step.latex) {
-      try {
-        katex.render(step.latex, stepRef.current, {
-          displayMode: true,
-          throwOnError: false,
-        });
-      } catch (err) {
-        console.error(`[MathBlock] Step ${index} render error:`, err.message);
-      }
+  const html = useMemo(() => {
+    if (!step.latex) return '';
+    try {
+      return katex.renderToString(step.latex, {
+        displayMode: true,
+        throwOnError: false,
+      });
+    } catch (err) {
+      console.error(`[MathBlock] Step ${index} render error:`, err.message);
+      return '';
     }
   }, [step.latex, index]);
 
   return (
     <li className="math-block__step">
-      <div className="math-block__step-equation" ref={stepRef} />
+      <div className="math-block__step-equation" dangerouslySetInnerHTML={{ __html: html }} />
       {step.note && <p className="math-block__step-note">{step.note}</p>}
     </li>
   );

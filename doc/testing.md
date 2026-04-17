@@ -33,7 +33,7 @@ test: {
 3. **`renderWithProviders()`** helper wraps components in `BrowserRouter` + `AppProvider` + `ActivityBankProvider`
 4. **ARIA first** — Prefer `getByLabelText`, `getByRole` over `getByText`
 
-## Test Inventory (52 tests, 9 suites)
+## Test Inventory (62 tests, 10 suites)
 
 ### AppContext.test.jsx (9 tests)
 - Switches streams
@@ -87,6 +87,9 @@ test: {
 - getAvailableModules returns only available modules
 - All 10 modules are available
 - Each module slug is unique
+
+### moduleStreams.test.js (10 tests)
+- Each module `index.js` exports `PulseStream`, `VisionStream`, `CoreStream`
 
 ### Module1Pulse.test.jsx (5 tests)
 - Renders the opening question

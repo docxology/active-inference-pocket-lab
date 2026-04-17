@@ -194,6 +194,11 @@ export default function VisionStream() {
           rightLabel="Precise"
           color="var(--color-core)"
         />
+
+        <p className="vision-stream__moves text-label" aria-live="polite">
+          Exploration moves: {interactionCount}
+          {!hasExplored ? ' — keep playing past 10 moves to complete this stream' : ' — orbit unlocked'}
+        </p>
       </div>
 
       {/* Exploration hint */}
