@@ -31,6 +31,13 @@ Each module offers three learning paths that users can switch between at any tim
 - **The Hearth**: Replace leaderboards with warmth, clarity badges, and "Good Questions"
 - **Visible Pathing**: Proficiency maps showing exactly what's required — no hidden gates
 
+### Learner experience (design commitments)
+
+- **Triple streams**: Pulse, Vision, and Core run in parallel; learners switch anytime without losing place.
+- **Legible knowledge**: Each module pulls **terms** and **retrieval questions** from [`src/data/modules.js`](src/data/modules.js) — glossary deep links (`/glossary#key`) and a short **Core quiz** at the end make uncertainty and recall explicit, not hidden.
+- **Warm feedback**: Quizzes are framed as retrieval (no timers, generous explanations); motion and haptics reward participation, not speed.
+- **Installable shell**: PWA assets live under [`public/`](public/) (`manifest.webmanifest`, `sw.js`); Settings includes reduced motion, haptics, and font scale.
+
 ## The 10 Modules
 
 | # | Title | Chapter Basis |
@@ -73,7 +80,7 @@ Or use individual commands:
 ```bash
 npm install
 npm run dev      # → http://localhost:5173 (mobile viewport recommended)
-npm test         # Run all tests (module registry + 10 module bundles + UI)
+npm test         # Run all tests (65 tests, 11 files — registry, bundles, UI)
 npm run build    # Production build
 ```
 
@@ -88,8 +95,8 @@ src/
 ├── contexts/           # AppContext, ActivityBankContext, SettingsContext
 ├── data/               # Module registry, glossary, badges
 ├── modules/
-│   ├── module1/        # PulseStream, VisionStream, CoreStream (+ module2 … module10)
-│   └── …
+│   ├── module1/ … module10/   # PulseStream, VisionStream, CoreStream per module
+│   └── shared/         # useStreamProgress, glossary line, Core retrieval helpers
 ├── pages/              # Home, modules, glossary, search, settings, …
 ├── styles/             # Design tokens + global CSS
 ├── utils/              # Shared helpers (e.g. activeInference)
@@ -121,7 +128,7 @@ src/
 - [ ] Offline storage with IndexedDB (beyond installable shell)
 - [ ] Server-synced progress (when backend is ready)
 - [ ] Hearth social features (shared questions, group streaks)
-- [ ] Accessibility audit (screen reader testing)
+- [ ] Full accessibility pass (screen reader + keyboard run-through; track in releases)
 - [ ] Performance profiling for canvas animations
 
 ## Contributing

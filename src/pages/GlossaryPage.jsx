@@ -3,13 +3,14 @@
  * @description Every term, every cross-link, wired to the module registry.
  * @module pages/GlossaryPage
  */
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { getAllGlossary } from '../data/glossary';
-import { getModuleById } from '../data/modules';
+import { getModuleBySlug } from '../data/modules';
 import './GlossaryPage.css';
 
 export default function GlossaryPage() {
+  const location = useLocation();
   const [query, setQuery] = useState('');
   const entries = useMemo(() => getAllGlossary(), []);
   const q = query.trim().toLowerCase();
@@ -33,6 +34,15 @@ export default function GlossaryPage() {
       .sort()
       .map((L) => ({ L, items: byLetter[L].sort((a, b) => a.term.localeCompare(b.term)) }));
   }, [filtered]);
+
+  useEffect(() => {
+    const raw = location.hash?.replace(/^#/, '') || '';
+    if (!raw || raw.startsWith('gl-')) return;
+    const el = document.getElementById(raw);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash, filtered]);
 
   return (
     <div className="page glossary-page">
@@ -71,7 +81,7 @@ export default function GlossaryPage() {
               <h2 className="glossary-page__letter">{L}</h2>
               <ul>
                 {items.map((entry) => (
-                  <li key={entry.key} className="glossary-page__item">
+                  <li key={entry.key} id={entry.key} className="glossary-page__item">
                     <h3 className="glossary-page__term">{entry.term}</h3>
                     <p className="glossary-page__short">{entry.short}</p>
                     {entry.formal && (
@@ -81,11 +91,15 @@ export default function GlossaryPage() {
                     )}
                     {entry.relatedModules?.length > 0 && (
                       <div className="glossary-page__links">
-                        {entry.relatedModules.map((id) => {
-                          const mod = getModuleById(id);
+                        {entry.relatedModules.map((slug) => {
+                          const mod = getModuleBySlug(slug);
                           if (!mod) return null;
                           return (
-                            <Link key={id} to={`/modules/${id}`} className="glossary-page__link">
+                            <Link
+                              key={slug}
+                              to={`/modules/${mod.id}`}
+                              className="glossary-page__link"
+                            >
                               {mod.icon} {mod.title}
                             </Link>
                           );

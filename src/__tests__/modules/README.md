@@ -1,9 +1,6 @@
 # **tests**/modules/
 
-Tests for per-module stream implementations.
-
-## Test Files
-
-| File                    | Tests | Module                                                     |
-| ----------------------- | ----- | ---------------------------------------------------------- |
-| `Module1Pulse.test.jsx` | 5     | Opening text, slider, continue gating, progress dots, ARIA |
+| File | Role |
+| --- | --- |
+| `Module1Pulse.test.jsx` | Module 1 Pulse: copy, slider, continue, dots, ARIA |
+| `moduleStreams.test.js` | Each `module1`…`module10` barrel exports Pulse, Vision, Core |

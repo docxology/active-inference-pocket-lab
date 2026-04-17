@@ -9,6 +9,7 @@ import { useState } from 'react';
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const [prior, setPrior] = useState(4);
@@ -33,6 +34,7 @@ export default function PulseStream() {
             Before you opened your eyes today your brain had already wagered the <em>prior</em>:
             where your phone is, what the light looks like, how the bed feels.
           </p>
+          <GlossaryTermsLine moduleId={2} />
           <p>
             Prediction is cheap. Checking — that's the work. Pull the slider to post your prior for
             this screen, then I'll reveal what actually shows up.

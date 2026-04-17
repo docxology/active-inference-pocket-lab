@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import MessagePassingCircuit from '../../components/interactive/MessagePassingCircuit';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(5, 'pulse', 5);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             Pyramidal cells push predictions downward — "this is probably a cat". Bottom-up circuits
             push back with <em>prediction errors</em> — "the whiskers don't match".
           </p>
+          <GlossaryTermsLine moduleId={5} />
         </>
       ),
       interactive: <MessagePassingCircuit />,

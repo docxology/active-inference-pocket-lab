@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import ModelRecipe from '../../components/interactive/ModelRecipe';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(6, 'pulse', 6);
@@ -18,6 +19,7 @@ export default function PulseStream() {
             <strong> C</strong> is what you want. <strong>D</strong> is where you start.
             <strong> E</strong> is your habits.
           </p>
+          <GlossaryTermsLine moduleId={6} />
         </>
       ),
       interactive: <ModelRecipe />,

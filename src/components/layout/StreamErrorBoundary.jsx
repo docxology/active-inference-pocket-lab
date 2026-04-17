@@ -23,7 +23,9 @@ export default class StreamErrorBoundary extends Component {
       return (
         <div className="stream-error-boundary" role="alert">
           <p className="stream-error-boundary__title">This stream could not load.</p>
-          <p className="stream-error-boundary__detail">{String(this.state.error?.message || this.state.error)}</p>
+          <p className="stream-error-boundary__detail">
+            {String(this.state.error?.message || this.state.error)}
+          </p>
           <button
             type="button"
             className="stream-error-boundary__retry"

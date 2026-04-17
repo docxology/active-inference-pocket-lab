@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import DataFitter from '../../components/interactive/DataFitter';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(9, 'pulse', 6);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             Each model is a defendant with a story. Bayes is the judge. The model that explains the
             data best — without over-explaining — wins.
           </p>
+          <GlossaryTermsLine moduleId={9} />
         </>
       ),
       interactive: <DataFitter />,

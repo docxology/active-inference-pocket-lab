@@ -11,6 +11,7 @@ import BeliefChart from '../../components/interactive/BeliefChart';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { gaussianProduct } from '../../utils/activeInference';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const [muP, setMuP] = useState(2);
@@ -100,6 +101,7 @@ export default function VisionStream() {
             The blue wave is your prior. The orange dashed wave is the likelihood of an incoming
             observation. Where they meet — in green — lives your updated belief.
           </p>
+          <GlossaryTermsLine moduleId={2} />
         </>
       ),
       interactive: <BeliefChart curves={curves} />,

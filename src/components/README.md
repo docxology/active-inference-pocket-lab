@@ -12,12 +12,13 @@ Touch-optimized components for user interaction:
 - **MathBlock** — KaTeX LaTeX renderer with collapsible derivation steps
 - **PauseButton** — Validates rest, saves bookmark, displays warm messaging
 - **RewardAnimation** — "Spin" orbital particle burst for celebrating completions
+- **Quiz** — Registry-driven retrieval checks; **GlossaryLink** / **GlossaryChips** — in-app glossary navigation
 
 ### `layout/`
 
 Application structure and navigation:
 
-- **AppShell** — Root layout wrapper with content area + bottom nav
+- **AppShell** — Root layout wrapper with content area + bottom nav + TopBar where used
 - **BottomNav** — Five-tab mobile bottom navigation with animated indicator
 - **StreamSwitcher** — Segmented control for Pulse / Vision / Core streams
 - **Drawer** — Physics-based slide-up panel (framer-motion spring)

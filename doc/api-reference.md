@@ -13,14 +13,15 @@ Complete props/exports reference for Spin components, contexts, and data.
 | `min` | number | `0` | no | Minimum slider value |
 | `max` | number | `100` | no | Maximum slider value |
 | `step` | number | `1` | no | Step increment |
-| `value` | number | `50` | no | Current value |
+| `value` | number | — | no | Controlled value (omit with `defaultValue` for uncontrolled) |
+| `defaultValue` | number | `50` | no | Initial value when uncontrolled |
 | `onChange` | `(value: number) => void` | — | no | Change callback |
-| `label` | string | — | **yes** | Accessible label (renders as `aria-label`) |
+| `label` | string | `'Adjust'` | no | Accessible label (`aria-label` on the range input) |
 | `leftLabel` | string | — | no | Left range label text |
 | `rightLabel` | string | — | no | Right range label text |
-| `unit` | string | — | no | Suffix for display value |
-| `color` | string | `var(--color-accent)` | no | Track and glow color |
-| `formatValue` | `(value: number) => string` | — | no | Custom value formatter |
+| `unit` | string | `''` | no | Suffix for display value |
+| `color` | string | `var(--color-pulse)` | no | Track and glow color |
+| `formatValue` | `(value: number) => string` | — | no | Custom value display |
 
 ---
 
@@ -80,6 +81,79 @@ No props. Reads `activeStream` from `AppContext` and renders tab bar.
 
 ---
 
+### Quiz
+
+**Path**: `src/components/interactive/Quiz.jsx`
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `questions` | `Array<{ prompt, options, correctIndex, explanation }>` | — | MCQ items (registry shape) |
+| `onComplete` | `(score, total) => void` | — | Called after submit |
+| `title` | string | `'Retrieval'` | Section `aria-label` |
+
+Requires `ActivityBankProvider` (uses `recordQuiz`).
+
+---
+
+### GlossaryLink
+
+**Path**: `src/components/interactive/GlossaryLink.jsx`
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `glossaryKey` | string | Key in `glossary.js` / `modules.js` `glossary` arrays |
+| `children` | ReactNode | Optional; defaults to glossary term title |
+| `className` | string | Optional CSS class |
+
+Renders `Link` to `/glossary#glossaryKey`.
+
+---
+
+### GlossaryChips
+
+**Path**: `src/components/interactive/GlossaryChips.jsx`
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `keys` | `string[]` | — | Keys to show (invalid keys skipped) |
+| `caption` | string | `'Terms'` | Lead-in label |
+
+---
+
+### StreamTemplate
+
+**Path**: `src/components/layout/StreamTemplate.jsx`
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `streamKey` | `'pulse' \| 'vision' \| 'core'` | CSS modifier |
+| `beats` | `Array<{ id, content, interactive? }>` | Step-through beats |
+| `onProgress` | `(fraction: number) => void` | 0..1 progress |
+| `onComplete` | `() => void` | Last step continue |
+| `finalLabel` | string | Default `'Spin 🌀'` |
+
+---
+
+### ModuleRetrievalQuiz
+
+**Path**: `src/modules/shared/ModuleRetrievalQuiz.jsx`
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `moduleId` | number | Loads `getModuleById(moduleId).quiz` |
+
+---
+
+### getCoreRetrievalBeat
+
+**Path**: `src/modules/shared/getCoreRetrievalBeat.jsx`
+
+| Export | Signature | Description |
+| --- | --- | --- |
+| `getCoreRetrievalBeat` | `(moduleId: number) => StreamBeat` | Final Core beat with heading + `ModuleRetrievalQuiz` |
+
+---
+
 ## Contexts
 
 ### useApp()
@@ -121,10 +195,28 @@ const {
   setBookmark,   // (moduleId, stream, position) => void
   clearBookmark, // () => void
   recordActivity,// (moduleId, stream, minutes) => void
+  recordQuiz,    // (passed: boolean) => void
 } = useActivityBank();
 ```
 
 **localStorage key**: `spin_activity_bank`
+
+---
+
+### useSettings()
+
+**Path**: `src/contexts/SettingsContext.jsx`
+
+```js
+const {
+  reducedMotion, haptics, sound, highContrast, fontScale,
+  defaultStream, autoBookmark, showMathByDefault,
+  set,   // (patch: Partial<State>) => void
+  reset, // () => void
+} = useSettings();
+```
+
+**localStorage key**: `spin_settings`
 
 ---
 
@@ -175,3 +267,18 @@ Usage: `const log = createLogger('PulseStream'); log.debug('step', 1);`
 | `getModuleById(id)` | `(id: number \| string) => Module` | Lookup by ID |
 | `getModuleBySlug(slug)` | `(slug: string) => Module` | Lookup by URL slug |
 | `getAvailableModules()` | `() => Module[]` | Only `available: true` modules |
+
+Each **`Module`** includes at least: `id`, `slug`, `title`, `subtitle`, `description`, `icon`, `firstAction`, `glossary` (string keys), `quiz` (three `QuizItem`s), `streams`, `available`, and related metadata (see JSDoc in source).
+
+---
+
+### glossary.js
+
+**Path**: `src/data/glossary.js`
+
+| Export | Signature | Description |
+| --- | --- | --- |
+| `default` | `Record<string, GlossaryEntry>` | Raw term map |
+| `getGlossaryEntry(key)` | `(key: string) => GlossaryEntry \| undefined` | Single term |
+| `getAllGlossary()` | `() => Array<{ key, ...GlossaryEntry }>` | Flattened rows for UI |
+| `searchGlossary(query)` | `(query: string) => Array` | Empty query: same rows as `getAllGlossary()`; else filter by term/short/formal |

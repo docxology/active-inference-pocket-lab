@@ -14,6 +14,22 @@ Each module offers three parallel learning paths ("The Helix"):
 
 Users can switch streams at any time via the StreamSwitcher. Progress is tracked per-stream.
 
+## Registry: quizzes and glossary
+
+`src/data/modules.js` is the source of truth for each module’s **`quiz`** (three multiple-choice questions) and **`glossary`** (string keys into `src/data/glossary.js`).
+
+- **Core streams** end with a retrieval beat that mounts the shared `Quiz` using that module’s `quiz` array (see `src/modules/shared/getCoreRetrievalBeat.jsx`, `ModuleRetrievalQuiz.jsx`, and Module 1’s Core layout).
+- **`GlossaryLink` / `GlossaryChips`** use those keys as URL fragments: `/glossary#<key>`. The glossary page renders matching `id` attributes so deep links scroll to the right entry.
+
+## Quality bar (all 10 modules)
+
+For each module, the shipped experience should:
+
+- **Close the loop**: Core ends with the registry retrieval quiz; Pulse and Vision reference real glossary keys, not orphaned jargon.
+- **Stay playable**: Vision beats do not end on prose alone unless a `GlossaryChips` row or a compact repeat of the main widget is attached; prefer `InferenceSlider` over raw `<input type="range">` where sliders are primary controls (see module 7/8 Vision).
+- **Respect the First Threshold**: The first meaningful interaction is physical (slider, drag, tap) before long explanation.
+- **Feel humane**: Generous spacing, optional haptics, no punitive scoring on quizzes.
+
 ## The 10 Modules
 
 Each module has a `src/modules/moduleN/` package (Pulse, Vision, Core) registered in `ModulePage.jsx` and marked `available: true` in `modules.js`.
@@ -143,3 +159,9 @@ Every module **must** start with a physical action — not text. Examples:
 - Derivation steps (collapsible)
 - Live sandbox in `Drawer` with computed metrics
 - All equations numbered and labeled
+- Final beat: registry `quiz` via `Quiz` (three questions, required shape validated in `src/__tests__/data/modules.test.js`)
+
+### Glossary in Pulse / Vision
+
+- Pulse streams surface a few terms via `GlossaryTermsLine` (subset of the module’s `glossary` keys).
+- Vision may add the same on an early beat; prose-only closing beats use `GlossaryChips` or a compact repeat of the main interactive.

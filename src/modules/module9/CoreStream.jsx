@@ -5,6 +5,7 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import MathBlock from '../../components/interactive/MathBlock';
 import DataFitter from '../../components/interactive/DataFitter';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import { getCoreRetrievalBeat } from '../shared/getCoreRetrievalBeat';
 
 export default function CoreStream() {
   const { onProgress, onComplete } = useStreamProgress(9, 'core', 8);
@@ -76,6 +77,7 @@ export default function CoreStream() {
       ),
       interactive: <DataFitter />,
     },
+    getCoreRetrievalBeat(9),
   ];
   return (
     <StreamTemplate

@@ -16,6 +16,7 @@ import InferenceSlider from '../../components/interactive/InferenceSlider';
 import RewardAnimation from '../../components/interactive/RewardAnimation';
 import { useApp } from '../../contexts/AppContext';
 import { hapticLight, hapticMedium, hapticSuccess } from '../../utils/haptics';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 import './PulseStream.css';
 
 /**
@@ -32,6 +33,7 @@ const STEPS = [
           Right now, your brain is generating expectations about what comes next — before you even
           finish reading this sentence.
         </p>
+        <GlossaryTermsLine moduleId={1} />
         <p className="pulse-hint">
           👇 Move the slider below to set your first <strong>prior belief</strong>.
         </p>

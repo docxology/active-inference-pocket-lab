@@ -3,10 +3,14 @@
  */
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import ConceptMap from '../../components/interactive/ConceptMap';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const { onProgress, onComplete } = useStreamProgress(10, 'vision', 7);
+  const glossaryKeys = getModuleById(10).glossary;
   const beats = [
     {
       id: 'map',
@@ -17,6 +21,7 @@ export default function VisionStream() {
             Bayes at the center. Free energy orbits. Active inference is the outer ring where
             perception, planning, and action meet.
           </p>
+          <GlossaryTermsLine moduleId={10} />
         </>
       ),
       interactive: <ConceptMap />,
@@ -32,6 +37,7 @@ export default function VisionStream() {
           </p>
         </>
       ),
+      interactive: <GlossaryChips keys={glossaryKeys} caption="Key terms" />,
     },
     {
       id: 'synth',
@@ -44,6 +50,7 @@ export default function VisionStream() {
           </p>
         </>
       ),
+      interactive: <ConceptMap />,
     },
   ];
   return (

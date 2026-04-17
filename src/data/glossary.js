@@ -297,12 +297,13 @@ const glossary = {
 
 /**
  * Get the full glossary, sorted alphabetically by display term.
- * @returns {Array<{key: string, entry: GlossaryEntry}>}
+ * Each row includes `key` (slug) plus all {@link GlossaryEntry} fields at top level.
+ * @returns {Array<{key: string} & GlossaryEntry>}
  */
 export function getAllGlossary() {
   return Object.entries(glossary)
-    .map(([key, entry]) => ({ key, entry }))
-    .sort((a, b) => a.entry.term.localeCompare(b.entry.term));
+    .map(([key, entry]) => ({ key, ...entry }))
+    .sort((a, b) => a.term.localeCompare(b.term));
 }
 
 /**
@@ -322,12 +323,14 @@ export function getGlossaryEntry(key) {
 export function searchGlossary(query) {
   const q = query.trim().toLowerCase();
   if (!q) return getAllGlossary();
-  return getAllGlossary().filter(
-    ({ entry }) =>
-      entry.term.toLowerCase().includes(q) ||
-      entry.short.toLowerCase().includes(q) ||
-      entry.formal.toLowerCase().includes(q),
-  );
+  return getAllGlossary().filter((row) => {
+    const formal = row.formal || '';
+    return (
+      row.term.toLowerCase().includes(q) ||
+      row.short.toLowerCase().includes(q) ||
+      formal.toLowerCase().includes(q)
+    );
+  });
 }
 
 export default glossary;

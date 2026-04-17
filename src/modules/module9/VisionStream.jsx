@@ -4,10 +4,14 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import DataFitter from '../../components/interactive/DataFitter';
 import MathBlock from '../../components/interactive/MathBlock';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const { onProgress, onComplete } = useStreamProgress(9, 'vision', 7);
+  const glossaryKeys = getModuleById(9).glossary;
   const beats = [
     {
       id: 'evidence',
@@ -18,6 +22,7 @@ export default function VisionStream() {
             The Gaussian rises and falls as you tune it. Log-evidence is how <em>surprising</em> the
             data are under the model — minimize surprise, maximize evidence.
           </p>
+          <GlossaryTermsLine moduleId={9} />
         </>
       ),
       interactive: <DataFitter />,
@@ -51,6 +56,7 @@ export default function VisionStream() {
           </p>
         </>
       ),
+      interactive: <GlossaryChips keys={glossaryKeys.slice(0, 4)} />,
     },
   ];
   return (

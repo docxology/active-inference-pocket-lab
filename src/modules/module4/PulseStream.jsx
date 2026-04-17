@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import GenerativeGraph from '../../components/interactive/GenerativeGraph';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(4, 'pulse', 5);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             Hidden ingredients → observations. Pick the right ingredients, and the world generates
             itself in your head.
           </p>
+          <GlossaryTermsLine moduleId={4} />
         </>
       ),
       interactive: <GenerativeGraph precision={1} />,

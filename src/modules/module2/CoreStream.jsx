@@ -11,6 +11,7 @@ import MathBlock from '../../components/interactive/MathBlock';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { gaussianProduct } from '../../utils/activeInference';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import { getCoreRetrievalBeat } from '../shared/getCoreRetrievalBeat';
 
 export default function CoreStream() {
   const [muP, setMuP] = useState(0);
@@ -118,6 +119,7 @@ export default function CoreStream() {
         />
       ),
     },
+    getCoreRetrievalBeat(2),
   ];
 
   return (

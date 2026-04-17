@@ -5,7 +5,12 @@ import { useState } from 'react';
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
 import MessagePassingCircuit from '../../components/interactive/MessagePassingCircuit';
+import InferenceSlider from '../../components/interactive/InferenceSlider';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
+import './VisionStream.css';
 
 function FlowField() {
   const [spread, setSpread] = useState(1.2);
@@ -14,41 +19,34 @@ function FlowField() {
     <div className="flow-field">
       <FreeEnergyField spread={spread} noise={noise} />
       <div className="flow-field__controls">
-        <label>
-          Landscape spread <span>{spread.toFixed(2)}</span>
-          <input
-            type="range"
-            min={0.4}
-            max={2.5}
-            step={0.05}
-            value={spread}
-            onChange={(e) => setSpread(parseFloat(e.target.value))}
-          />
-        </label>
-        <label>
-          Sensory noise <span>{noise.toFixed(2)}</span>
-          <input
-            type="range"
-            min={0}
-            max={0.5}
-            step={0.01}
-            value={noise}
-            onChange={(e) => setNoise(parseFloat(e.target.value))}
-          />
-        </label>
+        <InferenceSlider
+          min={0.4}
+          max={2.5}
+          step={0.05}
+          value={spread}
+          onChange={setSpread}
+          label="Landscape spread"
+          color="var(--color-pulse)"
+          formatValue={(v) => v.toFixed(2)}
+        />
+        <InferenceSlider
+          min={0}
+          max={0.5}
+          step={0.01}
+          value={noise}
+          onChange={setNoise}
+          label="Sensory noise"
+          color="var(--color-vision)"
+          formatValue={(v) => v.toFixed(2)}
+        />
       </div>
-      <style>{`
-        .flow-field { display: flex; flex-direction: column; gap: var(--space-md); }
-        .flow-field__controls { display: grid; gap: var(--space-sm); }
-        .flow-field__controls label { display: grid; gap: 4px; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
-        .flow-field__controls span { color: var(--color-accent); font-variant-numeric: tabular-nums; }
-      `}</style>
     </div>
   );
 }
 
 export default function VisionStream() {
   const { onProgress, onComplete } = useStreamProgress(8, 'vision', 7);
+  const glossaryKeys = getModuleById(8).glossary;
   const beats = [
     {
       id: 'landscape',
@@ -59,6 +57,7 @@ export default function VisionStream() {
             Widen the valleys: beliefs slip easily. Add noise: the particle jitters. The agent is
             always trying to reach the well — and the world is always pushing it around.
           </p>
+          <GlossaryTermsLine moduleId={8} />
         </>
       ),
       interactive: <FlowField />,
@@ -87,6 +86,7 @@ export default function VisionStream() {
           </p>
         </>
       ),
+      interactive: <GlossaryChips keys={glossaryKeys.slice(0, 4)} />,
     },
   ];
   return (

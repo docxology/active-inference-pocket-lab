@@ -6,11 +6,15 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import MessagePassingCircuit from '../../components/interactive/MessagePassingCircuit';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 
 export default function VisionStream() {
   const [precision, setPrecision] = useState(1);
   const [drive, setDrive] = useState(1);
   const { onProgress, onComplete } = useStreamProgress(5, 'vision', 6);
+  const glossaryKeys = getModuleById(5).glossary;
 
   const Controls = (
     <div style={{ display: 'grid', gap: 'var(--space-2)' }}>
@@ -42,6 +46,7 @@ export default function VisionStream() {
         <>
           <h2>Watch the cortex think.</h2>
           <p>Blue = top-down predictions. Red = bottom-up prediction errors.</p>
+          <GlossaryTermsLine moduleId={5} />
         </>
       ),
       interactive: <MessagePassingCircuit precision={precision} drive={drive} />,
@@ -70,6 +75,7 @@ export default function VisionStream() {
             Too much drive, not enough precision → hallucination. The balance <em>is</em>
             perception.
           </p>
+          <GlossaryChips keys={glossaryKeys} caption="Terms to revisit" />
         </>
       ),
     },

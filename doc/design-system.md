@@ -129,8 +129,13 @@ All animations respect `prefers-reduced-motion: reduce`.
 
 ## Accessibility
 
-- Minimum 48×48px touch targets
-- Color contrast ratios optimized for dark backgrounds
-- `prefers-reduced-motion` disables all animations
-- ARIA attributes on all interactive elements
-- Semantic HTML structure
+Checklist (aligned with [philosophy.md](philosophy.md) Rule 1 and [Settings](../src/contexts/SettingsContext.jsx)):
+
+- **Touch**: Minimum `--touch-target-min` (48px) on controls; larger for primary actions where possible.
+- **Contrast**: Text uses `--color-text-primary` / `--color-text-secondary` on dark surfaces; favor semantic tokens over ad hoc hex in components.
+- **Focus**: Interactive elements should show visible focus styles (`:focus-visible`); glossary links use outlined focus in `GlossaryLink.css`.
+- **Motion**: `prefers-reduced-motion: reduce` is respected for CSS animations; learners can also set **reduced motion** in Settings (sets `data-reduced-motion` on `<html>` for app-wide behavior).
+- **Semantics**: Prefer `button` / landmarks / `aria-label` on sliders and stream tabs; Pulse/Vision steppers expose progress as tabs where applicable.
+- **Live regions**: Use `aria-live` sparingly for values that update during interaction (e.g. counters), not for static copy.
+
+Ongoing: run a dedicated screen-reader and keyboard pass as releases mature (tracked in root README TODO).

@@ -1,33 +1,18 @@
 # **tests**/
 
-Unit and integration test suites for Spin.
+Unit and integration tests for Spin. **65 tests** in **11** files (run `npm test` / see `doc/testing.md`).
 
-## Test Organization
+## Layout
 
 ```
 __tests__/
-├── components/
-│   ├── InferenceSlider.test.jsx   — Slider rendering, ARIA, value changes
-│   └── StreamSwitcher.test.jsx    — Tab rendering, switching, roles
-├── contexts/
-│   └── ActivityBank.test.jsx      — Pause/resume, bookmarks, persistence
-├── data/
-│   └── modules.test.js            — Registry structure, lookups, availability
-├── modules/
-│   └── Module1Pulse.test.jsx      — Pulse stream rendering, interaction
-└── App.test.jsx                   — Root app rendering, nav, routing
+├── App.test.jsx
+├── components/     InferenceSlider, StreamSwitcher, Quiz
+├── contexts/       AppContext, ActivityBank
+├── data/           modules.test.js (registry, quiz, glossary keys)
+├── modules/        Module1Pulse, moduleStreams (all 10 bundles)
+├── utils/          haptics, logger
 ```
-
-## Test Results (31/31 ✅)
-
-| Suite                    | Tests | Focus                                           |
-| ------------------------ | ----- | ----------------------------------------------- |
-| App.test.jsx             | 3     | Home page render, nav, quick start              |
-| InferenceSlider.test.jsx | 6     | Value, onChange, labels, format, ARIA           |
-| StreamSwitcher.test.jsx  | 4     | Tabs, default active, switching, roles          |
-| ActivityBank.test.jsx    | 5     | Pause, resume, bookmarks, sessions, persistence |
-| modules.test.js          | 8     | 10 modules, required fields, IDs, lookups       |
-| Module1Pulse.test.jsx    | 5     | Opening text, slider, continue, dots, ARIA      |
 
 ## Running
 
@@ -37,9 +22,8 @@ npm run test:watch    # Watch mode
 npm run test:coverage # Coverage report
 ```
 
-## Adding Tests
+## Adding tests
 
-1. Create `ComponentName.test.jsx` in the appropriate subdirectory
-2. Wrap components requiring context in `renderWithProviders()` helper
-3. Use real methods (no mocks per project policy)
-4. Import from `@testing-library/react` for queries
+1. Mirror structure under `src/__tests__/`
+2. Use real contexts and localStorage (no mocks, except `vi.fn()` for callbacks)
+3. Update `doc/testing.md` when the suite grows

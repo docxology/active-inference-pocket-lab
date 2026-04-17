@@ -6,14 +6,15 @@ Root source directory for the Spin Active Inference Pocket Lab.
 
 ## Structure
 
-- `main.jsx` — Entry point, mounts `<App />` with global styles
-- `App.jsx` — Root component, BrowserRouter, wraps AppProvider + ActivityBankProvider
+- `main.jsx` — Entry point, mounts `<App />` with global styles; registers service worker in production
+- `App.jsx` — Root component, BrowserRouter, `SettingsProvider` → `AppProvider` → `ActivityBankProvider`, lazy route chunks
 
 ## Dependencies
 
 - All components import design tokens via CSS `@import` chain
 - Contexts provide global state to the entire component tree
-- Module streams are lazy-loaded via `MODULE_STREAMS` map in `ModulePage.jsx`
+- Module streams are lazy-loaded via `MODULE_STREAMS` map in `ModulePage.jsx` (keys `1`–`10`)
+- Module metadata, `quiz`, and `glossary` keys: `src/data/modules.js`
 
 ## Conventions
 

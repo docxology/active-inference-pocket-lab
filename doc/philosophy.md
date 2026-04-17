@@ -25,6 +25,7 @@ The 6 constitutional rules of Spin — The Active Inference Pocket Lab.
 - Generous spacing on 8px grid (`--space-1` through `--space-12`)
 - Maximum 3 sentences per screen in Pulse streams
 - `--font-size-lg` (18px) for body text, never smaller than 14px
+- **Epistemic generosity**: Glossary links and end-of-module retrieval quizzes make uncertainty and recall explicit; learners see *what* to know and *how* to check themselves, without shame or speed pressure.
 
 ---
 
@@ -87,5 +88,11 @@ The 6 constitutional rules of Spin — The Active Inference Pocket Lab.
 **Implementation:**
 - `ProficiencyMapPage` shows all 10 modules × 3 streams in grid
 - Progress bars per stream, visible at all times
-- "Coming Soon" labels on unimplemented modules (transparent about status)
+- Module list and cards reflect shipped status — all 10 modules are implemented with `available: true` in `modules.js`
 - Module cards show percentage completion
+
+---
+
+## Joy (without scoreboards)
+
+Delight here is **participation-forward**: springs and haptics that acknowledge a gesture, a “Spin” moment that celebrates exploration, and language that stays warm. It is not leaderboard adrenaline—learners are not ranked on speed or streaks as the primary identity of the app.

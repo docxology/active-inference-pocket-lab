@@ -150,10 +150,5 @@ function FreeEnergyFieldInner({
  */
 export default function FreeEnergyField(props) {
   const { attractorX, attractorY, spread, size } = props;
-  return (
-    <FreeEnergyFieldInner
-      key={`${attractorX}-${attractorY}-${spread}-${size}`}
-      {...props}
-    />
-  );
+  return <FreeEnergyFieldInner key={`${attractorX}-${attractorY}-${spread}-${size}`} {...props} />;
 }

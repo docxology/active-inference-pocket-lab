@@ -19,11 +19,13 @@ The project originates from a single creative brief: `doc/initial-pocket-lab-pro
 
 ### Architecture
 - `src/contexts/` — Global state (AppContext for streams, ActivityBankContext for pause/bookmark, SettingsContext)
-- `src/components/interactive/` — Reusable interactive elements (InferenceSlider, MathBlock, etc.)
+- `src/components/interactive/` — Reusable interactive elements (InferenceSlider, MathBlock, Quiz, GlossaryLink, GlossaryChips, etc.)
 - `src/components/layout/` — Layout shells (AppShell, TopBar, BottomNav, StreamSwitcher, Drawer, StreamErrorBoundary, StreamTemplate)
 - `src/modules/module1` … `module10/` — Per-module triple streams (lazy-loaded from `ModulePage.jsx` → `MODULE_STREAMS`)
+- `src/modules/shared/` — `useStreamProgress.js`, `GlossaryTermsLine.jsx`, `getCoreRetrievalBeat.jsx`, `ModuleRetrievalQuiz.jsx`
 - `src/pages/` — Route-level page components
-- `src/data/modules.js` — Module registry (10 modules, metadata; all `available: true`)
+- `src/data/modules.js` — Module registry (10 modules; `quiz`, `glossary` keys per module; all `available: true`)
+- `src/data/glossary.js` — Term definitions keyed for glossary UI and deep links
 - `src/styles/` — Design tokens + global CSS
 - `public/` — PWA (`manifest.webmanifest`, `sw.js`), static icons, Netlify `_redirects`
 
@@ -31,7 +33,8 @@ The project originates from a single creative brief: `doc/initial-pocket-lab-pro
 - Triple-Stream: Each module has 3 experiences (Pulse, Vision, Core) switchable at any time
 - Activity Banking: LocalStorage-persisted pause/resume/bookmark system
 - First Threshold: Every module starts with a physical action (no walls of text)
-- Module expansion: Add streams in `src/modules/`, register in `ModulePage.jsx` `MODULE_STREAMS`
+- Registry integration: Core streams end with `getCoreRetrievalBeat` / `ModuleRetrievalQuiz` using `mod.quiz`; Pulse/Vision surface `GlossaryLink` / `GlossaryChips` / `GlossaryTermsLine` from `mod.glossary`
+- Module expansion: Add streams in `src/modules/`, register in `ModulePage.jsx` `MODULE_STREAMS`, extend `modules.js` with `quiz` + `glossary`
 
 ### Conventions
 - **Thin Orchestrator**: Always use `./run.sh` as the primary entry point for dev, test, and build operations.

@@ -7,6 +7,13 @@ Per-module stream implementations. Each module has three parallel experience str
 ## Structure
 
 - `moduleN/` → contains `PulseStream.jsx`, `VisionStream.jsx`, `CoreStream.jsx`, co-located CSS, `index.js` barrel
+- `shared/` → `useStreamProgress.js`, `GlossaryTermsLine.jsx`, `getCoreRetrievalBeat.jsx`, `ModuleRetrievalQuiz.jsx`
+
+## Registry integration
+
+- **`data/modules.js`**: each module defines `quiz` (3 questions: `prompt`, `options[]`, `correctIndex`, `explanation`) and `glossary` (keys into `data/glossary.js`).
+- **Core**: append `getCoreRetrievalBeat(id)` to `beats`, or mount `ModuleRetrievalQuiz` (Module 1) so the stream ends with the registry quiz.
+- **Glossary UI**: `components/interactive/GlossaryLink.jsx`, `GlossaryChips.jsx`; Pulse uses `GlossaryTermsLine` for 2–4 terms; Vision uses chips or a repeated widget where a beat would otherwise be prose-only.
 
 ## Module Expansion Workflow
 

@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(3, 'pulse', 5);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             A fish out of water is <em>literally surprised</em>: a gill breathing air violates
             everything the creature expects itself to be.
           </p>
+          <GlossaryTermsLine moduleId={3} />
           <p>Staying alive means keeping your observations inside the bounds of "you".</p>
         </>
       ),

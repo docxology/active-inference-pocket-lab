@@ -4,10 +4,14 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import ModelRecipe from '../../components/interactive/ModelRecipe';
 import GenerativeGraph from '../../components/interactive/GenerativeGraph';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const { onProgress, onComplete } = useStreamProgress(6, 'vision', 6);
+  const glossaryKeys = getModuleById(6).glossary;
   const beats = [
     {
       id: 'map',
@@ -18,6 +22,7 @@ export default function VisionStream() {
             Every ingredient maps to an edge or node in a generative graph. Tap the tabs to see each
             matrix — its values determine the story.
           </p>
+          <GlossaryTermsLine moduleId={6} />
         </>
       ),
       interactive: <ModelRecipe />,
@@ -43,6 +48,7 @@ export default function VisionStream() {
           <p>Agent obsessed with fog? Check C. Agent freezes? Check B's diagonal dominance.</p>
         </>
       ),
+      interactive: <GlossaryChips keys={glossaryKeys.slice(0, 4)} />,
     },
   ];
   return (

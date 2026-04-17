@@ -1,0 +1,13 @@
+/**
+ * @file module8/VisionStream.css — FlowField layout (Vision)
+ */
+.flow-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.flow-field__controls {
+  display: grid;
+  gap: var(--space-sm);
+}

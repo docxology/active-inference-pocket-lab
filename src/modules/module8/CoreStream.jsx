@@ -5,6 +5,7 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import MathBlock from '../../components/interactive/MathBlock';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import { getCoreRetrievalBeat } from '../shared/getCoreRetrievalBeat';
 
 export default function CoreStream() {
   const { onProgress, onComplete } = useStreamProgress(8, 'core', 8);
@@ -73,6 +74,7 @@ export default function CoreStream() {
       ),
       interactive: <FreeEnergyField />,
     },
+    getCoreRetrievalBeat(8),
   ];
   return (
     <StreamTemplate

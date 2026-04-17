@@ -1,0 +1,13 @@
+/**
+ * @file module7/VisionStream.css — TunedGrid layout (Vision)
+ */
+.tuned-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.tuned-grid__controls {
+  display: grid;
+  gap: var(--space-sm);
+}

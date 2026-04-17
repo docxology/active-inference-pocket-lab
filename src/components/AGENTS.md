@@ -6,19 +6,18 @@ Reusable UI components for Spin, split into `interactive/` and `layout/`.
 
 ## Subdirectories
 
-- `interactive/` — Touch-optimized input components (InferenceSlider, MathBlock, PauseButton, RewardAnimation)
-- `layout/` — App structure components (AppShell, BottomNav, StreamSwitcher, Drawer)
+- `interactive/` — Sliders, MathBlock, Quiz, glossary links, module-specific canvases (see `interactive/AGENTS.md`)
+- `layout/` — AppShell, TopBar, BottomNav, StreamSwitcher, Drawer, StreamTemplate, RouteFallback, etc.
 
 ## Patterns
 
-- Each component has a co-located `.css` file
-- Components use `framer-motion` for physics-based animations
-- All interactive elements have `aria-*` attributes and `role` attributes
-- Components log state changes via `console.log('[ComponentName]', ...)`
+- Co-located `.css` where styles warrant a file
+- `framer-motion` for physics-based animations where used
+- Interactive elements: `aria-*` / roles, 48×48px minimum touch targets
+- `console.log('[ComponentName]', ...)` for traceable logs
 
-## Adding Components
+## Adding components
 
-1. Create `ComponentName.jsx` + `ComponentName.css` in the appropriate subdirectory
-2. Export from subdirectory barrel file if applicable
-3. Add JSDoc with `@module` tag
-4. Ensure 48×48px minimum touch targets for interactive elements
+1. Create `ComponentName.jsx` + optional `ComponentName.css` in the appropriate subdirectory
+2. JSDoc with `@module` on exports
+3. Document new public components in `doc/api-reference.md`

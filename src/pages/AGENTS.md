@@ -12,8 +12,12 @@ Route-level page components rendered by React Router inside AppShell.
 - `ProficiencyMapPage.jsx` — `/map` — Progress grid
 - `HearthPage.jsx` — `/hearth` — Celebration, badges
 - `PausePage.jsx` — `/pause` — Planned pause with bookmark
+- `GlossaryPage.jsx` — `/glossary` — Terms with stable `id` anchors for deep links
+- `SearchPage.jsx` — `/search` — In-app search
+- `SettingsPage.jsx` — `/settings` — Preferences (motion, haptics, font scale, …)
+- `NotFoundPage.jsx` — `*` — Unknown routes
 
-## Key File: ModulePage.jsx
+## Key file: ModulePage.jsx
 
 - `MODULE_STREAMS` map registers stream components per module ID
 - To add a new module: import streams, add entry to `MODULE_STREAMS`

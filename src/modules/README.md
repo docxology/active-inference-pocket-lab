@@ -17,20 +17,19 @@ moduleN/
 └── index.js           — Barrel export
 ```
 
-## Module Status
+`shared/` holds cross-module helpers: `useStreamProgress`, `GlossaryTermsLine`, `getCoreRetrievalBeat`, `ModuleRetrievalQuiz`.
 
-| Module              | Directory  | Status                             |
-| ------------------- | ---------- | ---------------------------------- |
-| 1 — The First Orbit | `module1/` | ✅ Implemented                     |
-| 2–10                | —          | 📋 Scaffolded in `data/modules.js` |
+## Module status
 
-## Adding a Module
+All **10** directories (`module1` … `module10`) are implemented and registered in `ModulePage.jsx` with `available: true` in `src/data/modules.js`.
+
+## Adding a module
 
 1. Create `src/modules/moduleN/` directory
 2. Implement `PulseStream.jsx`, `VisionStream.jsx`, `CoreStream.jsx` (+ CSS)
 3. Create `index.js` barrel export
 4. Register in `src/pages/ModulePage.jsx` → `MODULE_STREAMS` map
-5. Set `available: true` in `src/data/modules.js`
+5. Add a full entry in `src/data/modules.js` (including `quiz`, `glossary`, `available: true`)
 6. Add README.md + AGENTS.md to the new directory
 
-See `CONTRIBUTING.md` for stream content requirements.
+See `CONTRIBUTING.md` and `doc/modules-guide.md` for stream content requirements.

@@ -1,0 +1,16 @@
+.glossary-terms-line {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-3) 0 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.glossary-terms-line__label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  margin-right: var(--space-2);
+}
+
+.glossary-terms-line__item {
+  display: inline;
+}

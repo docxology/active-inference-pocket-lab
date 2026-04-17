@@ -8,6 +8,7 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const [ax, setAx] = useState(0.5);
@@ -67,6 +68,7 @@ export default function VisionStream() {
             The ball is always at the configuration you currently hold. Warm colours = high free
             energy. Cool colours = low. The ball wants to fall.
           </p>
+          <GlossaryTermsLine moduleId={3} />
         </>
       ),
       interactive: (

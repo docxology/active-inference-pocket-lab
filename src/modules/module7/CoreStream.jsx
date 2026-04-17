@@ -5,6 +5,7 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import MathBlock from '../../components/interactive/MathBlock';
 import GridWorld from '../../components/interactive/GridWorld';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import { getCoreRetrievalBeat } from '../shared/getCoreRetrievalBeat';
 
 export default function CoreStream() {
   const { onProgress, onComplete } = useStreamProgress(7, 'core', 8);
@@ -56,6 +57,7 @@ export default function CoreStream() {
       ),
       interactive: <GridWorld risk={1} ambiguity={1} />,
     },
+    getCoreRetrievalBeat(7),
   ];
   return (
     <StreamTemplate

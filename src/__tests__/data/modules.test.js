@@ -69,4 +69,42 @@ describe('Module Registry', () => {
     const slugs = modules.map((m) => m.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+
+  it('each module has a 3-question quiz with required fields', () => {
+    for (const mod of modules) {
+      expect(mod.quiz, `module ${mod.id}`).toBeDefined();
+      expect(mod.quiz, `module ${mod.id}`).toHaveLength(3);
+      mod.quiz.forEach((q, qi) => {
+        expect(q, `module ${mod.id} question ${qi}`).toHaveProperty('prompt');
+        expect(typeof q.prompt).toBe('string');
+        expect(q.prompt.length).toBeGreaterThan(0);
+        expect(q).toHaveProperty('options');
+        expect(Array.isArray(q.options)).toBe(true);
+        expect(q.options.length).toBeGreaterThanOrEqual(2);
+        q.options.forEach((opt) => {
+          expect(typeof opt).toBe('string');
+          expect(opt.length).toBeGreaterThan(0);
+        });
+        expect(q).toHaveProperty('correctIndex');
+        expect(Number.isInteger(q.correctIndex)).toBe(true);
+        expect(q.correctIndex).toBeGreaterThanOrEqual(0);
+        expect(q.correctIndex).toBeLessThan(q.options.length);
+        expect(q).toHaveProperty('explanation');
+        expect(typeof q.explanation).toBe('string');
+        expect(q.explanation.length).toBeGreaterThan(0);
+      });
+    }
+  });
+
+  it('each module lists glossary keys as non-empty strings', () => {
+    for (const mod of modules) {
+      expect(mod.glossary).toBeDefined();
+      expect(Array.isArray(mod.glossary)).toBe(true);
+      expect(mod.glossary.length).toBeGreaterThan(0);
+      mod.glossary.forEach((k) => {
+        expect(typeof k).toBe('string');
+        expect(k.length).toBeGreaterThan(0);
+      });
+    }
+  });
 });

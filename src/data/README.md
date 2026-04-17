@@ -17,26 +17,7 @@ The centralized module registry defining all 10 Active Inference modules.
 | `getModuleBySlug(slug)` | function | Lookup by URL slug |
 | `getAvailableModules()` | function | Returns only `available: true` modules |
 
-**Module Shape:**
-
-```js
-{
-  id: number,         // 1-10
-  slug: string,       // URL-safe identifier
-  title: string,      // Display title
-  subtitle: string,   // Chapter reference
-  description: string,// Brief content description
-  icon: string,       // Emoji icon
-  color: string,      // CSS custom property name
-  available: boolean, // Module implemented?
-  firstAction: string,// "The First Threshold" description
-  streams: {
-    pulse: string,    // Pulse stream description
-    vision: string,   // Vision stream description
-    core: string,     // Core stream description
-  }
-}
-```
+**Module shape (see JSDoc in source):** includes `outcomes`, `glossary` (keys into `glossary.js`), `quiz` (three multiple-choice items), `streams` (structured stream metadata with `summary` / `beats`), `estMinutes`, `difficulty`, and more.
 
 ## Adding Data
 

@@ -30,6 +30,9 @@ This convention enables:
 | CoreStream | `[CoreStream]` | Sandbox explored |
 | InferenceSlider | `[InferenceSlider]` | Value change (label + value) |
 | ModulePage | `[ModulePage]` | Module entered (ID + title) |
+| Settings | `[Settings]` | Load/persist failures (via `console.warn`) |
+
+`GlossaryLink` does not emit structured logs; navigation is visible in the router.
 
 ## State Change Logging
 

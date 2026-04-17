@@ -6,6 +6,7 @@ import StreamTemplate from '../../components/layout/StreamTemplate';
 import GenerativeGraph from '../../components/interactive/GenerativeGraph';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function VisionStream() {
   const [precision, setPrecision] = useState(1);
@@ -21,6 +22,7 @@ export default function VisionStream() {
             The top node (s³) is slow — it describes a situation. Middle (s²) names objects. Bottom
             (s¹) points at pixels. Arrows are likelihoods.
           </p>
+          <GlossaryTermsLine moduleId={4} />
         </>
       ),
       interactive: <GenerativeGraph precision={precision} />,

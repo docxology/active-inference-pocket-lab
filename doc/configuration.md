@@ -15,6 +15,7 @@ export default defineConfig({
     globals: true,           // No explicit imports for describe/it/expect
     environment: 'jsdom',    // DOM simulation for tests
     setupFiles: './src/test/setup.js',
+    css: true,               // Import CSS in tests
   },
 });
 ```
@@ -28,6 +29,7 @@ export default defineConfig({
 | `test.globals` | true | Vitest globals without imports |
 | `test.environment` | jsdom | Browser-like DOM |
 | `test.setupFiles` | `./src/test/setup.js` | localStorage polyfill + jest-dom |
+| `test.css` | true | Allow importing CSS in test modules |
 
 ## Package Scripts (`package.json`)
 
@@ -95,9 +97,11 @@ npm run build
 # Upload dist/ to Netlify, Vercel, GitHub Pages, etc.
 ```
 
+This repo includes **`netlify.toml`** at the root (build command, `publish = dist`, SPA redirect `/*` → `/index.html` 200, security headers). **`public/_redirects`** also supports Netlify-style hosting.
+
 ### SPA Routing
 Configure your host to redirect all routes to `index.html` (since we use BrowserRouter):
-- **Netlify**: `_redirects` file with `/* /index.html 200`
+- **Netlify**: `netlify.toml` + `_redirects` (see above)
 - **Vercel**: `vercel.json` with `rewrites`
 - **GitHub Pages**: Use HashRouter instead (requires code change)
 
@@ -107,6 +111,13 @@ Configure your host to redirect all routes to `index.html` (since we use Browser
 | --- | --- | --- |
 | `spin_activity_bank` | ActivityBankContext | Pause state, bookmarks, sessions, streak |
 | `spin_module_progress` | AppContext | Progress per module per stream (0-100) |
+| `spin_settings` | SettingsContext | Reduced motion, haptics, font scale, default stream, etc. |
+
+## PWA (`public/`)
+
+- `manifest.webmanifest` — installability and display metadata
+- `sw.js` — service worker (registered from [`src/main.jsx`](../src/main.jsx) in production)
+- `public/_redirects` — SPA fallback on Netlify (`/* /index.html 200`)
 
 ## Orchestration (`run.sh`)
 
@@ -117,7 +128,7 @@ Use the `run.sh` thin orchestrator at the repository root as the primary command
 
 ## Future Configuration TODOs
 
-- [ ] PWA manifest (`manifest.json`) for installability
-- [ ] Service worker for offline support
-- [ ] IndexedDB for larger data storage
-- [ ] Dark/light theme toggle (currently dark-only)
+- [x] PWA shell — `manifest.webmanifest` + `sw.js` under `public/` (offline cache strategy can deepen over time)
+- [ ] IndexedDB for larger offline data (beyond the installable shell)
+- [ ] Dark/light theme toggle (currently dark-only; Settings has high-contrast + font scale)
+- [ ] Optional env vars (`VITE_*`) when a backend or analytics layer lands

@@ -4,7 +4,12 @@
 import { useState } from 'react';
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import GridWorld from '../../components/interactive/GridWorld';
+import InferenceSlider from '../../components/interactive/InferenceSlider';
+import GlossaryChips from '../../components/interactive/GlossaryChips';
+import { getModuleById } from '../../data/modules';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
+import './VisionStream.css';
 
 function TunedGrid() {
   const [risk, setRisk] = useState(1);
@@ -13,41 +18,34 @@ function TunedGrid() {
     <div className="tuned-grid">
       <GridWorld risk={risk} ambiguity={ambiguity} />
       <div className="tuned-grid__controls">
-        <label>
-          Risk weight <span>{risk.toFixed(2)}</span>
-          <input
-            type="range"
-            min={0}
-            max={2}
-            step={0.05}
-            value={risk}
-            onChange={(e) => setRisk(parseFloat(e.target.value))}
-          />
-        </label>
-        <label>
-          Ambiguity weight <span>{ambiguity.toFixed(2)}</span>
-          <input
-            type="range"
-            min={0}
-            max={2}
-            step={0.05}
-            value={ambiguity}
-            onChange={(e) => setAmbiguity(parseFloat(e.target.value))}
-          />
-        </label>
+        <InferenceSlider
+          min={0}
+          max={2}
+          step={0.05}
+          value={risk}
+          onChange={setRisk}
+          label="Risk weight"
+          color="var(--color-pulse)"
+          formatValue={(v) => v.toFixed(2)}
+        />
+        <InferenceSlider
+          min={0}
+          max={2}
+          step={0.05}
+          value={ambiguity}
+          onChange={setAmbiguity}
+          label="Ambiguity weight"
+          color="var(--color-vision)"
+          formatValue={(v) => v.toFixed(2)}
+        />
       </div>
-      <style>{`
-        .tuned-grid { display: flex; flex-direction: column; gap: var(--space-md); }
-        .tuned-grid__controls { display: grid; gap: var(--space-sm); }
-        .tuned-grid__controls label { display: grid; gap: 4px; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
-        .tuned-grid__controls span { color: var(--color-accent); font-variant-numeric: tabular-nums; }
-      `}</style>
     </div>
   );
 }
 
 export default function VisionStream() {
   const { onProgress, onComplete } = useStreamProgress(7, 'vision', 7);
+  const glossaryKeys = getModuleById(7).glossary;
   const beats = [
     {
       id: 'tune',
@@ -58,6 +56,7 @@ export default function VisionStream() {
             Push <em>risk</em> up and the agent bolts for the goal. Push <em>ambiguity</em> up and
             it wanders, mapping every corner. Same math, different soul.
           </p>
+          <GlossaryTermsLine moduleId={7} />
         </>
       ),
       interactive: <TunedGrid />,
@@ -86,6 +85,7 @@ export default function VisionStream() {
           </p>
         </>
       ),
+      interactive: <GlossaryChips keys={glossaryKeys.slice(0, 4)} />,
     },
   ];
   return (

@@ -115,10 +115,7 @@ export default function SearchPage() {
             <ul>
               {results.glossary.map(({ item }) => (
                 <li key={item.key} className="search-page__item">
-                  <Link
-                    to={`/glossary#gl-${(item.term[0] || '#').toUpperCase()}`}
-                    className="search-page__link"
-                  >
+                  <Link to={`/glossary#${item.key}`} className="search-page__link">
                     <strong>{item.term}</strong>
                     <small>{item.short}</small>
                   </Link>

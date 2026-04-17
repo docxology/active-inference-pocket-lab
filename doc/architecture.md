@@ -16,24 +16,23 @@ Spin's system architecture for the Active Inference Pocket Lab.
 
 ## Component Hierarchy
 
+Matches [`src/App.jsx`](../src/App.jsx):
+
 ```
 <BrowserRouter>
-  <SettingsProvider>               ← App preferences
-    <AppProvider>                    ← Triple-Stream state
-      <ActivityBankProvider>          ← Pause/bookmark state
-      <Routes>
-        <AppShell>                 ← Layout shell
-          <main>
-            <Outlet />             ← Active page component
-          </main>
-          <BottomNav />            ← 5-tab navigation
-        </AppShell>
-      </Routes>
+  <SettingsProvider>            ← preferences (useSettings), CSS vars on <html>
+    <AppProvider>                 ← streams + module progress
+      <ActivityBankProvider>       ← pause, bookmark, sessions, quiz flags
+        <Routes>                   ← most routes use React.lazy + Suspense
+          <Route element={<AppShell />}>  … pages …
+        </Routes>
       </ActivityBankProvider>
     </AppProvider>
   </SettingsProvider>
 </BrowserRouter>
 ```
+
+`AppShell` wraps `<Outlet />`, `TopBar`, `BottomNav`, and stream UI. `HomePage` is eager; other pages load via `React.lazy` with `RouteFallback` (reduced-motion-safe).
 
 ## Data Flow
 
@@ -89,7 +88,17 @@ Spin's system architecture for the Active Inference Pocket Lab.
 - `sessions` — activity records array
 - `totalMinutes` — cumulative active time
 - `currentStreak` — consecutive day count
+- Quiz completion recording where applicable
 - **Key**: `spin_activity_bank`
+
+### SettingsContext (persisted to localStorage)
+
+**Path**: `src/contexts/SettingsContext.jsx`
+
+- `reducedMotion`, `haptics`, `sound`, `highContrast`, `fontScale`, `defaultStream`, `autoBookmark`, `showMathByDefault`
+- `set(patch)`, `reset()`
+- Applies `--font-scale` and `data-*` attributes on `document.documentElement`
+- **Key**: `spin_settings`
 
 ## Module Architecture
 
@@ -103,7 +112,14 @@ src/modules/moduleN/
 └── index.js          ← Barrel export
 ```
 
-Stream components are registered in `ModulePage.jsx` via the `MODULE_STREAMS` map.
+Stream components are registered in `ModulePage.jsx` via the `MODULE_STREAMS` map (keys `1`–`10`), each value a `React.lazy(() => import(...))` for the module’s barrel export.
+
+### Registry-driven content
+
+- **`src/data/modules.js`** — Each module includes `quiz` (three MCQs) and `glossary` (string keys).
+- **Core streams** — Final beat uses `getCoreRetrievalBeat` / `ModuleRetrievalQuiz` to render `Quiz` from the registry.
+- **`src/data/glossary.js`** — Definitions and `getGlossaryEntry` / `getAllGlossary` / `searchGlossary`.
+- **Glossary page** — Entries render with `id={key}` so `/glossary#key` scrolls correctly; `GlossaryLink` targets those hashes.
 
 ## Build Output
 

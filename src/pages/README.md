@@ -12,6 +12,10 @@ Route-level page components for Spin.
 | Map         | `ProficiencyMapPage.jsx` | `/map`               | Visual progress grid across all modules × 3 streams            |
 | Hearth      | `HearthPage.jsx`         | `/hearth`            | Community celebration, stats, clarity badges                   |
 | Pause       | `PausePage.jsx`          | `/pause`             | Planned pause page with bookmark display                       |
+| Glossary    | `GlossaryPage.jsx`       | `/glossary`          | Terms with deep-linkable anchors                               |
+| Search      | `SearchPage.jsx`         | `/search`            | Search modules and glossary                                    |
+| Settings    | `SettingsPage.jsx`       | `/settings`          | Motion, haptics, font scale, defaults                          |
+| 404         | `NotFoundPage.jsx`       | `*`                  | Unknown paths                                                  |
 
 ## Routing
 
@@ -29,13 +33,4 @@ All pages are children of `<AppShell>` (which renders `<Outlet>`). Routes define
 
 ### MODULE_STREAMS Registry
 
-```js
-const MODULE_STREAMS = {
-  1: {
-    pulse: PulseStream,
-    vision: VisionStream,
-    core: CoreStream,
-  },
-  // Add modules 2-10 here
-};
-```
+`MODULE_STREAMS` maps numeric IDs `1` … `10` to lazy-loaded `{ pulse, vision, core }` components per module (see `ModulePage.jsx`).

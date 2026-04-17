@@ -1,23 +1,31 @@
 # AGENTS.md — doc/
 
 ## Purpose
+
 Comprehensive project documentation for Spin — The Active Inference Pocket Lab.
 
-## Founding Document
-- `initial-pocket-lab-prompt.md` — **The Seed.** The original creative brief that defines the project's constitutional narrative, the 6 rules, the Triple-Stream Architecture, and the Module 1 prototype mandate. This file is preserved exactly as-written and must never be modified. All architectural and design decisions trace back to this document.
+## Founding document
 
-## Documentation Files
-- `philosophy.md` — The 6 rules derived from the seed, with implementation mapping
-- `architecture.md` — System architecture, component hierarchy, data flow
-- `design-system.md` — Design tokens, color palette, typography, spacing
-- `modules-guide.md` — Module content structure and expansion guide
-- `api-reference.md` — Component props, context APIs, data exports
-- `testing.md` — Test strategy, inventory, coverage
-- `configuration.md` — Vite config, environment, build, deployment
-- `logging.md` — Logging conventions and prefixes
+- `initial-pocket-lab-prompt.md` — **The Seed.** The original creative brief. **Do not modify its text**; treat it as read-only. All current behavior (10 modules, registry-driven quiz and glossary, lazy streams, PWA) is documented in the files below.
+
+## Documentation files
+
+| File | Role |
+| --- | --- |
+| `initial-pocket-lab-prompt.md` | Constitutional narrative and Module 1 mandate (immutable) |
+| `philosophy.md` | The 6 rules with implementation mapping |
+| `architecture.md` | Providers, routes, lazy `MODULE_STREAMS`, registry data flow |
+| `design-system.md` | Tokens, typography, touch targets, accessibility |
+| `modules-guide.md` | Triple streams, `quiz` / `glossary` registry, expansion |
+| `api-reference.md` | Props and exports mirroring source |
+| `testing.md` | Policy, inventory — **refresh test counts when the suite changes** |
+| `configuration.md` | Vite, scripts, deployment, `public/` PWA assets |
+| `logging.md` | `[ComponentName]` prefixes and logger usage |
 
 ## Maintenance
-- `initial-pocket-lab-prompt.md` is **read-only** — never edit
-- Update other docs when adding new components, modules, or systems
-- API reference should mirror actual props/exports
-- Architecture doc should reflect any structural changes
+
+- After adding components, contexts, or data exports: update `api-reference.md`.
+- After adding or removing tests: run `npm test` and update numeric lines in `testing.md` and root `README.md` if they quote totals.
+- After routing or provider changes: update `architecture.md` and `configuration.md` as needed.
+- Keep `modules-guide.md` aligned with `src/data/modules.js` and `src/pages/ModulePage.jsx`.
+- Never edit the Seed body; link to other docs for “current Spin” instead.

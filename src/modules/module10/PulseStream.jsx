@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import ConceptMap from '../../components/interactive/ConceptMap';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(10, 'pulse', 6);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             The map below is your mental model of active inference. Every node is a chapter — every
             edge, a dependency. Touch a node; read its soul.
           </p>
+          <GlossaryTermsLine moduleId={10} />
         </>
       ),
       interactive: <ConceptMap />,

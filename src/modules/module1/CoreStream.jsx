@@ -14,6 +14,7 @@ import MathBlock from '../../components/interactive/MathBlock';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import Drawer from '../../components/layout/Drawer';
 import { useApp } from '../../contexts/AppContext';
+import ModuleRetrievalQuiz from '../shared/ModuleRetrievalQuiz';
 import './CoreStream.css';
 
 /**
@@ -207,6 +208,14 @@ export default function CoreStream() {
         label="Eq. 3 — Marginal Likelihood"
         description="The probability of an observation given the model — computed by integrating over all possible hidden states."
       />
+
+      <section className="core-stream__retrieval" aria-labelledby="core-retrieval-heading">
+        <h2 id="core-retrieval-heading">Check understanding</h2>
+        <p className="core-stream__retrieval-lead">
+          Three quick questions — no timer, clarity only.
+        </p>
+        <ModuleRetrievalQuiz moduleId={1} />
+      </section>
     </div>
   );
 }

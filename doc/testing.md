@@ -14,15 +14,18 @@ Test strategy, inventory, and coverage for Spin.
 ## Configuration
 
 **`vite.config.js`**:
+
 ```js
 test: {
   globals: true,
   environment: 'jsdom',
   setupFiles: './src/test/setup.js',
-}
+  css: true,
+},
 ```
 
 **`src/test/setup.js`**:
+
 - localStorage polyfill for jsdom
 - `@testing-library/jest-dom` matchers
 
@@ -30,78 +33,72 @@ test: {
 
 1. **No mocks** — Use real methods, real contexts, real localStorage
 2. **`vi.fn()`** is allowed only for verifying callbacks were called
-3. **`renderWithProviders()`** helper wraps components in `BrowserRouter` + `AppProvider` + `ActivityBankProvider`
+3. **`renderWithProviders()`** helper (where used) wraps components in `BrowserRouter` + `AppProvider` + `ActivityBankProvider`
 4. **ARIA first** — Prefer `getByLabelText`, `getByRole` over `getByText`
 
-## Test Inventory (62 tests, 10 suites)
+## Test Inventory (65 tests, 11 files)
+
+Totals from `vitest run` (update this section when the suite changes).
 
 ### AppContext.test.jsx (9 tests)
-- Switches streams
-- Sets current module
-- Updates module progress
-- Clamps progress to 0-100
-- Persists progress to localStorage
-- Computes averages
+
+- Default stream state
+- Switches streams / sets module / updates progress
+- Clamps progress, persists to localStorage
+- Module and overall progress averages
+- Throws outside provider
 
 ### haptics.test.js (7 tests)
-- Safe fallback when navigator.vibrate is missing
-- Patterns for light, medium, success, and reward
+
+- Detect support / no support
+- light, medium, success, reward patterns
+- No throw when vibration unsupported
 
 ### logger.test.js (5 tests)
-- Creates logger with component prefix
-- Collects entries when enabled
-- Respects log level filtering
+
+- Prefix, collection, level filter, clear, error level
 
 ### App.test.jsx (3 tests)
-- Renders home page by default (main heading and subtitle)
-- Renders bottom navigation with 5 tabs
-- Home links to module 1 (`/modules/1`)
+
+- Home by default, bottom nav, hero links to first module
 
 ### InferenceSlider.test.jsx (6 tests)
-- Renders with default value
-- Renders with custom value and unit
-- Calls onChange when value changes
-- Renders range labels when provided
-- Uses custom formatValue function
-- Has proper ARIA attributes
+
+- Default and custom value, onChange, labels, formatValue, ARIA
 
 ### StreamSwitcher.test.jsx (4 tests)
-- Renders all three stream tabs
-- Shows Pulse as active by default
-- Switches streams on click
-- Has proper ARIA role structure
+
+- Tabs, default Pulse, switch on click, roles
 
 ### ActivityBank.test.jsx (5 tests)
-- Starts with default state
-- Pauses and resumes
-- Sets and clears bookmarks
-- Records activity and tracks total minutes
-- Persists state to localStorage
 
-### modules.test.js (8 tests)
-- Exports 10 modules
-- Each module has required fields
-- Module IDs are sequential 1-10
-- getModuleById returns correct module
-- getModuleBySlug returns correct module
-- getAvailableModules returns only available modules
-- All 10 modules are available
-- Each module slug is unique
+- Default state, pause/resume, bookmark, activity, persist
+
+### modules.test.js (10 tests)
+
+- 10 modules, required fields, IDs 1–10
+- getModuleById / getModuleBySlug
+- getAvailableModules, unique slugs
+- All 10 available
+- Quiz schema (3 questions, fields) per module
+- Glossary key lists non-empty strings
 
 ### moduleStreams.test.js (10 tests)
-- Each module `index.js` exports `PulseStream`, `VisionStream`, `CoreStream`
+
+- Each `module1`…`module10` barrel exports Pulse, Vision, Core
 
 ### Module1Pulse.test.jsx (5 tests)
-- Renders the opening question
-- Renders the prior belief slider
-- Shows continue button after slider interaction
-- Has step progress dots
-- Has proper ARIA tabpanel role
+
+- Opening copy, slider, continue after interaction, dots, ARIA
+
+### Quiz.test.jsx (1 test)
+
+- Module 1 registry `quiz` renders inside `ActivityBankProvider`
 
 ## Running Tests
 
 ```bash
-npm test                # Run all tests once
+npm test                # Run all tests once (same as vitest run)
 npm run test:watch      # Watch mode (re-run on changes)
 npm run test:coverage   # Generate coverage report
 ```
@@ -109,7 +106,7 @@ npm run test:coverage   # Generate coverage report
 ## Adding Tests
 
 1. Create test file in `src/__tests__/` mirroring the source structure
-2. Import component and required providers
-3. Use `renderWithProviders()` for context-dependent components
+2. Import component and required providers (`ActivityBankProvider` for Quiz)
+3. Use `renderWithProviders()` where the project already defines it
 4. Assert on rendered output, not internal state
-5. Add README documentation for the test subdirectory
+5. Update this document’s counts and bullets when adding files or cases

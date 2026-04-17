@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(8, 'pulse', 6);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             In continuous flow, the agent isn't stepping — it's <em>gliding</em>. Beliefs, actions,
             and errors all flow as smooth trajectories down a free-energy landscape.
           </p>
+          <GlossaryTermsLine moduleId={8} />
         </>
       ),
       interactive: <FreeEnergyField spread={1.4} noise={0.12} />,

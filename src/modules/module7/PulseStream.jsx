@@ -4,6 +4,7 @@
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import GridWorld from '../../components/interactive/GridWorld';
 import { useStreamProgress } from '../shared/useStreamProgress';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
   const { onProgress, onComplete } = useStreamProgress(7, 'pulse', 6);
@@ -17,6 +18,7 @@ export default function PulseStream() {
             The agent dreams each possible next step, grades it by how well it would resolve
             uncertainty and reach its goal, and picks.
           </p>
+          <GlossaryTermsLine moduleId={7} />
         </>
       ),
       interactive: <GridWorld />,

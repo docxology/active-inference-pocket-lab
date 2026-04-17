@@ -14,6 +14,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import InferenceSlider from '../../components/interactive/InferenceSlider';
 import RewardAnimation from '../../components/interactive/RewardAnimation';
+import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 import { useApp } from '../../contexts/AppContext';
 import './VisionStream.css';
 
@@ -169,6 +170,7 @@ export default function VisionStream() {
         <div className="vision-stream__canvas-label">
           <span>The Variable Hearth</span>
         </div>
+        <GlossaryTermsLine moduleId={1} />
       </div>
 
       {/* Controls — The Variable Hearth */}
@@ -197,7 +199,9 @@ export default function VisionStream() {
 
         <p className="vision-stream__moves text-label" aria-live="polite">
           Exploration moves: {interactionCount}
-          {!hasExplored ? ' — keep playing past 10 moves to complete this stream' : ' — orbit unlocked'}
+          {!hasExplored
+            ? ' — keep playing past 10 moves to complete this stream'
+            : ' — orbit unlocked'}
         </p>
       </div>
 
