@@ -53,5 +53,12 @@ export default function VisionStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

@@ -117,12 +117,14 @@
   margin-top: var(--space-3);
 }
 @media (min-width: 720px) {
-  .module-page__overview { grid-template-columns: 1fr 1fr; }
+  .module-page__overview {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .module-page__overview-card {
   padding: var(--space-3);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-md);
 }
 .module-page__overview-card h3 {
@@ -147,7 +149,7 @@
 .module-page__overview-tag {
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(120,150,255,0.12);
+  background: rgba(120, 150, 255, 0.12);
   color: var(--color-accent);
   font-size: var(--font-size-xs);
 }

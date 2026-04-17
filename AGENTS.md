@@ -18,13 +18,14 @@ The project originates from a single creative brief: `doc/initial-pocket-lab-pro
 - Vanilla CSS with design tokens
 
 ### Architecture
-- `src/contexts/` — Global state (AppContext for streams, ActivityBankContext for pause/bookmark)
+- `src/contexts/` — Global state (AppContext for streams, ActivityBankContext for pause/bookmark, SettingsContext)
 - `src/components/interactive/` — Reusable interactive elements (InferenceSlider, MathBlock, etc.)
-- `src/components/layout/` — Layout shells (AppShell, BottomNav, StreamSwitcher, Drawer)
-- `src/modules/moduleN/` — Per-module stream implementations (PulseStream, VisionStream, CoreStream)
+- `src/components/layout/` — Layout shells (AppShell, TopBar, BottomNav, StreamSwitcher, Drawer)
+- `src/modules/module1` … `module10/` — Per-module triple streams (lazy-loaded from `ModulePage.jsx` → `MODULE_STREAMS`)
 - `src/pages/` — Route-level page components
-- `src/data/modules.js` — Module registry (10 modules, metadata, availability)
+- `src/data/modules.js` — Module registry (10 modules, metadata; all `available: true`)
 - `src/styles/` — Design tokens + global CSS
+- `public/` — PWA (`manifest.webmanifest`, `sw.js`), static icons, Netlify `_redirects`
 
 ### Key Patterns
 - Triple-Stream: Each module has 3 experiences (Pulse, Vision, Core) switchable at any time

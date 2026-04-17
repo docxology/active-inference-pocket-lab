@@ -40,11 +40,31 @@ function useDailyMinutes(sessions) {
 }
 
 const BADGES = [
-  { id: 'first-spin', label: 'First Spin', icon: '🌀', test: ({ sessions }) => sessions.length > 0 },
-  { id: 'ten-minutes', label: '10 Minutes', icon: '⏱️', test: ({ totalMinutes }) => totalMinutes >= 10 },
+  {
+    id: 'first-spin',
+    label: 'First Spin',
+    icon: '🌀',
+    test: ({ sessions }) => sessions.length > 0,
+  },
+  {
+    id: 'ten-minutes',
+    label: '10 Minutes',
+    icon: '⏱️',
+    test: ({ totalMinutes }) => totalMinutes >= 10,
+  },
   { id: 'hour', label: 'First Hour', icon: '⏳', test: ({ totalMinutes }) => totalMinutes >= 60 },
-  { id: 'streak-3', label: '3-Day Streak', icon: '🔥', test: ({ currentStreak }) => currentStreak >= 3 },
-  { id: 'streak-7', label: '7-Day Streak', icon: '🔥🔥', test: ({ currentStreak }) => currentStreak >= 7 },
+  {
+    id: 'streak-3',
+    label: '3-Day Streak',
+    icon: '🔥',
+    test: ({ currentStreak }) => currentStreak >= 3,
+  },
+  {
+    id: 'streak-7',
+    label: '7-Day Streak',
+    icon: '🔥🔥',
+    test: ({ currentStreak }) => currentStreak >= 7,
+  },
   {
     id: 'pulse-open',
     label: 'Pulse Opened',
@@ -68,7 +88,9 @@ const BADGES = [
     label: 'Triple Stream',
     icon: '🎭',
     test: ({ moduleProgress }) =>
-      Object.values(moduleProgress).some((mp) => (mp?.pulse || 0) > 0 && (mp?.vision || 0) > 0 && (mp?.core || 0) > 0),
+      Object.values(moduleProgress).some(
+        (mp) => (mp?.pulse || 0) > 0 && (mp?.vision || 0) > 0 && (mp?.core || 0) > 0,
+      ),
   },
   {
     id: 'first-complete',
@@ -120,7 +142,10 @@ export default function HearthPage() {
   const bank = useActivityBank();
   const { moduleProgress, getOverallProgress } = useApp();
   const daily = useDailyMinutes(bank.sessions);
-  const earned = useMemo(() => BADGES.filter((b) => b.test({ ...bank, moduleProgress })), [bank, moduleProgress]);
+  const earned = useMemo(
+    () => BADGES.filter((b) => b.test({ ...bank, moduleProgress })),
+    [bank, moduleProgress],
+  );
   const recent = useMemo(() => bank.sessions.slice(-8).reverse(), [bank.sessions]);
   const maxDay = Math.max(1, ...daily.map((d) => d.minutes));
   const overall = getOverallProgress?.() || 0;
@@ -152,9 +177,18 @@ export default function HearthPage() {
           <Stat value={`${overall}%`} label="Overall progress" delay={0.4} />
         </div>
 
-        <motion.section className="hearth-page__section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+        <motion.section
+          className="hearth-page__section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
           <h2>Last four weeks</h2>
-          <div className="hearth-page__sparkline" role="img" aria-label="Daily learning minutes for the last 28 days">
+          <div
+            className="hearth-page__sparkline"
+            role="img"
+            aria-label="Daily learning minutes for the last 28 days"
+          >
             {daily.map((d, i) => {
               const h = Math.round((d.minutes / maxDay) * 100);
               const today = i === daily.length - 1;
@@ -174,7 +208,12 @@ export default function HearthPage() {
           </div>
         </motion.section>
 
-        <motion.section className="hearth-page__section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
+        <motion.section
+          className="hearth-page__section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
           <h2>Journey</h2>
           <div className="hearth-page__journey">
             {modules.map((m) => {
@@ -197,13 +236,27 @@ export default function HearthPage() {
           </div>
         </motion.section>
 
-        <motion.section className="hearth-page__section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-          <h2>Clarity badges <small>{earned.length}/{BADGES.length}</small></h2>
+        <motion.section
+          className="hearth-page__section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h2>
+            Clarity badges{' '}
+            <small>
+              {earned.length}/{BADGES.length}
+            </small>
+          </h2>
           <div className="hearth-page__badges">
             {BADGES.map((b) => {
               const isEarned = earned.some((e) => e.id === b.id);
               return (
-                <div key={b.id} className={`hearth-page__badge${isEarned ? ' earned' : ''}`} title={b.label}>
+                <div
+                  key={b.id}
+                  className={`hearth-page__badge${isEarned ? ' earned' : ''}`}
+                  title={b.label}
+                >
                   <span className="hearth-page__badge-icon">{b.icon}</span>
                   <span className="hearth-page__badge-label">{b.label}</span>
                 </div>
@@ -212,12 +265,19 @@ export default function HearthPage() {
           </div>
         </motion.section>
 
-        <motion.section className="hearth-page__section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+        <motion.section
+          className="hearth-page__section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
           <h2>Recent spins</h2>
           {recent.length === 0 ? (
             <div className="hearth-page__empty-state">
               <p>No spins yet. Pick a module and breathe into it.</p>
-              <Link to="/modules" className="button button--primary">Open a module</Link>
+              <Link to="/modules" className="button button--primary">
+                Open a module
+              </Link>
             </div>
           ) : (
             <ul className="hearth-page__timeline">
@@ -228,7 +288,10 @@ export default function HearthPage() {
                     <span className="hearth-page__timeline-icon">{mod?.icon || '✨'}</span>
                     <span>
                       <strong>{mod?.title || `Module ${s.moduleId}`}</strong>
-                      <small> · {s.stream} · {Number(s.duration).toFixed(1)} min</small>
+                      <small>
+                        {' '}
+                        · {s.stream} · {Number(s.duration).toFixed(1)} min
+                      </small>
                     </span>
                     <time dateTime={s.timestamp}>{new Date(s.timestamp).toLocaleString()}</time>
                   </li>
@@ -238,7 +301,12 @@ export default function HearthPage() {
           )}
         </motion.section>
 
-        <motion.section className="hearth-page__section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
+        <motion.section
+          className="hearth-page__section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
           <h2>Good questions</h2>
           <p className="hearth-page__section-desc">Questions you marked as illuminating.</p>
           {bank.goodQuestions.length === 0 ? (

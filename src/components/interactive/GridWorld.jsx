@@ -102,10 +102,7 @@ export default function GridWorld({ size = 4, risk = 1, ambiguity = 1, running =
     }
     intervalRef.current = setInterval(() => {
       // Pick action argmax (deterministic for smooth demo).
-      const best = scores.reduce(
-        (best, s) => (s.G < best.G ? s : best),
-        { G: Infinity },
-      );
+      const best = scores.reduce((best, s) => (s.G < best.G ? s : best), { G: Infinity });
       if (!best || best.G === Infinity) return;
       setAgent({ x: best.nx, y: best.ny });
       setTrail((t) => [...t.slice(-20), { x: best.nx, y: best.ny }]);

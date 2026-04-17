@@ -15,8 +15,8 @@ export default function VisionStream() {
         <>
           <h2>The recipe, visualized.</h2>
           <p>
-            Every ingredient maps to an edge or node in a generative graph. Tap the tabs to see
-            each matrix — its values determine the story.
+            Every ingredient maps to an edge or node in a generative graph. Tap the tabs to see each
+            matrix — its values determine the story.
           </p>
         </>
       ),
@@ -45,5 +45,12 @@ export default function VisionStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

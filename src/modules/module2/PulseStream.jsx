@@ -77,8 +77,8 @@ export default function PulseStream() {
             more pull it has.
           </p>
           <p>
-            You're never reading the world plain. You're re-writing your model of it, one
-            prediction error at a time.
+            You're never reading the world plain. You're re-writing your model of it, one prediction
+            error at a time.
           </p>
         </>
       ),

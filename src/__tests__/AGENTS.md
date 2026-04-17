@@ -17,7 +17,7 @@ Unit and integration test suites for all Spin components.
 - `renderWithProviders(ui)` — Wraps component in BrowserRouter + AppProvider + ActivityBankProvider
 - `vi.fn()` — Used only for callback assertions
 
-## Coverage: 31/31 tests pass
+## Coverage: 52 tests in 9 files (run `npm test`)
 
 ## Adding Tests
 

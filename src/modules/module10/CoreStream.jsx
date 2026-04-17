@@ -14,7 +14,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>One equation, ten chapters.</h2>
-          <p>Perception, learning, action, planning, model selection — all minimize variants of this functional.</p>
+          <p>
+            Perception, learning, action, planning, model selection — all minimize variants of this
+            functional.
+          </p>
         </>
       ),
       interactive: (
@@ -29,7 +32,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Scales nest.</h2>
-          <p>Neurons, bodies, organisms, societies — any system that persists must implement free-energy minimization on some scale. Markov blankets all the way down.</p>
+          <p>
+            Neurons, bodies, organisms, societies — any system that persists must implement
+            free-energy minimization on some scale. Markov blankets all the way down.
+          </p>
         </>
       ),
       interactive: (
@@ -44,7 +50,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Concept atlas.</h2>
-          <p>Explore the connections you've built. Tap nodes to see their definitions and the modules where they live.</p>
+          <p>
+            Explore the connections you've built. Tap nodes to see their definitions and the modules
+            where they live.
+          </p>
         </>
       ),
       interactive: <ConceptMap />,
@@ -54,10 +63,22 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Open questions.</h2>
-          <p>Scaling to real neural recordings, bridging with deep learning, formalizing multi-agent active inference, alignment as free-energy minimization of a shared model. The door is now yours.</p>
+          <p>
+            Scaling to real neural recordings, bridging with deep learning, formalizing multi-agent
+            active inference, alignment as free-energy minimization of a shared model. The door is
+            now yours.
+          </p>
         </>
       ),
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} finalLabel="Close the orbit" />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+      finalLabel="Close the orbit"
+    />
+  );
 }

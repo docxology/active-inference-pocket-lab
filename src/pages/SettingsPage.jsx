@@ -23,7 +23,12 @@ function Row({ label, hint, children }) {
 function Toggle({ checked, onChange, label }) {
   return (
     <label className="settings-page__toggle">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} aria-label={label} />
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        aria-label={label}
+      />
       <span className="settings-page__toggle-track" aria-hidden>
         <span className="settings-page__toggle-thumb" />
       </span>
@@ -62,10 +67,18 @@ export default function SettingsPage() {
             label="Reduced motion"
             hint="Minimize animations. Useful for vestibular sensitivity."
           >
-            <Toggle checked={s.reducedMotion} onChange={(v) => s.set({ reducedMotion: v })} label="Reduced motion" />
+            <Toggle
+              checked={s.reducedMotion}
+              onChange={(v) => s.set({ reducedMotion: v })}
+              label="Reduced motion"
+            />
           </Row>
           <Row label="High contrast" hint="Increase color contrast for readability.">
-            <Toggle checked={s.highContrast} onChange={(v) => s.set({ highContrast: v })} label="High contrast" />
+            <Toggle
+              checked={s.highContrast}
+              onChange={(v) => s.set({ highContrast: v })}
+              label="High contrast"
+            />
           </Row>
           <Row label="Font size" hint="Scales typography app-wide.">
             <div className="settings-page__seg">
@@ -108,17 +121,27 @@ export default function SettingsPage() {
             </div>
           </Row>
           <Row label="Show math by default" hint="Expand equations instead of collapsing them.">
-            <Toggle checked={s.showMathByDefault} onChange={(v) => s.set({ showMathByDefault: v })} label="Show math" />
+            <Toggle
+              checked={s.showMathByDefault}
+              onChange={(v) => s.set({ showMathByDefault: v })}
+              label="Show math"
+            />
           </Row>
           <Row label="Auto-bookmark" hint="Remember where you left off inside each module.">
-            <Toggle checked={s.autoBookmark} onChange={(v) => s.set({ autoBookmark: v })} label="Auto-bookmark" />
+            <Toggle
+              checked={s.autoBookmark}
+              onChange={(v) => s.set({ autoBookmark: v })}
+              label="Auto-bookmark"
+            />
           </Row>
         </section>
 
         <section className="settings-page__section settings-page__section--danger">
           <h2>Danger zone</h2>
           <Row label="Reset settings" hint="Restore defaults on this device.">
-            <button className="settings-page__danger" onClick={() => s.reset()}>Reset</button>
+            <button className="settings-page__danger" onClick={() => s.reset()}>
+              Reset
+            </button>
           </Row>
           {resetApp && (
             <Row

@@ -74,7 +74,7 @@ export default function DataFitter() {
     const maxC = Math.max(...counts, 1);
     ctx.fillStyle = 'rgba(124, 107, 255, 0.35)';
     for (let b = 0; b < bins; b++) {
-      const x = scaleX(xMin + ((b) / bins) * (xMax - xMin));
+      const x = scaleX(xMin + (b / bins) * (xMax - xMin));
       const bw = (W / bins) * 0.92;
       const h = (counts[b] / maxC) * (H - 20);
       ctx.fillRect(x, H - h - 1, bw, h);

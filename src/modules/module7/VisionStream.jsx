@@ -55,8 +55,8 @@ export default function VisionStream() {
         <>
           <h2>Dial the agent's personality.</h2>
           <p>
-            Push <em>risk</em> up and the agent bolts for the goal. Push <em>ambiguity</em> up and it
-            wanders, mapping every corner. Same math, different soul.
+            Push <em>risk</em> up and the agent bolts for the goal. Push <em>ambiguity</em> up and
+            it wanders, mapping every corner. Same math, different soul.
           </p>
         </>
       ),
@@ -88,5 +88,12 @@ export default function VisionStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

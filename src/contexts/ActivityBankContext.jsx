@@ -79,7 +79,11 @@ function activityReducer(state, action) {
       return {
         ...state,
         goodQuestions: [
-          { text: action.payload.text, moduleId: action.payload.moduleId, timestamp: new Date().toISOString() },
+          {
+            text: action.payload.text,
+            moduleId: action.payload.moduleId,
+            timestamp: new Date().toISOString(),
+          },
           ...state.goodQuestions.slice(0, 99),
         ],
       };

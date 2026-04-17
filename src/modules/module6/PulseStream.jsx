@@ -38,7 +38,9 @@ export default function PulseStream() {
       id: 'lift',
       content: (
         <>
-          <h2>You're allowed to <em>design</em> minds.</h2>
+          <h2>
+            You're allowed to <em>design</em> minds.
+          </h2>
           <p>
             That's the radical claim: a careful A/B/C/D/E spec is a full description of a tiny
             agent's world. You'll build one next chapter.
@@ -47,5 +49,12 @@ export default function PulseStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="pulse" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="pulse"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

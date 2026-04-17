@@ -13,7 +13,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>The joint is the model.</h2>
-          <p>A generative model is a recipe for the joint p(o, s) — everything else factorizes from here.</p>
+          <p>
+            A generative model is a recipe for the joint p(o, s) — everything else factorizes from
+            here.
+          </p>
         </>
       ),
       interactive: <MathBlock latex="p(o,s) = p(o\\mid s)\\, p(s)" label="Joint factorization" />,
@@ -49,5 +52,12 @@ export default function CoreStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

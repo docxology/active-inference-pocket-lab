@@ -39,10 +39,19 @@ export default function PulseStream() {
       content: (
         <>
           <h2>Curiosity falls out of the math.</h2>
-          <p>You didn't add a "be curious" bonus. It appeared from minimizing expected free energy.</p>
+          <p>
+            You didn't add a "be curious" bonus. It appeared from minimizing expected free energy.
+          </p>
         </>
       ),
     },
   ];
-  return <StreamTemplate streamKey="pulse" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="pulse"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

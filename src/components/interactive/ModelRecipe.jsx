@@ -39,7 +39,7 @@ const INGREDIENTS = [
   {
     symbol: 'B',
     name: 'Transitions',
-    plain: "How the world moves — what you believe happens next, given an action.",
+    plain: 'How the world moves — what you believe happens next, given an action.',
     formal: "B[s', s, u] = p(s' | s, u)",
     matrix: [
       [0.9, 0.05, 0.05],

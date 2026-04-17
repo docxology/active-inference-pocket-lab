@@ -46,5 +46,13 @@ export default function PulseStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="pulse" beats={beats} onProgress={onProgress} onComplete={onComplete} finalLabel="Close the orbit" />;
+  return (
+    <StreamTemplate
+      streamKey="pulse"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+      finalLabel="Close the orbit"
+    />
+  );
 }

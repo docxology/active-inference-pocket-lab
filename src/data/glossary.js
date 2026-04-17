@@ -28,7 +28,8 @@ const glossary = {
   },
   observation: {
     term: 'Observation',
-    short: 'Any piece of sensory data the agent receives. Observations update priors into posteriors.',
+    short:
+      'Any piece of sensory data the agent receives. Observations update priors into posteriors.',
     formal: 'o: sampled value from the likelihood p(o|s).',
     latex: 'o \\sim p(o|s)',
     relatedModules: ['the-first-orbit', 'the-low-road'],
@@ -60,8 +61,7 @@ const glossary = {
     term: 'Variational Free Energy',
     short:
       'A tractable upper bound on surprise. Minimising it is how brains (and cells) approximate Bayesian inference.',
-    formal:
-      'F = D_KL[q(s) ∥ p(s|o)] + (−ln p(o)); equivalently F = Complexity − Accuracy.',
+    formal: 'F = D_KL[q(s) ∥ p(s|o)] + (−ln p(o)); equivalently F = Complexity − Accuracy.',
     latex: 'F = D_{KL}[q(s) \\| p(s|o)] - \\ln p(o)',
     relatedModules: ['the-first-orbit', 'the-high-road'],
   },
@@ -89,7 +89,8 @@ const glossary = {
   },
   precision: {
     term: 'Precision',
-    short: 'The inverse of variance — how confident a belief is. Higher precision = tighter distribution.',
+    short:
+      'The inverse of variance — how confident a belief is. Higher precision = tighter distribution.',
     formal: 'π = 1/σ². Precision-weighting governs message weight.',
     latex: '\\pi = 1/\\sigma^2',
     relatedModules: ['the-low-road', 'message-passing'],
@@ -110,7 +111,8 @@ const glossary = {
   },
   attractor: {
     term: 'Attractor',
-    short: 'A region of state space that trajectories are pulled toward. Living systems are slow attractors.',
+    short:
+      'A region of state space that trajectories are pulled toward. Living systems are slow attractors.',
     formal: 'Fixed points or limit sets of a dynamical system where ẋ = 0 or behavior is bounded.',
     relatedModules: ['the-high-road', 'continuous-flow'],
   },
@@ -146,7 +148,8 @@ const glossary = {
   beliefPropagation: {
     term: 'Belief Propagation',
     short: 'A message-passing algorithm that is exact on trees.',
-    formal: 'Recursive computation of marginals via factor-to-variable and variable-to-factor messages.',
+    formal:
+      'Recursive computation of marginals via factor-to-variable and variable-to-factor messages.',
     relatedModules: ['message-passing'],
   },
   matrixA: {
@@ -160,7 +163,7 @@ const glossary = {
     term: 'B matrix (Transition)',
     short: 'Probability that state transitions given a control.',
     formal: "B[s', s, u] = p(s'|s, u).",
-    latex: 'B_{s\',s,u} = p(s\'|s,u)',
+    latex: "B_{s',s,u} = p(s'|s,u)",
     relatedModules: ['designing-models'],
   },
   matrixC: {
@@ -180,7 +183,7 @@ const glossary = {
   transition: {
     term: 'Transition Model',
     short: 'How the world evolves from step to step, given actions.',
-    formal: "p(s_{t+1} | s_t, u_t).",
+    formal: 'p(s_{t+1} | s_t, u_t).',
     relatedModules: ['designing-models', 'discrete-worlds'],
   },
   policy: {
@@ -212,8 +215,7 @@ const glossary = {
   },
   generalizedCoordinates: {
     term: 'Generalized Coordinates',
-    short:
-      'States plus their temporal derivatives. A local Taylor series of the trajectory.',
+    short: 'States plus their temporal derivatives. A local Taylor series of the trajectory.',
     formal: 'x̃ = (x, x′, x″, …).',
     latex: '\\tilde{x} = (x, x\\prime, x\\prime\\prime, \\ldots)',
     relatedModules: ['continuous-flow'],
@@ -240,7 +242,8 @@ const glossary = {
   },
   modelEvidence: {
     term: 'Model Evidence',
-    short: "How much the data support a model, averaged over parameters. Also 'marginal likelihood'.",
+    short:
+      "How much the data support a model, averaged over parameters. Also 'marginal likelihood'.",
     formal: 'p(o|m) = ∫ p(o|θ, m) p(θ|m) dθ.',
     latex: 'p(o|m) = \\int p(o|\\theta,m)p(\\theta|m)d\\theta',
     relatedModules: ['model-based-analysis'],
@@ -286,7 +289,8 @@ const glossary = {
   enactivism: {
     term: 'Enactivism',
     short: 'Cognition arises from embodied, situated action — not passive representation.',
-    formal: 'Consistent with active inference in that perception-action loops are constitutive of mind.',
+    formal:
+      'Consistent with active inference in that perception-action loops are constitutive of mind.',
     relatedModules: ['the-whole-orbit'],
   },
 };

@@ -57,10 +57,7 @@ export function gaussianSurprise(o, mu, pi) {
 export function gaussianKL(muQ, piQ, muP, piP) {
   const varQ = 1 / Math.max(piQ, 1e-9);
   const varP = 1 / Math.max(piP, 1e-9);
-  return (
-    0.5 *
-    (Math.log(varP / varQ) + (varQ + (muQ - muP) ** 2) / varP - 1)
-  );
+  return 0.5 * (Math.log(varP / varQ) + (varQ + (muQ - muP) ** 2) / varP - 1);
 }
 
 /**
@@ -108,7 +105,10 @@ export function entropy(p) {
  * KL divergence KL[q ∥ p] for discrete vectors.
  */
 export function categoricalKL(q, p) {
-  return q.reduce((s, qi, i) => (qi > 0 ? s + qi * (Math.log(qi) - Math.log(Math.max(p[i], 1e-12))) : s), 0);
+  return q.reduce(
+    (s, qi, i) => (qi > 0 ? s + qi * (Math.log(qi) - Math.log(Math.max(p[i], 1e-12))) : s),
+    0,
+  );
 }
 
 /* ──────────────────────────── POMDP toy core ────────────────────────── */
@@ -168,7 +168,8 @@ export function makeFreeEnergyField({ size = 40, muX = 0.5, muY = 0.5, spread = 
       const ny = y / (size - 1);
       const d2 = (nx - muX) ** 2 + (ny - muY) ** 2;
       // Free energy: quadratic well + small ridge — creates visible gradient.
-      grid[y][x] = d2 / (2 * spread * spread) + 0.15 * Math.sin(6 * Math.PI * nx) * Math.cos(6 * Math.PI * ny);
+      grid[y][x] =
+        d2 / (2 * spread * spread) + 0.15 * Math.sin(6 * Math.PI * nx) * Math.cos(6 * Math.PI * ny);
     }
   }
   return grid;
@@ -180,8 +181,12 @@ export function makeFreeEnergyField({ size = 40, muX = 0.5, muY = 0.5, spread = 
  */
 export function gradientStep(field, x, y, { step = 0.02, noise = 0 } = {}) {
   const size = field.length;
-  const gx = (sampleField(field, Math.min(1, x + 0.02), y) - sampleField(field, Math.max(0, x - 0.02), y)) / 0.04;
-  const gy = (sampleField(field, x, Math.min(1, y + 0.02)) - sampleField(field, x, Math.max(0, y - 0.02))) / 0.04;
+  const gx =
+    (sampleField(field, Math.min(1, x + 0.02), y) - sampleField(field, Math.max(0, x - 0.02), y)) /
+    0.04;
+  const gy =
+    (sampleField(field, x, Math.min(1, y + 0.02)) - sampleField(field, x, Math.max(0, y - 0.02))) /
+    0.04;
   const nx = Math.min(1, Math.max(0, x - step * gx + (Math.random() - 0.5) * noise));
   const ny = Math.min(1, Math.max(0, y - step * gy + (Math.random() - 0.5) * noise));
   return { x: nx, y: ny, gx, gy, size };

@@ -36,7 +36,8 @@ export default function ModuleListPage() {
   const [activeTag, setActiveTag] = useState('all');
   const tags = useMemo(() => collectTags(modules), [modules]);
   const filtered = useMemo(
-    () => (activeTag === 'all' ? modules : modules.filter((m) => (m.tags || []).includes(activeTag))),
+    () =>
+      activeTag === 'all' ? modules : modules.filter((m) => (m.tags || []).includes(activeTag)),
     [modules, activeTag],
   );
 
@@ -45,7 +46,9 @@ export default function ModuleListPage() {
       <div className="container">
         <header className="module-list-page__header">
           <h1>Modules</h1>
-          <p>Ten orbits through Active Inference. Each has three streams — pick what suits your day.</p>
+          <p>
+            Ten orbits through Active Inference. Each has three streams — pick what suits your day.
+          </p>
         </header>
 
         <div className="module-list-page__filters" role="tablist" aria-label="Filter by topic">
@@ -113,7 +116,11 @@ export default function ModuleListPage() {
                 )}
 
                 {!mod.available && <span className="module-card__coming-soon">Coming soon</span>}
-                {done && <span className="module-card__badge" aria-hidden>🏅</span>}
+                {done && (
+                  <span className="module-card__badge" aria-hidden>
+                    🏅
+                  </span>
+                )}
               </motion.button>
             );
           })}

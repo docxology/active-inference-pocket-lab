@@ -14,8 +14,24 @@ export default function VisionStream() {
 
   const Controls = (
     <div style={{ display: 'grid', gap: 'var(--space-2)' }}>
-      <InferenceSlider min={0} max={2} step={0.05} value={precision} onChange={setPrecision} label="Prediction-error precision π" color="var(--color-pulse)" />
-      <InferenceSlider min={0} max={2} step={0.05} value={drive} onChange={setDrive} label="Top-down drive" color="var(--color-vision)" />
+      <InferenceSlider
+        min={0}
+        max={2}
+        step={0.05}
+        value={precision}
+        onChange={setPrecision}
+        label="Prediction-error precision π"
+        color="var(--color-pulse)"
+      />
+      <InferenceSlider
+        min={0}
+        max={2}
+        step={0.05}
+        value={drive}
+        onChange={setDrive}
+        label="Top-down drive"
+        color="var(--color-vision)"
+      />
     </div>
   );
 
@@ -58,5 +74,12 @@ export default function VisionStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

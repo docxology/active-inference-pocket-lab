@@ -18,12 +18,12 @@ import './GenerativeGraph.css';
  */
 
 const DEFAULT_NODES = [
-  { id: 's3', label: "s³", x: 160, y: 40, kind: 'state' },
-  { id: 's2', label: "s²", x: 80, y: 120, kind: 'state' },
-  { id: 's2b', label: "s²′", x: 240, y: 120, kind: 'state' },
-  { id: 's1', label: "s¹", x: 40, y: 200, kind: 'state' },
-  { id: 's1b', label: "s¹′", x: 160, y: 200, kind: 'state' },
-  { id: 's1c', label: "s¹″", x: 280, y: 200, kind: 'state' },
+  { id: 's3', label: 's³', x: 160, y: 40, kind: 'state' },
+  { id: 's2', label: 's²', x: 80, y: 120, kind: 'state' },
+  { id: 's2b', label: 's²′', x: 240, y: 120, kind: 'state' },
+  { id: 's1', label: 's¹', x: 40, y: 200, kind: 'state' },
+  { id: 's1b', label: 's¹′', x: 160, y: 200, kind: 'state' },
+  { id: 's1c', label: 's¹″', x: 280, y: 200, kind: 'state' },
   { id: 'o1', label: 'o₁', x: 40, y: 280, kind: 'obs' },
   { id: 'o2', label: 'o₂', x: 160, y: 280, kind: 'obs' },
   { id: 'o3', label: 'o₃', x: 280, y: 280, kind: 'obs' },
@@ -49,10 +49,7 @@ const DEFAULT_EDGES = [
  * @param {string} [props.highlight] - Optional node id to highlight.
  */
 export default function GenerativeGraph({ precision = 1, highlight }) {
-  const { nodes, edges } = useMemo(
-    () => ({ nodes: DEFAULT_NODES, edges: DEFAULT_EDGES }),
-    [],
-  );
+  const { nodes, edges } = useMemo(() => ({ nodes: DEFAULT_NODES, edges: DEFAULT_EDGES }), []);
 
   const nodeMap = useMemo(() => Object.fromEntries(nodes.map((n) => [n.id, n])), [nodes]);
 

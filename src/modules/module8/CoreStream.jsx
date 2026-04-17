@@ -74,5 +74,12 @@ export default function CoreStream() {
       interactive: <FreeEnergyField />,
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

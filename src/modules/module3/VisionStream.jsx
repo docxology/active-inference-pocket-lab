@@ -18,10 +18,42 @@ export default function VisionStream() {
 
   const Controls = (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
-      <InferenceSlider min={0.05} max={0.95} step={0.01} value={ax} onChange={setAx} label="Attractor x" color="var(--color-vision)" />
-      <InferenceSlider min={0.05} max={0.95} step={0.01} value={ay} onChange={setAy} label="Attractor y" color="var(--color-vision)" />
-      <InferenceSlider min={0.05} max={0.5} step={0.01} value={spread} onChange={setSpread} label="Well width σ" color="var(--color-core)" />
-      <InferenceSlider min={0} max={0.15} step={0.005} value={noise} onChange={setNoise} label="Noise (temperature)" color="var(--color-pulse)" />
+      <InferenceSlider
+        min={0.05}
+        max={0.95}
+        step={0.01}
+        value={ax}
+        onChange={setAx}
+        label="Attractor x"
+        color="var(--color-vision)"
+      />
+      <InferenceSlider
+        min={0.05}
+        max={0.95}
+        step={0.01}
+        value={ay}
+        onChange={setAy}
+        label="Attractor y"
+        color="var(--color-vision)"
+      />
+      <InferenceSlider
+        min={0.05}
+        max={0.5}
+        step={0.01}
+        value={spread}
+        onChange={setSpread}
+        label="Well width σ"
+        color="var(--color-core)"
+      />
+      <InferenceSlider
+        min={0}
+        max={0.15}
+        step={0.005}
+        value={noise}
+        onChange={setNoise}
+        label="Noise (temperature)"
+        color="var(--color-pulse)"
+      />
     </div>
   );
 
@@ -37,7 +69,9 @@ export default function VisionStream() {
           </p>
         </>
       ),
-      interactive: <FreeEnergyField attractorX={ax} attractorY={ay} spread={spread} noise={noise} />,
+      interactive: (
+        <FreeEnergyField attractorX={ax} attractorY={ay} spread={spread} noise={noise} />
+      ),
     },
     {
       id: 'attractor',
@@ -74,5 +108,12 @@ export default function VisionStream() {
     },
   ];
 
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

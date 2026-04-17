@@ -14,7 +14,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Discrete POMDP spec.</h2>
-          <p>All five matrices live in a sparse tensor network. Their dimensions tell you the state space.</p>
+          <p>
+            All five matrices live in a sparse tensor network. Their dimensions tell you the state
+            space.
+          </p>
         </>
       ),
       interactive: (
@@ -53,5 +56,12 @@ export default function CoreStream() {
       interactive: <ModelRecipe />,
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

@@ -75,13 +75,18 @@ export default function SearchPage() {
 
         {!q && (
           <div className="search-page__empty">
-            <p>Try: <em>free energy</em>, <em>Markov blanket</em>, <em>precision</em>, <em>policy</em>.</p>
+            <p>
+              Try: <em>free energy</em>, <em>Markov blanket</em>, <em>precision</em>,{' '}
+              <em>policy</em>.
+            </p>
           </div>
         )}
 
         {q && results.modules.length === 0 && results.glossary.length === 0 && (
           <div className="search-page__empty">
-            <p>No matches. Try a simpler term or search the <Link to="/glossary">glossary</Link>.</p>
+            <p>
+              No matches. Try a simpler term or search the <Link to="/glossary">glossary</Link>.
+            </p>
           </div>
         )}
 
@@ -110,7 +115,10 @@ export default function SearchPage() {
             <ul>
               {results.glossary.map(({ item }) => (
                 <li key={item.key} className="search-page__item">
-                  <Link to={`/glossary#gl-${(item.term[0] || '#').toUpperCase()}`} className="search-page__link">
+                  <Link
+                    to={`/glossary#gl-${(item.term[0] || '#').toUpperCase()}`}
+                    className="search-page__link"
+                  >
                     <strong>{item.term}</strong>
                     <small>{item.short}</small>
                   </Link>

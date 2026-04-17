@@ -78,7 +78,8 @@
   height: 10px;
   border-radius: var(--radius-full);
   background: var(--color-bg-elevated);
-  transition: background var(--transition-normal),
+  transition:
+    background var(--transition-normal),
     box-shadow var(--transition-normal);
   padding: 0;
   min-height: unset;

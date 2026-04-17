@@ -122,8 +122,7 @@ export default function ConceptMap() {
           const na = nodeMap[a];
           const nb = nodeMap[b];
           if (!na || !nb) return null;
-          const isActive =
-            selected && (selected === a || selected === b);
+          const isActive = selected && (selected === a || selected === b);
           return (
             <line
               key={i}
@@ -146,12 +145,7 @@ export default function ConceptMap() {
             aria-label={`Concept: ${n.id}`}
           >
             <circle r="9" fill={MOD_COLORS[n.mod - 1]} opacity={0.85} />
-            <text
-              y="22"
-              textAnchor="middle"
-              fontSize="9"
-              fill="var(--color-text-secondary)"
-            >
+            <text y="22" textAnchor="middle" fontSize="9" fill="var(--color-text-secondary)">
               {n.id}
             </text>
           </g>
@@ -171,9 +165,7 @@ export default function ConceptMap() {
           <p>{entry.short}</p>
           {entry.formal && <p className="concept-map__formal">{entry.formal}</p>}
           {entry.relatedModules?.length > 0 && (
-            <p className="concept-map__hint">
-              modules: {entry.relatedModules.join(', ')}
-            </p>
+            <p className="concept-map__hint">modules: {entry.relatedModules.join(', ')}</p>
           )}
         </div>
       )}

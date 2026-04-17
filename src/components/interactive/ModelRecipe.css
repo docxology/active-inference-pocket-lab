@@ -29,7 +29,9 @@
   background: var(--color-bg-surface);
   color: var(--color-text-secondary);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: border-color var(--transition-normal), color var(--transition-normal);
+  transition:
+    border-color var(--transition-normal),
+    color var(--transition-normal);
 }
 
 .model-recipe__tab.active {

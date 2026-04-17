@@ -34,8 +34,8 @@ export default function CoreStream() {
         <>
           <h2>From score to action.</h2>
           <p>
-            Softmax with inverse temperature γ converts EFE scores into a policy distribution.
-            High γ = greedy; low γ = exploratory. Boltzmann's ghost in the agent.
+            Softmax with inverse temperature γ converts EFE scores into a policy distribution. High
+            γ = greedy; low γ = exploratory. Boltzmann's ghost in the agent.
           </p>
         </>
       ),
@@ -57,5 +57,12 @@ export default function CoreStream() {
       interactive: <GridWorld risk={1} ambiguity={1} />,
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

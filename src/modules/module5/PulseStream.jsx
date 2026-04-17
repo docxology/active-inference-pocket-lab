@@ -14,8 +14,8 @@ export default function PulseStream() {
         <>
           <h2>Your neurons are gossiping.</h2>
           <p>
-            Pyramidal cells push predictions downward — "this is probably a cat". Bottom-up
-            circuits push back with <em>prediction errors</em> — "the whiskers don't match".
+            Pyramidal cells push predictions downward — "this is probably a cat". Bottom-up circuits
+            push back with <em>prediction errors</em> — "the whiskers don't match".
           </p>
         </>
       ),
@@ -26,9 +26,7 @@ export default function PulseStream() {
       content: (
         <>
           <h2>Precision is the volume knob.</h2>
-          <p>
-            Attention is a precision boost. Whichever side turns up wins the conversation.
-          </p>
+          <p>Attention is a precision boost. Whichever side turns up wins the conversation.</p>
         </>
       ),
       interactive: <MessagePassingCircuit precision={1.4} drive={0.8} />,
@@ -44,5 +42,12 @@ export default function PulseStream() {
       interactive: <MessagePassingCircuit precision={0.4} drive={1.2} />,
     },
   ];
-  return <StreamTemplate streamKey="pulse" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="pulse"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

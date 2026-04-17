@@ -122,7 +122,10 @@ export default function BeliefChart({
       ctx.lineTo(scaleX(xs[xs.length - 1]), height);
       ctx.lineTo(scaleX(xs[0]), height);
       ctx.closePath();
-      ctx.fillStyle = c.color.replace('1)', '0.15)').replace('rgb(', 'rgba(').replace(')', ',0.15)');
+      ctx.fillStyle = c.color
+        .replace('1)', '0.15)')
+        .replace('rgb(', 'rgba(')
+        .replace(')', ',0.15)');
       // fallback fill:
       ctx.globalAlpha = 0.15;
       ctx.fill();

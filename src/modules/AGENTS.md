@@ -23,5 +23,4 @@ Per-module stream implementations. Each module has three parallel experience str
 
 ## Current Status
 
-- Module 1: fully implemented
-- Modules 2-10: data scaffolded, streams not yet built
+- Modules 1–10: each folder exports `PulseStream`, `VisionStream`, and `CoreStream` via `index.js`.

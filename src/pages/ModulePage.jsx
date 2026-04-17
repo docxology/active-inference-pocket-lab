@@ -168,7 +168,9 @@ export default function ModulePage() {
                 <h3>Vocabulary lit up</h3>
                 <div className="module-page__overview-tags">
                   {mod.glossary.map((g) => (
-                    <span key={g} className="module-page__overview-tag">{g}</span>
+                    <span key={g} className="module-page__overview-tag">
+                      {g}
+                    </span>
                   ))}
                 </div>
               </div>

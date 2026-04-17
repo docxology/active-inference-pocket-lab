@@ -60,9 +60,9 @@ describe('Module Registry', () => {
     });
   });
 
-  it('Module 1 is available', () => {
-    const mod = getModuleById(1);
-    expect(mod.available).toBe(true);
+  it('all 10 modules are available', () => {
+    expect(getAvailableModules()).toHaveLength(10);
+    expect(modules.every((m) => m.available)).toBe(true);
   });
 
   it('each module slug is unique', () => {

@@ -74,7 +74,11 @@ export default function GlossaryPage() {
                   <li key={entry.key} className="glossary-page__item">
                     <h3 className="glossary-page__term">{entry.term}</h3>
                     <p className="glossary-page__short">{entry.short}</p>
-                    {entry.formal && <p className="glossary-page__formal"><code>{entry.formal}</code></p>}
+                    {entry.formal && (
+                      <p className="glossary-page__formal">
+                        <code>{entry.formal}</code>
+                      </p>
+                    )}
                     {entry.relatedModules?.length > 0 && (
                       <div className="glossary-page__links">
                         {entry.relatedModules.map((id) => {

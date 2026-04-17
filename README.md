@@ -46,7 +46,7 @@ Each module offers three learning paths that users can switch between at any tim
 | 9 | 📊 Model-Based Data Analysis | Model-Based Data Analysis |
 | 10 | 🌐 The Whole Orbit | A Broader View |
 
-**Module 1 (The First Orbit)** is fully implemented. Modules 2-10 are scaffolded with content metadata.
+All **10 modules** ship **Pulse**, **Vision**, and **Core** streams (`src/modules/module1` … `module10`), lazy-loaded from [`ModulePage.jsx`](src/pages/ModulePage.jsx) and marked available in [`src/data/modules.js`](src/data/modules.js).
 
 ## Quick Start
 
@@ -80,16 +80,19 @@ npm run build    # Production build
 ## Project Architecture
 
 ```
+public/                 # PWA: manifest.webmanifest, sw.js, icons, _redirects
 src/
 ├── components/
-│   ├── interactive/    # InferenceSlider, MathBlock, PauseButton, RewardAnimation
-│   └── layout/         # AppShell, BottomNav, StreamSwitcher, Drawer
-├── contexts/           # AppContext (streams/modules), ActivityBankContext (pause/bookmark)
-├── data/               # Module registry (10 modules with metadata)
+│   ├── interactive/    # InferenceSlider, MathBlock, interactives, Quiz, …
+│   └── layout/         # AppShell, TopBar, BottomNav, StreamSwitcher, …
+├── contexts/           # AppContext, ActivityBankContext, SettingsContext
+├── data/               # Module registry, glossary, badges
 ├── modules/
-│   └── module1/        # PulseStream, VisionStream, CoreStream
-├── pages/              # HomePage, ModuleListPage, ModulePage, etc.
+│   ├── module1/        # PulseStream, VisionStream, CoreStream (+ module2 … module10)
+│   └── …
+├── pages/              # Home, modules, glossary, search, settings, …
 ├── styles/             # Design tokens + global CSS
+├── utils/              # Shared helpers (e.g. activeInference)
 └── test/               # Vitest setup
 ```
 
@@ -113,10 +116,9 @@ src/
 
 ## TODO
 
-- [ ] Implement Modules 2-10 stream content
-- [ ] Add haptic feedback for mobile interactions
-- [ ] PWA manifest and service worker
-- [ ] Offline storage with IndexedDB
+- [x] Triple-stream implementations for modules 1–10
+- [x] PWA manifest and service worker (`public/`)
+- [ ] Offline storage with IndexedDB (beyond installable shell)
 - [ ] Server-synced progress (when backend is ready)
 - [ ] Hearth social features (shared questions, group streaks)
 - [ ] Accessibility audit (screen reader testing)

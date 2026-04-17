@@ -25,7 +25,9 @@ export default function PulseStream() {
       id: 'coords',
       content: (
         <>
-          <h2>You predict position <em>and</em> velocity <em>and</em> acceleration.</h2>
+          <h2>
+            You predict position <em>and</em> velocity <em>and</em> acceleration.
+          </h2>
           <p>
             That's "generalized coordinates." Brains don't just guess where the ball is — they guess
             where it's going, and how fast it's accelerating.
@@ -47,5 +49,12 @@ export default function PulseStream() {
       interactive: <FreeEnergyField x={-1} y={1} spread={1} />,
     },
   ];
-  return <StreamTemplate streamKey="pulse" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="pulse"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

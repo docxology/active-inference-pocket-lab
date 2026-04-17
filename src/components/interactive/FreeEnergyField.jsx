@@ -141,7 +141,9 @@ export default function FreeEnergyField({
       />
       <div className="fe-field__caption">
         <span>F ≈ {fAtParticle.toFixed(2)}</span>
-        <span className="fe-field__hint">click the field to re-seed · attractor pulled by sliders</span>
+        <span className="fe-field__hint">
+          click the field to re-seed · attractor pulled by sliders
+        </span>
       </div>
     </div>
   );

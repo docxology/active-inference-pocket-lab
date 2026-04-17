@@ -28,7 +28,9 @@
   justify-content: center;
   color: var(--color-text-secondary);
   font-size: var(--font-size-lg);
-  transition: background var(--transition-normal), transform var(--transition-normal);
+  transition:
+    background var(--transition-normal),
+    transform var(--transition-normal);
 }
 
 .grid-world__cell.trail {

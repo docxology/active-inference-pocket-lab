@@ -16,6 +16,8 @@ Users can switch streams at any time via the StreamSwitcher. Progress is tracked
 
 ## The 10 Modules
 
+Each module has a `src/modules/moduleN/` package (Pulse, Vision, Core) registered in `ModulePage.jsx` and marked `available: true` in `modules.js`.
+
 ### Module 1: 🌀 The First Orbit ✅
 **Chapter**: Overview / Introduction
 **First Action**: Move the Prior Belief slider
@@ -24,47 +26,47 @@ Users can switch streams at any time via the StreamSwitcher. Progress is tracked
 - **Vision**: Orbiting particle canvas responding to Prior Strength and Precision
 - **Core**: Variational Free Energy derivation with live sandbox
 
-### Module 2: 🛤️ The Low Road 📋
+### Module 2: 🛤️ The Low Road ✅
 **Chapter**: The Low Road to Active Inference
 **First Action**: Drag a ball toward an attractor
 **Content**: Reflexes, habits, homeostasis → Active Inference from the bottom up
 
-### Module 3: 🏔️ The High Road 📋
+### Module 3: 🏔️ The High Road ✅
 **Chapter**: The High Road to Active Inference
 **First Action**: Adjust a Bayesian prior distribution
 **Content**: Bayesian brain, predictive processing → Active Inference from the top down
 
-### Module 4: 🏛️ The Generative Architecture 📋
+### Module 4: 🏛️ The Generative Architecture ✅
 **Chapter**: Generative Models
 **First Action**: Rewire a simple graphical model
 **Content**: Structure of generative models, likelihood, prior, posterior
 
-### Module 5: 🧠 Message Passing 📋
+### Module 5: 🧠 Message Passing ✅
 **Chapter**: Message Passing & Neurobiology
 **First Action**: Send a prediction error signal
 **Content**: Belief propagation, neural correlates, forward/backward messages
 
-### Module 6: 📐 A Recipe for Designing Models 📋
+### Module 6: 📐 A Recipe for Designing Models ✅
 **Chapter**: A Recipe for Designing Models
 **First Action**: Select variables for a model
 **Content**: Practical modeling, choosing states, observations, parameters
 
-### Module 7: 🎲 Discrete Worlds 📋
+### Module 7: 🎲 Discrete Worlds ✅
 **Chapter**: Active Inference in Discrete Time
 **First Action**: Choose an action in a grid world
 **Content**: POMDPs, policy selection, expected free energy
 
-### Module 8: 🌊 Continuous Flow 📋
+### Module 8: 🌊 Continuous Flow ✅
 **Chapter**: Active Inference in Continuous Time
 **First Action**: Perturb a dynamical system
 **Content**: Continuous-time models, generalized coordinates, action
 
-### Module 9: 📊 Model-Based Data Analysis 📋
+### Module 9: 📊 Model-Based Data Analysis ✅
 **Chapter**: Model-Based Data Analysis
 **First Action**: Fit a model to data points
 **Content**: Parameter estimation, model comparison, Bayesian inference
 
-### Module 10: 🌐 The Whole Orbit 📋
+### Module 10: 🌐 The Whole Orbit ✅
 **Chapter**: A Broader View
 **First Action**: Place Active Inference among paradigms
 **Content**: Philosophical implications, future directions, capstone

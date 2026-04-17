@@ -82,7 +82,7 @@ export default function MessagePassingCircuit({
       // Bottom-up errors
       for (let i = 0; i < nodesPerLevel; i++) {
         const x = 60 + i * ((size - 120) / (nodesPerLevel - 1));
-        const phase = (1 - ((t * 0.025 + i * 0.3) % 1));
+        const phase = 1 - ((t * 0.025 + i * 0.3) % 1);
         for (let L2 = 0; L2 < 2; L2++) {
           const y0 = levels[L2].y;
           const y1 = levels[L2 + 1].y;

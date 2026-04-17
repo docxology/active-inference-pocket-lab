@@ -53,9 +53,9 @@ test: {
 - Respects log level filtering
 
 ### App.test.jsx (3 tests)
-- Renders home page by default
+- Renders home page by default (main heading and subtitle)
 - Renders bottom navigation with 5 tabs
-- Renders quick start button
+- Home links to module 1 (`/modules/1`)
 
 ### InferenceSlider.test.jsx (6 tests)
 - Renders with default value
@@ -85,7 +85,7 @@ test: {
 - getModuleById returns correct module
 - getModuleBySlug returns correct module
 - getAvailableModules returns only available modules
-- Module 1 is available
+- All 10 modules are available
 - Each module slug is unique
 
 ### Module1Pulse.test.jsx (5 tests)

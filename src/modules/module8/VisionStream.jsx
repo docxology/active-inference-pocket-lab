@@ -16,11 +16,25 @@ function FlowField() {
       <div className="flow-field__controls">
         <label>
           Landscape spread <span>{spread.toFixed(2)}</span>
-          <input type="range" min={0.4} max={2.5} step={0.05} value={spread} onChange={(e) => setSpread(parseFloat(e.target.value))} />
+          <input
+            type="range"
+            min={0.4}
+            max={2.5}
+            step={0.05}
+            value={spread}
+            onChange={(e) => setSpread(parseFloat(e.target.value))}
+          />
         </label>
         <label>
           Sensory noise <span>{noise.toFixed(2)}</span>
-          <input type="range" min={0} max={0.5} step={0.01} value={noise} onChange={(e) => setNoise(parseFloat(e.target.value))} />
+          <input
+            type="range"
+            min={0}
+            max={0.5}
+            step={0.01}
+            value={noise}
+            onChange={(e) => setNoise(parseFloat(e.target.value))}
+          />
         </label>
       </div>
       <style>{`
@@ -67,10 +81,20 @@ export default function VisionStream() {
       content: (
         <>
           <h2>Continuous ≈ smooth discrete.</h2>
-          <p>Take the time-step to zero and the grid-world's update rules become differential equations.</p>
+          <p>
+            Take the time-step to zero and the grid-world's update rules become differential
+            equations.
+          </p>
         </>
       ),
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

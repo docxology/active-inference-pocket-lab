@@ -21,7 +21,9 @@ export default function TopBar() {
   return (
     <header className="topbar" role="banner">
       <Link to="/" className="topbar__brand" aria-label="Spin — home">
-        <span className="topbar__spin" aria-hidden>🌀</span>
+        <span className="topbar__spin" aria-hidden>
+          🌀
+        </span>
         <span className="topbar__name">Spin</span>
       </Link>
       <nav className="topbar__quick" aria-label="Quick links">

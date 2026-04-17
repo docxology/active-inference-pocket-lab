@@ -17,9 +17,8 @@ Static data layer and module registry.
 
 ## Module Availability
 
-- Module 1: available (`true`)
-- Modules 2-10: scaffolded (`false`)
+All 10 modules use `available: true` with stream bundles in `src/modules/module1` through `src/modules/module10`.
 
-## Adding Modules
+## Adding a New Module
 
-Set `available: true` in the module entry, then add stream implementations in `src/modules/moduleN/`.
+After module 10, add `moduleN/` streams, register in `ModulePage.jsx` → `MODULE_STREAMS`, and add a new entry in `modules.js` with `available: true`.

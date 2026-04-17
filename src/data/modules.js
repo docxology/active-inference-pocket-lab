@@ -92,10 +92,7 @@ const modules = [
           'Free energy is a tractable upper bound on surprise.',
           'Minimizing F means either updating beliefs (perception) or acting on the world.',
         ],
-        equations: [
-          'F = D_{KL}[q(s) \\| p(s|o)] + (-\\ln p(o))',
-          '\\text{Surprise} = -\\ln p(o)',
-        ],
+        equations: ['F = D_{KL}[q(s) \\| p(s|o)] + (-\\ln p(o))', '\\text{Surprise} = -\\ln p(o)'],
       },
     },
     quiz: [
@@ -109,7 +106,7 @@ const modules = [
         ],
         correctIndex: 1,
         explanation:
-          'A prior is the generative model\'s prior probability over hidden states — what you believed before observing.',
+          "A prior is the generative model's prior probability over hidden states — what you believed before observing.",
       },
       {
         prompt: 'What does minimizing free energy accomplish?',
@@ -132,7 +129,8 @@ const modules = [
           'A variance estimate',
         ],
         correctIndex: 1,
-        explanation: 'Surprise (or surprisal) is −ln p(o). Low-probability observations carry more bits.',
+        explanation:
+          'Surprise (or surprisal) is −ln p(o). Low-probability observations carry more bits.',
       },
     ],
     available: true,
@@ -188,7 +186,8 @@ const modules = [
     },
     quiz: [
       {
-        prompt: 'Given a Gaussian prior (μ=0, π=1) and likelihood (o=6, π=2), the posterior mean is:',
+        prompt:
+          'Given a Gaussian prior (μ=0, π=1) and likelihood (o=6, π=2), the posterior mean is:',
         options: ['2', '3', '4', '6'],
         correctIndex: 2,
         explanation: '(2·6 + 1·0) / (2+1) = 12/3 = 4. Precision-weighted average.',
@@ -367,7 +366,8 @@ const modules = [
           'Eliminate precision weighting',
         ],
         correctIndex: 1,
-        explanation: 'Higher layers capture slower, more abstract regularities that constrain lower layers.',
+        explanation:
+          'Higher layers capture slower, more abstract regularities that constrain lower layers.',
       },
       {
         prompt: 'Precision in a hierarchical model controls:',
@@ -435,7 +435,8 @@ const modules = [
         prompt: 'In predictive coding, pyramidal prediction errors ascend primarily via:',
         options: ['Granular layer 4', 'Superficial layers 2/3', 'Deep layer 6', 'Subcortex'],
         correctIndex: 1,
-        explanation: 'Superficial pyramidal cells broadcast precision-weighted prediction errors up the hierarchy.',
+        explanation:
+          'Superficial pyramidal cells broadcast precision-weighted prediction errors up the hierarchy.',
       },
       {
         prompt: 'Belief propagation is exact on:',
@@ -499,7 +500,7 @@ const modules = [
           'Expected Free Energy ranks policies by exploration + exploitation.',
         ],
         equations: [
-          'A_{o,s} = p(o|s),\\ B_{s,s\',u} = p(s|s\',u)',
+          "A_{o,s} = p(o|s),\\ B_{s,s',u} = p(s|s',u)",
           'G(\\pi) = \\mathbb{E}_{q}[ \\ln q(s|\\pi) - \\ln p(o,s|\\pi)]',
         ],
       },
@@ -509,7 +510,8 @@ const modules = [
         prompt: 'In the A-B-C-D recipe, which matrix encodes goal preferences?',
         options: ['A', 'B', 'C', 'D'],
         correctIndex: 2,
-        explanation: 'C encodes prior preferences over observations — the agent wants what C rewards.',
+        explanation:
+          'C encodes prior preferences over observations — the agent wants what C rewards.',
       },
       {
         prompt: 'Expected free energy ranks policies by:',
@@ -615,8 +617,7 @@ const modules = [
     slug: 'continuous-flow',
     title: 'Continuous Flow',
     subtitle: 'Chapter 8 — Active Inference in Continuous Time',
-    description:
-      'Flow through continuous dynamics: generalized coordinates and smooth inference.',
+    description: 'Flow through continuous dynamics: generalized coordinates and smooth inference.',
     icon: '🌊',
     color: 'var(--color-accent)',
     firstAction: 'Slide to control the flow of continuous dynamics',
@@ -854,7 +855,8 @@ const modules = [
           'AI ignores policies',
         ],
         correctIndex: 1,
-        explanation: 'With C encoding preferred observations, EFE minimization reduces to reward-seeking in the appropriate limit.',
+        explanation:
+          'With C encoding preferred observations, EFE minimization reduces to reward-seeking in the appropriate limit.',
       },
     ],
     available: true,

@@ -18,8 +18,8 @@ export default function VisionStream() {
         <>
           <h2>Three layers. Three timescales.</h2>
           <p>
-            The top node (s³) is slow — it describes a situation. Middle (s²) names objects.
-            Bottom (s¹) points at pixels. Arrows are likelihoods.
+            The top node (s³) is slow — it describes a situation. Middle (s²) names objects. Bottom
+            (s¹) points at pixels. Arrows are likelihoods.
           </p>
         </>
       ),
@@ -65,5 +65,12 @@ export default function VisionStream() {
       interactive: <GenerativeGraph precision={precision} highlight="s1b" />,
     },
   ];
-  return <StreamTemplate streamKey="vision" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="vision"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

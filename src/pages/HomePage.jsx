@@ -41,7 +41,9 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="home-page__logo" aria-hidden="true">🌀</div>
+          <div className="home-page__logo" aria-hidden="true">
+            🌀
+          </div>
           <h1 className="home-page__title">Spin</h1>
           <p className="home-page__subtitle">The Active Inference Pocket Lab</p>
           <p className="home-page__tagline">
@@ -83,7 +85,9 @@ export default function HomePage() {
               <strong>{next.mod.title}</strong>
               <small>{next.mod.subtitle}</small>
             </div>
-            <span className="home-page__next-arrow" aria-hidden>→</span>
+            <span className="home-page__next-arrow" aria-hidden>
+              →
+            </span>
           </Link>
           <div className="home-page__overall">
             <div className="home-page__overall-track">
@@ -121,22 +125,34 @@ export default function HomePage() {
           transition={{ delay: 0.4 }}
         >
           <Link to="/modules" className="home-page__tile">
-            <span aria-hidden>📚</span><strong>All modules</strong><small>The 10-chapter journey</small>
+            <span aria-hidden>📚</span>
+            <strong>All modules</strong>
+            <small>The 10-chapter journey</small>
           </Link>
           <Link to="/map" className="home-page__tile">
-            <span aria-hidden>🗺️</span><strong>Proficiency map</strong><small>What you know, at a glance</small>
+            <span aria-hidden>🗺️</span>
+            <strong>Proficiency map</strong>
+            <small>What you know, at a glance</small>
           </Link>
           <Link to="/glossary" className="home-page__tile">
-            <span aria-hidden>📖</span><strong>Glossary</strong><small>Every term, linked</small>
+            <span aria-hidden>📖</span>
+            <strong>Glossary</strong>
+            <small>Every term, linked</small>
           </Link>
           <Link to="/hearth" className="home-page__tile">
-            <span aria-hidden>🔥</span><strong>Hearth</strong><small>Your journey, celebrated</small>
+            <span aria-hidden>🔥</span>
+            <strong>Hearth</strong>
+            <small>Your journey, celebrated</small>
           </Link>
           <Link to="/search" className="home-page__tile">
-            <span aria-hidden>🔎</span><strong>Search</strong><small>Jump anywhere</small>
+            <span aria-hidden>🔎</span>
+            <strong>Search</strong>
+            <small>Jump anywhere</small>
           </Link>
           <Link to="/pause" className="home-page__tile">
-            <span aria-hidden>🌙</span><strong>Pause</strong><small>Honor the rhythm</small>
+            <span aria-hidden>🌙</span>
+            <strong>Pause</strong>
+            <small>Honor the rhythm</small>
           </Link>
         </motion.nav>
 

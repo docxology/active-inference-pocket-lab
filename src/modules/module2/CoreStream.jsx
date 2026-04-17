@@ -30,9 +30,7 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Bayes, cleanly.</h2>
-          <p>
-            Posterior is proportional to prior × likelihood — four ingredients, one ratio.
-          </p>
+          <p>Posterior is proportional to prior × likelihood — four ingredients, one ratio.</p>
         </>
       ),
       interactive: (
@@ -104,8 +102,8 @@ export default function CoreStream() {
         <>
           <h2>Predictive coding.</h2>
           <p>
-            Cortical updates ride on <em>precision-weighted prediction errors</em>: each layer
-            sends its surprise to the next, scaled by how much it should matter.
+            Cortical updates ride on <em>precision-weighted prediction errors</em>: each layer sends
+            its surprise to the next, scaled by how much it should matter.
           </p>
         </>
       ),

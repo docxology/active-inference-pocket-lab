@@ -14,7 +14,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Free energy is a tight bound on log evidence.</h2>
-          <p>Minimize F, maximize ln p(y∣M). Identical in the Gaussian limit; numerically the same dial.</p>
+          <p>
+            Minimize F, maximize ln p(y∣M). Identical in the Gaussian limit; numerically the same
+            dial.
+          </p>
         </>
       ),
       interactive: (
@@ -29,7 +32,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Random-effects Bayesian model selection.</h2>
-          <p>Treat the model <em>index</em> as a latent Dirichlet variable across subjects. Compute expected exceedance probabilities.</p>
+          <p>
+            Treat the model <em>index</em> as a latent Dirichlet variable across subjects. Compute
+            expected exceedance probabilities.
+          </p>
         </>
       ),
       interactive: (
@@ -44,7 +50,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Parametric Empirical Bayes.</h2>
-          <p>Second-level model pools subject-level posteriors, shrinks noisy estimates toward a group mean, reveals between-subject effects.</p>
+          <p>
+            Second-level model pools subject-level posteriors, shrinks noisy estimates toward a
+            group mean, reveals between-subject effects.
+          </p>
         </>
       ),
       interactive: (
@@ -59,11 +68,21 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Touch the bound.</h2>
-          <p>Drag the Gaussian and watch log evidence climb and fall. This is all a model comparison tool ever does.</p>
+          <p>
+            Drag the Gaussian and watch log evidence climb and fall. This is all a model comparison
+            tool ever does.
+          </p>
         </>
       ),
       interactive: <DataFitter />,
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

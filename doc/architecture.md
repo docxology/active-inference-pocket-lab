@@ -18,8 +18,9 @@ Spin's system architecture for the Active Inference Pocket Lab.
 
 ```
 <BrowserRouter>
-  <AppProvider>                    ← Triple-Stream state
-    <ActivityBankProvider>          ← Pause/bookmark state
+  <SettingsProvider>               ← App preferences
+    <AppProvider>                    ← Triple-Stream state
+      <ActivityBankProvider>          ← Pause/bookmark state
       <Routes>
         <AppShell>                 ← Layout shell
           <main>
@@ -28,8 +29,9 @@ Spin's system architecture for the Active Inference Pocket Lab.
           <BottomNav />            ← 5-tab navigation
         </AppShell>
       </Routes>
-    </ActivityBankProvider>
-  </AppProvider>
+      </ActivityBankProvider>
+    </AppProvider>
+  </SettingsProvider>
 </BrowserRouter>
 ```
 
@@ -67,6 +69,10 @@ Spin's system architecture for the Active Inference Pocket Lab.
 | `/map` | ProficiencyMapPage | Visual progress grid |
 | `/hearth` | HearthPage | Community celebration |
 | `/pause` | PausePage | Planned pause / hibernate |
+| `/glossary` | GlossaryPage | Term lookup |
+| `/search` | SearchPage | In-app search |
+| `/settings` | SettingsPage | User preferences |
+| `*` | NotFoundPage | Unknown paths |
 
 ## State Management
 
@@ -101,11 +107,4 @@ Stream components are registered in `ModulePage.jsx` via the `MODULE_STREAMS` ma
 
 ## Build Output
 
-```
-dist/
-├── index.html          (0.87 KB)
-├── assets/
-│   ├── index-*.css     (61 KB → 14 KB gzipped)
-│   ├── index-*.js      (655 KB → 203 KB gzipped)
-│   └── KaTeX_*.woff2   (font files)
-```
+`npm run build` writes versioned chunks and assets under `dist/` (including KaTeX fonts). Sizes change with each release; use `npm run preview` or CI artifacts to inspect the current bundle.

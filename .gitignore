@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Netlify CLI local project state (keep netlify.toml in repo)
+.netlify/
+
+# Git bundle/patch transfer artifacts
+spin-update.bundle
+spin-update.patch
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

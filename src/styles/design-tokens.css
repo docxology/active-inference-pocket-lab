@@ -147,7 +147,7 @@
 }
 
 /* ─── High-contrast mode (Settings toggle) ─── */
-html[data-high-contrast="true"] {
+html[data-high-contrast='true'] {
   --color-text-primary: #ffffff;
   --color-text-secondary: #e9e6ff;
   --color-text-muted: #c9c4df;
@@ -158,14 +158,18 @@ html[data-high-contrast="true"] {
 
 /* ─── Reduced motion (user pref OR Settings toggle) ─── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
 }
-html[data-reduced-motion="true"] *, html[data-reduced-motion="true"] *::before, html[data-reduced-motion="true"] *::after {
+html[data-reduced-motion='true'] *,
+html[data-reduced-motion='true'] *::before,
+html[data-reduced-motion='true'] *::after {
   animation-duration: 0.001ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.001ms !important;

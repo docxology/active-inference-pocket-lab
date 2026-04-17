@@ -28,7 +28,9 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Predictive coding = residual messages.</h2>
-          <p>The signal a pyramidal cell broadcasts upward is exactly the precision-weighted error.</p>
+          <p>
+            The signal a pyramidal cell broadcasts upward is exactly the precision-weighted error.
+          </p>
         </>
       ),
       interactive: (
@@ -54,5 +56,12 @@ export default function CoreStream() {
       ),
     },
   ];
-  return <StreamTemplate streamKey="core" beats={beats} onProgress={onProgress} onComplete={onComplete} />;
+  return (
+    <StreamTemplate
+      streamKey="core"
+      beats={beats}
+      onProgress={onProgress}
+      onComplete={onComplete}
+    />
+  );
 }

@@ -10,7 +10,7 @@ import App from '../App';
 describe('App', () => {
   it('renders the home page by default', () => {
     render(<App />);
-    expect(screen.getByText('Spin')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Spin' })).toBeInTheDocument();
     expect(screen.getByText('The Active Inference Pocket Lab')).toBeInTheDocument();
   });
 
@@ -25,8 +25,9 @@ describe('App', () => {
     expect(screen.getByLabelText('Pause')).toBeInTheDocument();
   });
 
-  it('renders the quick start button', () => {
+  it('links to the first module from the home hero', () => {
     render(<App />);
-    expect(screen.getByText(/Begin The First Orbit/)).toBeInTheDocument();
+    const start = screen.getByRole('link', { name: /The First Orbit/i });
+    expect(start).toHaveAttribute('href', '/modules/1');
   });
 });
