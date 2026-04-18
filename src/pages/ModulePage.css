@@ -153,3 +153,57 @@
   color: var(--color-accent);
   font-size: var(--font-size-xs);
 }
+
+.module-page__nav {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: space-between;
+  padding: var(--space-5) 0 var(--space-8);
+}
+
+.module-page__nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.module-page__nav-btn--next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.module-page__nav-btn:hover {
+  background: var(--color-surface-glass-hover, rgba(255,255,255,0.1));
+}
+
+.module-page__nav-arrow {
+  font-size: var(--text-xl);
+  color: var(--color-text-secondary);
+}
+
+.module-page__nav-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.module-page__nav-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.module-page__nav-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}

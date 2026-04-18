@@ -35,6 +35,7 @@ export default function PulseStream() {
           </p>
         </>
       ),
+      interactive: <ModelRecipe />,
     },
     {
       id: 'lift',

@@ -46,6 +46,7 @@ export default function PulseStream() {
           </p>
         </>
       ),
+      interactive: <GridWorld ambiguity={1.8} risk={0.3} />,
     },
   ];
   return (

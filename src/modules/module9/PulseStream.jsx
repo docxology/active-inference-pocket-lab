@@ -34,6 +34,7 @@ export default function PulseStream() {
           </p>
         </>
       ),
+      interactive: <DataFitter />,
     },
     {
       id: 'life-skill',

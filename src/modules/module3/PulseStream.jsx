@@ -7,7 +7,7 @@ import { useStreamProgress } from '../shared/useStreamProgress';
 import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
 export default function PulseStream() {
-  const { onProgress, onComplete } = useStreamProgress(3, 'pulse', 5);
+  const { onProgress, onComplete } = useStreamProgress(3, 'pulse', 6);
   const beats = [
     {
       id: 'alive',
@@ -50,6 +50,24 @@ export default function PulseStream() {
           <p>Free energy is what both are trying to shrink.</p>
         </>
       ),
+    },
+    {
+      id: 'why-variational',
+      content: (
+        <>
+          <h2>Why not just compute the exact posterior?</h2>
+          <p>
+            Because marginalizing over <em>all possible hidden states</em> is combinatorially
+            explosive — for a brain, literally impossible. Variational inference trades exactness
+            for speed: bound the surprise, then optimize the bound.
+          </p>
+          <p>
+            The valley you see isn't reality — it's your brain's best <em>approximation</em> of
+            reality. And that's enough.
+          </p>
+        </>
+      ),
+      interactive: <FreeEnergyField attractorX={0.3} attractorY={0.7} spread={0.35} noise={0.04} />,
     },
   ];
   return (

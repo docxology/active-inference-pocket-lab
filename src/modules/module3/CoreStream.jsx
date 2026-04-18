@@ -61,6 +61,30 @@ export default function CoreStream() {
         />
       ),
     },
+    {
+      id: 'elbo',
+      content: (
+        <>
+          <h2>The ELBO: the right thing to maximize.</h2>
+          <p>
+            Flip the sign and you get the Evidence Lower BOund. Maximizing the ELBO <em>is</em>{' '}
+            minimizing free energy — same knob, different name. Every VAE, every variational
+            Bayesian model, every active inference agent is climbing this hill.
+          </p>
+          <p>
+            The gap between ELBO and log evidence is exactly the KL divergence between your
+            approximation q and the true posterior — zero when q is perfect, positive otherwise.
+          </p>
+        </>
+      ),
+      interactive: (
+        <MathBlock
+          latex="\\ln p(o) = \\underbrace{\\mathbb{E}_q[\\ln p(o,s)] - \\mathbb{E}_q[\\ln q(s)]}_{\\text{ELBO} = -F} + D_{KL}[q(s)\\|p(s\\mid o)]"
+          label="Log evidence = ELBO + KL gap"
+          description="Maximize the ELBO, shrink the gap."
+        />
+      ),
+    },
     getCoreRetrievalBeat(3),
   ];
   return (

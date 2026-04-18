@@ -51,6 +51,13 @@ export default function CoreStream() {
           </p>
         </>
       ),
+      interactive: (
+        <MathBlock
+          latex="\\mathcal{N}(\\mu_0, \\sigma_0^2) \\times \\mathcal{N}(x; \\mu, \\sigma^2) \\propto \\mathcal{N}\\!\\left(\\frac{\\sigma_0^2 x + \\sigma^2 \\mu_0}{\\sigma_0^2 + \\sigma^2},\\; \\frac{\\sigma_0^2\\sigma^2}{\\sigma_0^2+\\sigma^2}\\right)"
+          label="Gaussian conjugate update"
+          description="The posterior of a Gaussian model under Gaussian observations is also Gaussian — no approximation needed."
+        />
+      ),
     },
     getCoreRetrievalBeat(4),
   ];

@@ -156,6 +156,33 @@ export default function HomePage() {
           </Link>
         </motion.nav>
 
+        <motion.section
+          className="home-page__streams"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.45 }}
+          aria-labelledby="streams-heading"
+        >
+          <h2 id="streams-heading" className="home-page__streams-title">Three ways to learn</h2>
+          <div className="home-page__streams-grid">
+            <div className="home-page__stream-card home-page__stream-card--pulse">
+              <span className="home-page__stream-icon">💓</span>
+              <strong>Pulse</strong>
+              <p>Conversational. Analogies, stories, a single slider. For when you have 2 minutes.</p>
+            </div>
+            <div className="home-page__stream-card home-page__stream-card--vision">
+              <span className="home-page__stream-icon">✨</span>
+              <strong>Vision</strong>
+              <p>Interactive. Animations that respond to your hands. For visual thinkers.</p>
+            </div>
+            <div className="home-page__stream-card home-page__stream-card--core">
+              <span className="home-page__stream-icon">🔬</span>
+              <strong>Core</strong>
+              <p>Mathematical. LaTeX derivations with a live sandbox. For the equations people.</p>
+            </div>
+          </div>
+        </motion.section>
+
         <motion.blockquote
           className="home-page__quote"
           initial={{ opacity: 0 }}

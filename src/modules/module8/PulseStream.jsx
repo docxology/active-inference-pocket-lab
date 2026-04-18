@@ -3,6 +3,7 @@
  */
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import FreeEnergyField from '../../components/interactive/FreeEnergyField';
+import BeliefChart from '../../components/interactive/BeliefChart';
 import { useStreamProgress } from '../shared/useStreamProgress';
 import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 
@@ -35,6 +36,17 @@ export default function PulseStream() {
             where it's going, and how fast it's accelerating.
           </p>
         </>
+      ),
+      interactive: (
+        <BeliefChart
+          curves={[
+            { name: 'position x', mean: 5, sigma: 1.2, color: 'rgba(124,107,255,1)' },
+            { name: "velocity x'", mean: 2, sigma: 0.8, color: 'rgba(255,184,107,1)', dashed: true },
+            { name: "accel x''", mean: 0.5, sigma: 0.5, color: 'rgba(107,203,119,1)' },
+          ]}
+          xMin={-2}
+          xMax={10}
+        />
       ),
     },
     {

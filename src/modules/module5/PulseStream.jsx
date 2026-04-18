@@ -41,7 +41,7 @@ export default function PulseStream() {
           <p>Perfect prediction sends no error. Most of what your cortex does is verify a hunch.</p>
         </>
       ),
-      interactive: <MessagePassingCircuit precision={0.4} drive={1.2} />,
+      interactive: <MessagePassingCircuit precision={1.8} drive={1.8} />,
     },
   ];
   return (

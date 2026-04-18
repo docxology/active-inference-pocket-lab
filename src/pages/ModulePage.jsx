@@ -9,7 +9,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getModuleById } from '../data/modules';
+import { getModuleById, getAllModules } from '../data/modules';
 import { useApp, STREAMS } from '../contexts/AppContext';
 import StreamSwitcher from '../components/layout/StreamSwitcher';
 import PauseButton from '../components/interactive/PauseButton';
@@ -78,6 +78,47 @@ function ProgressBar({ progress }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+function ModuleNav({ currentId }) {
+  const navigate = useNavigate();
+  const all = getAllModules().filter((m) => m.available);
+  const idx = all.findIndex((m) => m.id === currentId);
+  const prev = idx > 0 ? all[idx - 1] : null;
+  const next = idx < all.length - 1 ? all[idx + 1] : null;
+
+  if (!prev && !next) return null;
+
+  return (
+    <div className="module-page__nav">
+      {prev ? (
+        <motion.button
+          className="module-page__nav-btn module-page__nav-btn--prev"
+          onClick={() => { hapticMedium(); navigate(`/modules/${prev.id}`); }}
+          whileTap={{ scale: 0.96 }}
+        >
+          <span className="module-page__nav-arrow">←</span>
+          <span className="module-page__nav-info">
+            <span className="module-page__nav-label">Previous</span>
+            <span className="module-page__nav-title">{prev.icon} {prev.title}</span>
+          </span>
+        </motion.button>
+      ) : <div />}
+      {next ? (
+        <motion.button
+          className="module-page__nav-btn module-page__nav-btn--next"
+          onClick={() => { hapticMedium(); navigate(`/modules/${next.id}`); }}
+          whileTap={{ scale: 0.96 }}
+        >
+          <span className="module-page__nav-info">
+            <span className="module-page__nav-label">Next</span>
+            <span className="module-page__nav-title">{next.icon} {next.title}</span>
+          </span>
+          <span className="module-page__nav-arrow">→</span>
+        </motion.button>
+      ) : <div />}
     </div>
   );
 }
@@ -222,6 +263,11 @@ export default function ModulePage() {
       {/* Pause Button */}
       <div className="container">
         <PauseButton moduleId={mod.id} />
+      </div>
+
+      {/* Module Navigation */}
+      <div className="container">
+        <ModuleNav currentId={mod.id} />
       </div>
     </div>
   );
