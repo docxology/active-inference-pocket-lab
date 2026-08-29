@@ -10,7 +10,7 @@
 
 ### Genesis
 
-This project grew from a single creative brief — [**The Seed**](doc/initial-pocket-lab-prompt.md) — which defines the constitutional narrative, the core philosophy, the Triple-Stream Architecture, and the mandate for Module 1. Every design token, animation curve, and interaction pattern in this codebase traces back to that document. It is preserved exactly as-written in `doc/initial-pocket-lab-prompt.md`. For the full documentation suite, see [**doc/**](doc/README.md).
+This project grew from a single creative brief — [**The Seed**](docs/initial-pocket-lab-prompt.md) — which defines the constitutional narrative, the core philosophy, the Triple-Stream Architecture, and the mandate for Module 1. Every design token, animation curve, and interaction pattern in this codebase traces back to that document. It is preserved exactly as-written in `doc/initial-pocket-lab-prompt.md`. For the full documentation suite, see [**doc/**](docs/README.md).
 
 ### The Triple-Stream Architecture ("The Helix")
 
