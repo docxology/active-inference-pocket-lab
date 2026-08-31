@@ -10,7 +10,7 @@
 
 ### Genesis
 
-This project grew from a single creative brief — [**The Seed**](docs/initial-pocket-lab-prompt.md) — which defines the constitutional narrative, the core philosophy, the Triple-Stream Architecture, and the mandate for Module 1. Every design token, animation curve, and interaction pattern in this codebase traces back to that document. It is preserved exactly as-written in `doc/initial-pocket-lab-prompt.md`. For the full documentation suite, see [**doc/**](docs/README.md).
+This project grew from a single creative brief — [**The Seed**](docs/initial-pocket-lab-prompt.md) — which defines the constitutional narrative, the core philosophy, the Triple-Stream Architecture, and the mandate for Module 1. Every design token, animation curve, and interaction pattern in this codebase traces back to that document. It is preserved exactly as-written in `docs/initial-pocket-lab-prompt.md`. For the full documentation suite, see [**docs/**](docs/README.md).
 
 ### The Triple-Stream Architecture ("The Helix")
 
@@ -80,7 +80,7 @@ Or use individual commands:
 ```bash
 npm install
 npm run dev      # → http://localhost:5173 (mobile viewport recommended)
-npm test         # Run all tests (65 tests, 11 files — registry, bundles, UI)
+npm test         # Run all tests — current counts: see docs/testing.md (never trust a hardcoded number here)
 npm run build    # Production build
 ```
 
@@ -121,7 +121,12 @@ src/
 - **Testing**: Vitest + Testing Library
 - **Linting**: ESLint + Prettier
 
-## TODO
+## Status & next actions
+
+- **Current state (2026-08-31):** all 10 modules shipped with three streams; PWA shell in place; publication target: none (interactive teaching tool). Verify with `git log --oneline -3` and [docs/manuscript/MANUSCRIPT_STATUS.md](docs/manuscript/MANUSCRIPT_STATUS.md).
+- **Backlog:** [TODO.md](TODO.md) is the single canonical list of open work. The checklist below is historical record only.
+
+## TODO (historical — live backlog is TODO.md)
 
 - [x] Triple-stream implementations for modules 1–10
 - [x] PWA manifest and service worker (`public/`)

@@ -32,4 +32,4 @@ All **10** directories (`module1` … `module10`) are implemented and registered
 5. Add a full entry in `src/data/modules.js` (including `quiz`, `glossary`, `available: true`)
 6. Add README.md + AGENTS.md to the new directory
 
-See `CONTRIBUTING.md` and `doc/modules-guide.md` for stream content requirements.
+See `CONTRIBUTING.md` and `docs/modules-guide.md` for stream content requirements.

@@ -36,9 +36,9 @@ test: {
 3. **`renderWithProviders()`** helper (where used) wraps components in `BrowserRouter` + `AppProvider` + `ActivityBankProvider`
 4. **ARIA first** — Prefer `getByLabelText`, `getByRole` over `getByText`
 
-## Test Inventory (65 tests, 11 files)
+## Test Inventory
 
-Totals from `vitest run` (update this section when the suite changes).
+> Counts below were accurate as of 2026-08-29 (verify current totals with `npm test` — do not quote them elsewhere; this is the only place they live).
 
 ### AppContext.test.jsx (9 tests)
 

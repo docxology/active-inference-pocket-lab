@@ -7,7 +7,7 @@ Mobile-first React web app for learning Active Inference through interactive mod
 with the Triple-Stream Architecture (Pulse / Vision / Core).
 
 ### Genesis
-The project originates from a single creative brief: `doc/initial-pocket-lab-prompt.md` (the "Seed"). This document defines the constitutional narrative, the 6 rules, the Triple-Stream Architecture, and the Module 1 prototype mandate. It is preserved exactly as-written and must never be modified. All design and architectural decisions should be validated against this founding document.
+The project originates from a single creative brief: `docs/initial-pocket-lab-prompt.md` (the "Seed"). This document defines the constitutional narrative, the 6 rules, the Triple-Stream Architecture, and the Module 1 prototype mandate. It is preserved exactly as-written and must never be modified. All design and architectural decisions should be validated against this founding document.
 
 ### Tech Stack
 - React 19 + Vite 8

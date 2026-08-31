@@ -1,6 +1,6 @@
 # **tests**/
 
-Unit and integration tests for Spin. **65 tests** in **11** files (run `npm test` / see `doc/testing.md`).
+Unit and integration tests for Spin. Run `npm test` for live counts; strategy and per-file inventory live in [docs/testing.md](../../docs/testing.md).
 
 ## Layout
 
@@ -26,4 +26,4 @@ npm run test:coverage # Coverage report
 
 1. Mirror structure under `src/__tests__/`
 2. Use real contexts and localStorage (no mocks, except `vi.fn()` for callbacks)
-3. Update `doc/testing.md` when the suite grows
+3. Update `docs/testing.md` when the suite grows

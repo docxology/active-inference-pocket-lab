@@ -52,9 +52,9 @@ npm run test:watch # Watch mode
 
 ## The Founding Document
 
-Before contributing, please read [**The Seed**](doc/initial-pocket-lab-prompt.md) — the original creative brief that defines Spin's constitutional narrative, core philosophy, and architectural vision. This document is preserved exactly as-written and serves as the ultimate reference for design decisions. Every contribution should be consistent with the spirit and rules laid out in the Seed.
+Before contributing, please read [**The Seed**](docs/initial-pocket-lab-prompt.md) — the original creative brief that defines Spin's constitutional narrative, core philosophy, and architectural vision. This document is preserved exactly as-written and serves as the ultimate reference for design decisions. Every contribution should be consistent with the spirit and rules laid out in the Seed.
 
-For the complete philosophy breakdown with implementation details, see [doc/philosophy.md](doc/philosophy.md).
+For the complete philosophy breakdown with implementation details, see [docs/philosophy.md](docs/philosophy.md).
 
 ## Philosophy Reminders
 

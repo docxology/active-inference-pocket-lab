@@ -20,7 +20,7 @@ Unit and integration test suites for Spin.
 
 ## Coverage
 
-Run `npm test` — **65 tests** in **11** files (Vitest). Refresh `doc/testing.md` when counts change.
+Run `npm test` for live counts; refresh `docs/testing.md` inventory when the suite changes.
 
 ## Adding tests
 

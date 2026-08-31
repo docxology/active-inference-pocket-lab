@@ -20,4 +20,4 @@ Reusable UI components for Spin, split into `interactive/` and `layout/`.
 
 1. Create `ComponentName.jsx` + optional `ComponentName.css` in the appropriate subdirectory
 2. JSDoc with `@module` on exports
-3. Document new public components in `doc/api-reference.md`
+3. Document new public components in `docs/api-reference.md`
