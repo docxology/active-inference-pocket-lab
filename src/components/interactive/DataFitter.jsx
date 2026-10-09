@@ -7,7 +7,7 @@
  * @module components/interactive/DataFitter
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { gaussianLogPdf } from '../../utils/activeInference';
+import { gaussianLogPdf, gaussianKL } from '../../utils/activeInference';
 import './DataFitter.css';
 
 /**
@@ -39,10 +39,10 @@ export default function DataFitter() {
   const { accuracy, complexity, logEvidence } = useMemo(() => {
     const pi = 1 / sigma ** 2;
     const acc = data.reduce((s, o) => s + gaussianLogPdf(o, mu, pi), 0) / data.length;
-    // Complexity proxy: KL(q || flat-broad-prior) ≈ 0.5*((mu-m0)^2 / s0 + ln(s0/sigma))
+    // Illustrative regularizer between candidate and broad reference distributions.
     const mu0 = 0;
     const sig0 = 6;
-    const comp = 0.5 * ((mu - mu0) ** 2 / sig0 ** 2 + Math.log((sig0 / sigma) ** 2));
+    const comp = gaussianKL(mu, pi, mu0, 1 / sig0 ** 2);
     return { accuracy: acc, complexity: comp, logEvidence: acc - comp };
   }, [mu, sigma, data]);
 
@@ -111,7 +111,13 @@ export default function DataFitter() {
 
   return (
     <div className="data-fitter">
-      <canvas ref={canvasRef} className="data-fitter__canvas" style={{ width: 320, height: 180 }} />
+      <canvas
+        ref={canvasRef}
+        className="data-fitter__canvas"
+        style={{ width: 320, height: 180 }}
+        role="img"
+        aria-label="Histogram of simulated observations and candidate Gaussian density"
+      />
       <div className="data-fitter__sliders">
         <label className="data-fitter__slider">
           <span>
@@ -142,18 +148,22 @@ export default function DataFitter() {
       </div>
       <div className="data-fitter__metrics">
         <div>
-          <span>accuracy</span>
+          <span>mean log likelihood</span>
           <strong>{accuracy.toFixed(2)}</strong>
         </div>
         <div>
-          <span>complexity</span>
+          <span>KL regularizer</span>
           <strong>{complexity.toFixed(2)}</strong>
         </div>
         <div>
-          <span>log evidence</span>
+          <span>fit score</span>
           <strong style={{ color: 'var(--color-accent)' }}>{logEvidence.toFixed(2)}</strong>
         </div>
       </div>
+      <p className="text-label">
+        Illustrative fit score = mean log likelihood − KL regularizer. This is not marginal model
+        evidence or a Bayes factor.
+      </p>
     </div>
   );
 }

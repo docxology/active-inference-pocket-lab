@@ -23,7 +23,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="-F(q,y) \\le \\ln p(y\\mid M),\\quad \\text{with equality iff } q=p(\\cdot\\mid y,M)"
+          latex="-F(q,y) \le \ln p(y\mid M),\quad \text{with equality iff } q=p(\cdot\mid y,M)"
           label="Jensen-tight bound on evidence"
         />
       ),
@@ -41,7 +41,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="p(r\\mid y) \\propto \\mathrm{Dir}(r\\mid\\alpha_0) \\prod_n \\sum_k r_k\\, p(y_n\\mid M_k)"
+          latex="p(r\mid y) \propto \mathrm{Dir}(r\mid\alpha_0) \prod_n \sum_k r_k\, p(y_n\mid M_k)"
           label="RFX-BMS generative model"
         />
       ),
@@ -59,7 +59,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="p(\\theta\\mid y) = \\int p(\\theta\\mid y,\\eta)\\,p(\\eta\\mid y)\\,d\\eta"
+          latex="p(\theta\mid y) = \int p(\theta\mid y,\eta)\,p(\eta\mid y)\,d\eta"
           label="Two-level empirical Bayes"
         />
       ),

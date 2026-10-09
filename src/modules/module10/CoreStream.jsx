@@ -23,7 +23,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="F[q,\\phi] = D_{KL}[q(s)\\,\\|\\,p(s,\\phi)] - \\mathbb{E}_q[\\ln p(y\\mid s,\\phi)]"
+          latex="F[q,\phi] = D_{KL}[q(s)\,\|\,p(s,\phi)] - \mathbb{E}_q[\ln p(y\mid s,\phi)]"
           label="The variational free energy functional"
         />
       ),
@@ -41,7 +41,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\eta \\leftrightarrow [b, \\mu]\\leftrightarrow s : \\text{Markov blanket separates internal from external}"
+          latex="\eta \leftrightarrow [b, \mu]\leftrightarrow s : \text{Markov blanket separates internal from external}"
           label="Markov blanket factorization"
         />
       ),

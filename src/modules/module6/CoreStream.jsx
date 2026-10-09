@@ -23,7 +23,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="A_{o,s} = p(o\\mid s),\\quad B_{s',s,u} = p(s'\\mid s,u),\\quad C_o = \\ln \\tilde{p}(o)"
+          latex="A_{o,s} = p(o\mid s),\quad B_{s',s,u} = p(s'\mid s,u),\quad C_o = \ln \tilde{p}(o)"
           label="Generative model (categorical form)"
         />
       ),
@@ -41,7 +41,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="G(\\pi) = \\mathbb{E}_{q}\\big[\\mathrm{H}[p(o\\mid s)]\\big] + D_{KL}[q(o\\mid\\pi)\\|\\tilde p(o)]"
+          latex="G(\pi) = \mathbb{E}_{q}\big[\mathrm{H}[p(o\mid s)]\big] + D_{KL}[q(o\mid\pi)\|\tilde p(o)]"
           label="Expected free energy"
         />
       ),

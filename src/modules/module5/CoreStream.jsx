@@ -19,7 +19,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="m_{i\\to j}(s_j) \\propto \\sum_{s_i} \\psi_{ij}(s_i, s_j)\\prod_{k\\ne j} m_{k\\to i}(s_i)"
+          latex="m_{i\to j}(s_j) \propto \sum_{s_i} \psi_{ij}(s_i, s_j)\prod_{k\ne j} m_{k\to i}(s_i)"
           label="Belief propagation"
         />
       ),
@@ -36,7 +36,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\varepsilon^{(\\ell)} = \\pi^{(\\ell)} \\big(o^{(\\ell)} - g(\\mu^{(\\ell+1)})\\big)"
+          latex="\varepsilon^{(\ell)} = \pi^{(\ell)} \big(o^{(\ell)} - g(\mu^{(\ell+1)})\big)"
           label="Cortical prediction error"
         />
       ),
@@ -51,7 +51,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="q_i(s_i) \\propto \\exp\\!\\Big(\\mathbb{E}_{q_{\\neg i}}[\\ln p(s, o)]\\Big)"
+          latex="q_i(s_i) \propto \exp\!\Big(\mathbb{E}_{q_{\neg i}}[\ln p(s, o)]\Big)"
           label="Mean-field update"
         />
       ),

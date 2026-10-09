@@ -23,7 +23,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\tilde x = \\big(x,\\; x',\\; x'',\\; x''',\\; \\ldots\\big)^\\top"
+          latex="\tilde x = \big(x,\; x',\; x'',\; x''',\; \ldots\big)^\top"
           label="Generalized motion vector"
         />
       ),
@@ -41,7 +41,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\dot{\\tilde\\mu} = \\mathcal{D}\\tilde\\mu - \\partial_{\\tilde\\mu} F(\\tilde\\mu,\\tilde y)"
+          latex="\dot{\tilde\mu} = \mathcal{D}\tilde\mu - \partial_{\tilde\mu} F(\tilde\mu,\tilde y)"
           label="Generalized gradient descent"
         />
       ),
@@ -59,7 +59,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\dot a = -\\partial_a F = -\\big(\\partial_a \\tilde y\\big)^\\top \\varepsilon_y"
+          latex="\dot a = -\partial_a F = -\big(\partial_a \tilde y\big)^\top \varepsilon_y"
           label="Action law"
         />
       ),

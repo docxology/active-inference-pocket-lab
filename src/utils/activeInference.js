@@ -31,6 +31,8 @@ export const safeLog = (x) => Math.log(Math.max(x, 1e-12));
  * @returns {{mu: number, pi: number}}
  */
 export function gaussianProduct(muA, piA, muB, piB) {
+  validateGaussian(muA, piA);
+  validateGaussian(muB, piB);
   const pi = piA + piB;
   const mu = (piA * muA + piB * muB) / Math.max(pi, 1e-12);
   return { mu, pi };
@@ -40,7 +42,9 @@ export function gaussianProduct(muA, piA, muB, piB) {
  * Gaussian log-probability at x given mean μ and precision π.
  */
 export function gaussianLogPdf(x, mu, pi) {
-  const variance = 1 / Math.max(pi, 1e-9);
+  validateGaussian(mu, pi);
+  if (!Number.isFinite(x)) throw new RangeError('Observation must be finite');
+  const variance = 1 / pi;
   return -0.5 * Math.log(2 * Math.PI * variance) - 0.5 * pi * (x - mu) ** 2;
 }
 
@@ -55,8 +59,10 @@ export function gaussianSurprise(o, mu, pi) {
  * KL divergence between two 1-D Gaussians.
  */
 export function gaussianKL(muQ, piQ, muP, piP) {
-  const varQ = 1 / Math.max(piQ, 1e-9);
-  const varP = 1 / Math.max(piP, 1e-9);
+  validateGaussian(muQ, piQ);
+  validateGaussian(muP, piP);
+  const varQ = 1 / piQ;
+  const varP = 1 / piP;
   return 0.5 * (Math.log(varP / varQ) + (varQ + (muQ - muP) ** 2) / varP - 1);
 }
 
@@ -75,7 +81,8 @@ export function gaussianKL(muQ, piQ, muP, piP) {
  */
 export function gaussianFreeEnergy(muQ, piQ, o, muP, piP, piO) {
   const kl = gaussianKL(muQ, piQ, muP, piP);
-  const accuracy = gaussianLogPdf(o, muQ, piO); // E_q approximated at mode
+  // The expectation includes posterior variance, not just the density at its mode.
+  const accuracy = gaussianLogPdf(o, muQ, piO) - (0.5 * piO) / piQ;
   return { F: kl - accuracy, kl, accuracy };
 }
 
@@ -105,10 +112,13 @@ export function entropy(p) {
  * KL divergence KL[q ∥ p] for discrete vectors.
  */
 export function categoricalKL(q, p) {
-  return q.reduce(
-    (s, qi, i) => (qi > 0 ? s + qi * (Math.log(qi) - Math.log(Math.max(p[i], 1e-12))) : s),
-    0,
-  );
+  return q.reduce((s, qi, i) => (qi > 0 ? s + qi * (Math.log(qi) - Math.log(p[i])) : s), 0);
+}
+
+function validateGaussian(mu, precision) {
+  if (!Number.isFinite(mu) || !Number.isFinite(precision) || precision <= 0) {
+    throw new RangeError('Gaussian mean must be finite and precision must be positive and finite');
+  }
 }
 
 /* ──────────────────────────── POMDP toy core ────────────────────────── */

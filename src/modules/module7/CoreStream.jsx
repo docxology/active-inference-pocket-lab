@@ -24,7 +24,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="G(\\pi)=\\underbrace{\\mathbb{E}_{q(s\\mid\\pi)}\\!\\big[\\mathrm{H}[p(o\\mid s)]\\big]}_{\\text{ambiguity}} + \\underbrace{D_{KL}\\!\\big[q(o\\mid\\pi)\\,\\|\\,\\tilde p(o)\\big]}_{\\text{risk}}"
+          latex="G(\pi)=\underbrace{\mathbb{E}_{q(s\mid\pi)}\!\big[\mathrm{H}[p(o\mid s)]\big]}_{\text{ambiguity}} + \underbrace{D_{KL}\!\big[q(o\mid\pi)\,\|\,\tilde p(o)\big]}_{\text{risk}}"
           label="Expected free energy of a policy"
         />
       ),
@@ -42,7 +42,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="q(\\pi) = \\sigma\\!\\left(-\\gamma\\, G(\\pi) + \\ln E(\\pi)\\right)"
+          latex="q(\pi) = \sigma\!\left(-\gamma\, G(\pi) + \ln E(\pi)\right)"
           label="Policy posterior"
         />
       ),
@@ -52,7 +52,10 @@ export default function CoreStream() {
       content: (
         <>
           <h2>Everything above — in a 4×4 grid.</h2>
-          <p>The whole apparatus reduces to a few matrix multiplies per tick. Toy, but truthful.</p>
+          <p>
+            This grid uses a distance-and-fog heuristic to illustrate planning. It does not compute
+            the full POMDP expected free energy above.
+          </p>
         </>
       ),
       interactive: <GridWorld risk={1} ambiguity={1} />,

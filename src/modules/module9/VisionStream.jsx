@@ -17,10 +17,10 @@ export default function VisionStream() {
       id: 'evidence',
       content: (
         <>
-          <h2>Model evidence, visualized.</h2>
+          <h2>Model fitting, visualized.</h2>
           <p>
-            The Gaussian rises and falls as you tune it. Log-evidence is how <em>surprising</em> the
-            data are under the model — minimize surprise, maximize evidence.
+            Tune a Gaussian to simulated data. The sandbox compares mean log likelihood with a KL
+            regularizer. Its illustrative fit score is not marginal model evidence.
           </p>
           <GlossaryTermsLine moduleId={9} />
         </>
@@ -40,7 +40,7 @@ export default function VisionStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\ln \\mathrm{BF}_{12} = \\ln p(y\\mid M_1) - \\ln p(y\\mid M_2)"
+          latex="\ln \mathrm{BF}_{12} = \ln p(y\mid M_1) - \ln p(y\mid M_2)"
           label="Log Bayes factor"
         />
       ),

@@ -19,7 +19,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="-\\ln p(o) \\leq \\mathbb{E}_q[-\\ln p(o,s)] + \\mathbb{E}_q[\\ln q(s)]"
+          latex="-\ln p(o) \leq \mathbb{E}_q[-\ln p(o,s)] + \mathbb{E}_q[\ln q(s)]"
           label="Jensen's inequality on log evidence"
         />
       ),
@@ -37,7 +37,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="F = \\underbrace{D_{KL}[q(s)\\|p(s)]}_{\\text{complexity}} - \\underbrace{\\mathbb{E}_q[\\ln p(o\\mid s)]}_{\\text{accuracy}}"
+          latex="F = \underbrace{D_{KL}[q(s)\|p(s)]}_{\text{complexity}} - \underbrace{\mathbb{E}_q[\ln p(o\mid s)]}_{\text{accuracy}}"
           label="Variational free energy"
         />
       ),
@@ -56,7 +56,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\frac{dq}{dt} \\propto -\\partial_q F, \\quad \\frac{da}{dt} \\propto -\\partial_a F"
+          latex="\frac{dq}{dt} \propto -\partial_q F, \quad \frac{da}{dt} \propto -\partial_a F"
           label="Dual dynamics"
         />
       ),
@@ -79,7 +79,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\ln p(o) = \\underbrace{\\mathbb{E}_q[\\ln p(o,s)] - \\mathbb{E}_q[\\ln q(s)]}_{\\text{ELBO} = -F} + D_{KL}[q(s)\\|p(s\\mid o)]"
+          latex="\ln p(o) = \underbrace{\mathbb{E}_q[\ln p(o,s)] - \mathbb{E}_q[\ln q(s)]}_{\text{ELBO} = -F} + D_{KL}[q(s)\|p(s\mid o)]"
           label="Log evidence = ELBO + KL gap"
           description="Maximize the ELBO, shrink the gap."
         />

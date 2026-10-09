@@ -36,7 +36,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="p(s \\mid o) = \\frac{p(o \\mid s)\\, p(s)}{p(o)}"
+          latex="p(s \mid o) = \frac{p(o \mid s)\, p(s)}{p(o)}"
           label="Eq. 1 — Bayes' Theorem"
         />
       ),
@@ -114,7 +114,7 @@ export default function CoreStream() {
       ),
       interactive: (
         <MathBlock
-          latex="\\varepsilon^{(\\ell)} = \\pi^{(\\ell)}\\,(o^{(\\ell)} - g(\\mu^{(\\ell+1)}))"
+          latex="\varepsilon^{(\ell)} = \pi^{(\ell)}\,(o^{(\ell)} - g(\mu^{(\ell+1)}))"
           label="Eq. 2 — Prediction error update"
         />
       ),
