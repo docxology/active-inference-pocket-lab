@@ -7,6 +7,7 @@ import { ActivityBankProvider } from '../../contexts/ActivityBankContext';
 import StreamTemplate from '../../components/layout/StreamTemplate';
 import { useStreamProgress } from '../../modules/shared/useStreamProgress';
 import MathBlock from '../../components/interactive/MathBlock';
+import PauseButton from '../../components/interactive/PauseButton';
 
 function wrapper({ children }) {
   return (
@@ -39,6 +40,26 @@ function LearningStream() {
 }
 
 describe('learning controls', () => {
+  it('banks the live step on explicit pause even when automatic bookmarking is disabled', async () => {
+    localStorage.setItem('spin_settings', JSON.stringify({ autoBookmark: false }));
+    const view = render(
+      <>
+        <LearningStream />
+        <PauseButton moduleId={2} />
+      </>,
+      { wrapper },
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Beat 2' }));
+    await screen.findByRole('heading', { name: 'Second step' });
+    expect(JSON.parse(localStorage.getItem('spin_stream_positions'))[2]).toBeUndefined();
+    expect(JSON.parse(localStorage.getItem('spin_activity_bank')).bookmark).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Pause and rest' }));
+    expect(JSON.parse(localStorage.getItem('spin_activity_bank')).bookmark.position).toBe(1);
+    expect(JSON.parse(localStorage.getItem('spin_stream_positions'))[2].pulse).toBe(1);
+    view.unmount();
+    render(<LearningStream />, { wrapper });
+    await screen.findByRole('heading', { name: 'Second step' });
+  });
   it('does not mark completion merely on entering the final step and records only once', async () => {
     render(<LearningStream />, { wrapper });
     fireEvent.click(screen.getByRole('button', { name: 'Continue →' }));

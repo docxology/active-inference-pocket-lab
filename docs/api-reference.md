@@ -289,6 +289,7 @@ Each **`Module`** includes at least: `id`, `slug`, `title`, `subtitle`, `descrip
 | Export | Purpose |
 | --- | --- |
 | `useApp().setStreamPosition(moduleId, stream, position)` | Save a validated nonnegative step index separately from monotonic completion |
+| `useApp().currentPositions`, `setCurrentPosition(moduleId, stream, position)` | Live session steps, held in memory independently of automatic persistence |
 | `useApp().streamPositions`, `streamChoices` | Device-local narrative steps and last stream per module |
 | `useLearningPosition(moduleId, stream, stepCount)` | Restore a bounded index and automatically bank it when enabled; returns `[index, go]` |
 | `useStreamProgress(moduleId, stream)` | Report fractional progress and one completion; record measured visible, unpaused time |

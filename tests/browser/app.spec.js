@@ -174,6 +174,37 @@ test('settings affect stream entry, text size and math', async ({ page }) => {
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
+test('explicit pause holds the live step with automatic bookmarking disabled', async ({ page }) => {
+  await page.goto('/settings');
+  await page.getByRole('checkbox', { name: 'Auto-bookmark' }).uncheck();
+  await page.goto('/modules/2');
+  await page.getByRole('button', { name: 'Beat 2' }).click();
+  await expect(page.getByRole('button', { name: 'Beat 2' })).toHaveAttribute(
+    'aria-current',
+    'step',
+  );
+  expect(
+    await page.evaluate(() => JSON.parse(localStorage.getItem('spin_stream_positions'))[2]),
+  ).toBeUndefined();
+  await page.getByRole('button', { name: 'Pause and rest' }).click();
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem('spin_activity_bank')).bookmark.position,
+    ),
+  ).toBe(1);
+  await page.getByRole('button', { name: 'Home', exact: true }).click();
+  await page.getByRole('button', { name: /Continue where you left off/ }).click();
+  await expect(page.getByRole('button', { name: 'Beat 2' })).toHaveAttribute(
+    'aria-current',
+    'step',
+  );
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Beat 2' })).toHaveAttribute(
+    'aria-current',
+    'step',
+  );
+});
+
 test('drawer focus, escape and keyboard stream selection', async ({ page }) => {
   await page.goto('/modules/1');
   const pulse = page.getByRole('tab', { name: /Pulse/ });

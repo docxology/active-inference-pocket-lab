@@ -33,6 +33,7 @@ const ACTIONS = {
   SET_MODULE_PROGRESS: 'SET_MODULE_PROGRESS',
   RESTORE_PROGRESS: 'RESTORE_PROGRESS',
   SET_POSITION: 'SET_POSITION',
+  SET_CURRENT_POSITION: 'SET_CURRENT_POSITION',
 };
 
 /** localStorage key for persisted progress */
@@ -60,6 +61,7 @@ const initialState = {
   currentModuleId: null,
   moduleProgress: {},
   streamPositions: {},
+  currentPositions: {},
   streamChoices: {},
 };
 
@@ -86,16 +88,19 @@ function appReducer(state, action) {
         ? { ...state, currentModuleId: Number(action.payload) }
         : state;
 
+    case ACTIONS.SET_CURRENT_POSITION:
     case ACTIONS.SET_POSITION: {
       const { moduleId, stream, position } = action.payload;
       if (!isModuleId(moduleId) || !isStream(stream) || !Number.isInteger(position) || position < 0)
         return state;
-      if (state.streamPositions[moduleId]?.[stream] === position) return state;
+      const key =
+        action.type === ACTIONS.SET_CURRENT_POSITION ? 'currentPositions' : 'streamPositions';
+      if (state[key][moduleId]?.[stream] === position) return state;
       return {
         ...state,
-        streamPositions: {
-          ...state.streamPositions,
-          [moduleId]: { ...state.streamPositions[moduleId], [stream]: position },
+        [key]: {
+          ...state[key],
+          [moduleId]: { ...state[key][moduleId], [stream]: position },
         },
       };
     }
@@ -162,6 +167,11 @@ export function AppProvider({ children }) {
 
   const setStreamPosition = useCallback((moduleId, stream, position) => {
     dispatch({ type: ACTIONS.SET_POSITION, payload: { moduleId, stream, position } });
+  }, []);
+
+  /** Track the live narrative step without automatically writing a bookmark. */
+  const setCurrentPosition = useCallback((moduleId, stream, position) => {
+    dispatch({ type: ACTIONS.SET_CURRENT_POSITION, payload: { moduleId, stream, position } });
   }, []);
 
   const setStream = useCallback((stream) => {
@@ -235,6 +245,7 @@ export function AppProvider({ children }) {
     getOverallProgress,
     resetApp,
     setStreamPosition,
+    setCurrentPosition,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

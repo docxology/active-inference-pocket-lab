@@ -38,7 +38,7 @@ test: {
 
 ## Test Inventory
 
-> 105 unit/integration tests across 16 files passed on 2026-10-09. Counts below were accurate as of 2026-10-09 (verify current totals with `npm test` — do not quote them elsewhere; this is the only place they live).
+> 106 unit/integration tests across 16 files passed on 2026-10-09. Counts below were accurate as of 2026-10-09 (verify current totals with `npm test` — do not quote them elsewhere; this is the only place they live).
 
 ### AppContext.test.jsx (12 tests)
 
@@ -116,14 +116,14 @@ npm run test:coverage   # Generate coverage report
 
 - `utils/activeInference.test.js` (12): Gaussian posterior arithmetic, exact evidence/free-energy identity at and away from the optimum, negative continuous surprisal, invalid precision, stable softmax, impossible-event KL, categorical EFE, interpolation and descent.
 - `utils/persistence.test.js` (11): real Storage round trips, malformed JSON, invalid records/fields, preferences, activity collections and dates.
-- `components/LearningContinuity.test.jsx` (3): final-step entry is not completion, one activity receipt, saved-step remount, math preference and rejection of trusted HTML commands.
+- `components/LearningContinuity.test.jsx` (4): final-step entry is not completion, one activity receipt, saved-step remount, explicit pause with Auto-bookmark disabled, math preference and rejection of trusted HTML commands.
 - `components/Drawer.test.jsx` (1): initial focus, forward/backward Tab containment, Escape and focus restoration.
 - `modules/equations.test.js` (11): render actual JSX literal equations with strict KaTeX parsing and reject incorrectly doubled command backslashes.
 - AppContext adds provider-remount persistence, stored-shape validation and monotonic completion.
 
 ## Browser workflow
 
-`./run.sh browser` starts a production preview and runs `tests/browser/app.spec.js` at 390×844 and 1280×900. There are 92 scenarios: all 30 streams in both viewports, ten routes, and pause/resume/reload, settings, drawer/tab keyboard operation, malformed storage, an unvisited module loaded offline after worker installation, and a real worker update preserving progress and access to a retired chunk. Every stream beat and Core retrieval quiz is exercised. Axe must report zero critical or serious WCAG A/AA violations. Checks also fail on runtime exceptions, equation errors, error overlays and horizontal overflow. Traces, screenshots and full axe results are retained on failure.
+`./run.sh browser` starts a production preview and runs `tests/browser/app.spec.js` at 390×844 and 1280×900. There are 94 scenarios: all 30 streams in both viewports, ten routes, and pause/resume/reload, settings, drawer/tab keyboard operation, malformed storage, an unvisited module loaded offline after worker installation, and a real worker update preserving progress and access to a retired chunk. Every stream beat and Core retrieval quiz is exercised. Axe must report zero critical or serious WCAG A/AA violations. Checks also fail on runtime exceptions, equation errors, error overlays and horizontal overflow. Traces, screenshots and full axe results are retained on failure.
 
 Browser profiles are disposable and use real page methods, real network requests, DOM Storage and service workers. Set `SPIN_BASE_URL` to check an existing preview or deploy; `SPIN_BROWSER_OUTPUT` relocates browser evidence. Physical mobile performance and VoiceOver listening remain separate manual checks; automated axe coverage is not a full screen-reader certification.
 
