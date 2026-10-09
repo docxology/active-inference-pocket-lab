@@ -124,3 +124,14 @@ Stream components are registered in `ModulePage.jsx` via the `MODULE_STREAMS` ma
 ## Build Output
 
 `npm run build` writes versioned chunks and assets under `dist/` (including KaTeX fonts). Sizes change with each release; use `npm run preview` or CI artifacts to inspect the current bundle.
+
+
+## Learning continuity and accessibility
+
+Providers initialize storage when mounted, validate legacy JSON by field, and report storage errors while keeping the in-memory lab usable. Completion percentages are monotonic; step positions and last selected streams are stored separately, so revisiting material does not erase earned completion. `useLearningPosition` restores a bounded step index and honors automatic bookmarks. Explicit pause always saves the current step; resume restores the saved stream and clears pause state. Sliders and simulation parameters restart when their stream remounts; bookmarks preserve the narrative step rather than every sandbox variable.
+
+`useStreamProgress` records measured time while the stream is mounted, visible and unpaused, once per completion. Estimates in the catalog remain planning estimates. Reduced motion, visibility and pause state suspend continuous canvas/SVG animations through `useAnimationEnabled`; manual grid steps remain available.
+
+`AppShell` provides a skip link, route focus/scroll restoration, route error recovery, and `PwaStatus`. Stream tabs support arrow keys/Home/End. Drawers are portaled above navigation, isolate the app with `inert`, contain keyboard focus, close on Escape, lock scrolling, and return focus to the opener. Scrollable equations are keyboard focusable.
+
+The Gaussian utility computes the full expected log likelihood, including posterior variance. Module 1 uses an explicit Gaussian generative model and posterior KL gap. DataFitter and GridWorld identify their simplified scoring rules rather than presenting them as marginal evidence or full POMDP inference.

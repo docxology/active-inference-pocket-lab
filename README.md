@@ -2,6 +2,8 @@
 
 > "You are an architect of a world in formation."
 
+[Live lab](https://active-inference-pocket-lab.netlify.app) · [Verification workflow](https://github.com/docxology/active-inference-pocket-lab/actions)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
@@ -36,7 +38,7 @@ Each module offers three learning paths that users can switch between at any tim
 - **Triple streams**: Pulse, Vision, and Core run in parallel; learners switch anytime without losing place.
 - **Legible knowledge**: Each module pulls **terms** and **retrieval questions** from [`src/data/modules.js`](src/data/modules.js) — glossary deep links (`/glossary#key`) and a short **Core quiz** at the end make uncertainty and recall explicit, not hidden.
 - **Warm feedback**: Quizzes are framed as retrieval (no timers, generous explanations); motion and haptics reward participation, not speed.
-- **Installable shell**: PWA assets live under [`public/`](public/) (`manifest.webmanifest`, `sw.js`); Settings includes reduced motion, haptics, and font scale.
+- **Offline lab**: PWA assets live under [`public/`](public/) (`manifest.webmanifest`, `sw.js`). Production builds precache all bundled modules and math fonts. Updates are offered explicitly. Settings controls motion, sound, haptics, text size, stream defaults, math visibility, and auto-bookmarks.
 
 ## The 10 Modules
 

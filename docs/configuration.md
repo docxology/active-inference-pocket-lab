@@ -28,7 +28,7 @@ export default defineConfig({
 | `server.host` | true | Accessible from LAN devices (mobile testing) |
 | `test.globals` | true | Vitest globals without imports |
 | `test.environment` | jsdom | Browser-like DOM |
-| `test.setupFiles` | `./src/test/setup.js` | localStorage polyfill + jest-dom |
+| `test.setupFiles` | `./src/test/setup.js` | real DOM Storage + jest-dom |
 | `test.css` | true | Allow importing CSS in test modules |
 
 ## Package Scripts (`package.json`)
@@ -80,11 +80,11 @@ Currently none required. Future variables:
 | Package | Version | Purpose |
 | --- | --- | --- |
 | vite | ^8 | Build tool + dev server |
-| @vitejs/plugin-react | ^4 | React plugin for Vite |
+| @vitejs/plugin-react | ^6 | React plugin for Vite |
 | vitest | ^4 | Test runner |
 | @testing-library/react | ^16 | Component test utilities |
 | @testing-library/jest-dom | ^6 | DOM assertion matchers |
-| jsdom | ^26 | Test DOM environment |
+| jsdom | ^29 | Test DOM environment |
 | eslint | ^9 | Code linting |
 | prettier | ^3 | Code formatting |
 
@@ -93,7 +93,7 @@ Currently none required. Future variables:
 ### Static Hosting (Recommended)
 Build and deploy `dist/`:
 ```bash
-npm run build
+./run.sh verify
 # Upload dist/ to Netlify, Vercel, GitHub Pages, etc.
 ```
 
@@ -111,7 +111,9 @@ Configure your host to redirect all routes to `index.html` (since we use Browser
 | --- | --- | --- |
 | `spin_activity_bank` | ActivityBankContext | Pause state, bookmarks, sessions, streak |
 | `spin_module_progress` | AppContext | Progress per module per stream (0-100) |
-| `spin_settings` | SettingsContext | Reduced motion, haptics, font scale, default stream, etc. |
+| `spin_settings` | SettingsContext | Validated motion, haptics, sound, font scale, default stream, math and bookmark preferences |
+| `spin_stream_positions` | AppContext | Step index per module and stream |
+| `spin_stream_choices` | AppContext | Last selected stream per module |
 
 ## PWA (`public/`)
 
@@ -132,3 +134,17 @@ Use the `run.sh` thin orchestrator at the repository root as the primary command
 - [ ] IndexedDB for larger offline data (beyond the installable shell)
 - [ ] Dark/light theme toggle (currently dark-only; Settings has high-contrast + font scale)
 - [ ] Optional env vars (`VITE_*`) when a backend or analytics layer lands
+
+
+## Release gates and offline builds
+
+Use Node.js 24 LTS in CI and Netlify. The orchestrator also accepts 20.19+, 22.12+, and newer even majors. `npm ci` installs the exact lockfile when dependencies are absent.
+
+- `./run.sh lint` is non-mutating and fails on lint errors or warnings.
+- `./run.sh verify` runs lint, unit/integration tests, and the production build; Netlify uses this command.
+- `./run.sh browser` runs the Chromium mobile/desktop workflow in `tests/browser/app.spec.js`; install its browser with `npm exec playwright install chromium` first.
+- GitHub Actions additionally checks dependency advisories and runs browser QA.
+
+Vite generates `dist/sw.js` with the build's full asset inventory and a cache version derived from the bundle. Installation must fetch every bundled asset successfully. This covers unvisited modules and KaTeX fonts after installation. The worker serves its matching cached HTML shell, so a redeploy cannot mix new HTML with old JavaScript. `PwaStatus` offers waiting updates explicitly and displays connectivity. Only Spin caches are managed; one previous bundle is retained for other open tabs. Fonts requested from Google are optional and fall back to system fonts offline.
+
+Progress remains device-local. Clearing site data removes it; IndexedDB and server synchronization are still backlog decisions, not implemented features.

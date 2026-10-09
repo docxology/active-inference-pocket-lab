@@ -282,3 +282,21 @@ Each **`Module`** includes at least: `id`, `slug`, `title`, `subtitle`, `descrip
 | `getGlossaryEntry(key)` | `(key: string) => GlossaryEntry \| undefined` | Single term |
 | `getAllGlossary()` | `() => Array<{ key, ...GlossaryEntry }>` | Flattened rows for UI |
 | `searchGlossary(query)` | `(query: string) => Array` | Empty query: same rows as `getAllGlossary()`; else filter by term/short/formal |
+
+
+## Continuity and offline APIs
+
+| Export | Purpose |
+| --- | --- |
+| `useApp().setStreamPosition(moduleId, stream, position)` | Save a validated nonnegative step index separately from monotonic completion |
+| `useApp().streamPositions`, `streamChoices` | Device-local narrative steps and last stream per module |
+| `useLearningPosition(moduleId, stream, stepCount)` | Restore a bounded index and automatically bank it when enabled; returns `[index, go]` |
+| `useStreamProgress(moduleId, stream)` | Report fractional progress and one completion; record measured visible, unpaused time |
+| `usePageVisible()` / `useAnimationEnabled()` | Visibility tracking / permission for continuous animations |
+| `configureFeedback(settings)` | Apply haptics and sound preferences to subsequent feedback |
+| `PwaStatus` | Connection indicator, production worker registration, explicit update control |
+| `readStored(key, normalize, fallback)` / `writeStored(key, value)` | JSON storage with reported failure and schema normalization |
+| `normalizeProgress`, `normalizeStreamChoices`, `normalizeSettings`, `normalizeActivity` | Validate existing device-local records |
+| `isRecord`, `isModuleId`, `isStream` | Shared stored-state predicates |
+
+MathBlock honors `showMathByDefault`, disables trusted HTML/resource commands, and supplies a keyboard-focusable math region. StreamTemplate supplies step controls and saves its current step; the final action records completion, rather than entry into the final step.
