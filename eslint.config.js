@@ -37,6 +37,10 @@ export default defineConfig([
     },
   },
   {
+    files: ['vite.config.js', 'playwright.config.js', 'tests/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['src/contexts/**/*.{js,jsx}'],
     rules: {
       'react-refresh/only-export-components': 'off',

@@ -1,0 +1,26 @@
+name: Verify lab
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: ./run.sh verify
+      - run: npm audit --audit-level=low
+      - run: npm exec playwright install --with-deps chromium
+      - run: ./run.sh browser
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failure-evidence
+          path: test-results/

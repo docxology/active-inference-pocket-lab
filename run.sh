@@ -10,7 +10,7 @@
 #   ./run.sh test     # Run tests only
 #   ./run.sh build    # Production build
 #   ./run.sh preview  # Build + preview production bundle
-#   ./run.sh lint     # Run linter + formatter
+#   ./run.sh lint     # Run non-mutating linter
 #   ./run.sh clean    # Remove node_modules and dist
 #   ./run.sh help     # Show this help
 # ─────────────────────────────────────────────────────────────
@@ -47,10 +47,8 @@ check_node() {
   if ! command -v node &> /dev/null; then
     fail "Node.js is required but not found. Install from https://nodejs.org"
   fi
-  local node_major
-  node_major=$(node -v | sed 's/v//' | cut -d. -f1)
-  if (( node_major < 18 )); then
-    fail "Node.js >= 18 required (found $(node -v))"
+  if ! node -e 'const [major,minor]=process.versions.node.split(".").map(Number);process.exit((major===20&&minor>=19)||(major===22&&minor>=12)||major>=24?0:1)'; then
+    fail "Node.js 20.19+, 22.12+, or 24+ required (found $(node -v))"
   fi
   ok "Node.js $(node -v)"
 }
@@ -66,7 +64,7 @@ check_npm() {
 cmd_install() {
   if [ ! -d "node_modules" ]; then
     log "Installing dependencies..."
-    npm install
+    npm ci
     ok "Dependencies installed"
   else
     ok "Dependencies already installed"
@@ -75,16 +73,20 @@ cmd_install() {
 
 cmd_test() {
   log "Running test suite..."
-  npm test
+  npm test -- "$@"
   ok "All tests passed"
 }
 
 cmd_lint() {
-  log "Running linter..."
-  npm run lint 2>/dev/null || warn "Linter reported issues (non-blocking)"
-  log "Running formatter..."
-  npm run format 2>/dev/null || warn "Formatter reported issues (non-blocking)"
-  ok "Lint + format complete"
+  log "Running linter (failures block release)..."
+  npm run lint -- --max-warnings=0
+  ok "Lint passed"
+}
+
+cmd_verify() {
+  cmd_lint
+  cmd_test
+  cmd_build
 }
 
 cmd_dev() {
@@ -123,7 +125,9 @@ cmd_help() {
   echo "  test        Run tests only"
   echo "  build       Production build"
   echo "  preview     Build + preview production bundle"
-  echo "  lint        Run linter + formatter"
+  echo "  lint        Run non-mutating linter"
+  echo "  browser     Run production browser and accessibility tests"
+  echo "  verify      Lint, tests, and production build (release gate)"
   echo "  clean       Remove node_modules and dist"
   echo "  help        Show this help"
   echo ""
@@ -141,10 +145,20 @@ main() {
       cmd_install
       cmd_dev
       ;;
+    browser)
+      check_node && check_npm
+      cmd_install
+      npm run test:browser -- "${@:2}"
+      ;;
+    verify)
+      check_node && check_npm
+      cmd_install
+      cmd_verify
+      ;;
     test)
       check_node && check_npm
       cmd_install
-      cmd_test
+      cmd_test "${@:2}"
       ;;
     build)
       check_node && check_npm
