@@ -13,6 +13,13 @@
  * @module contexts/ActivityBankContext
  */
 import { createContext, useContext, useReducer, useCallback, useEffect, useMemo } from 'react';
+import {
+  normalizeActivity,
+  readStored,
+  writeStored,
+  isModuleId,
+  isStream,
+} from '../utils/persistence';
 
 /** @constant {string} */
 const STORAGE_KEY = 'spin_activity_bank';
@@ -29,13 +36,7 @@ const ACTIONS = {
 };
 
 function loadPersistedState() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return JSON.parse(stored);
-  } catch (err) {
-    console.warn('[ActivityBank] Failed to load:', err.message);
-  }
-  return null;
+  return readStored(STORAGE_KEY, (value) => normalizeActivity(value, defaultState), defaultState);
 }
 
 /** @type {Object} */
@@ -137,18 +138,20 @@ const ActivityBankContext = createContext(null);
  * @param {React.ReactNode} props.children
  */
 export function ActivityBankProvider({ children }) {
-  const persisted = loadPersistedState();
-  const [state, dispatch] = useReducer(activityReducer, { ...defaultState, ...(persisted || {}) });
+  const [state, dispatch] = useReducer(activityReducer, null, loadPersistedState);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch (err) {
-      console.warn('[ActivityBank] Failed to persist:', err.message);
-    }
+    writeStored(STORAGE_KEY, state);
   }, [state]);
 
   const recordActivity = useCallback((moduleId, stream, durationMinutes) => {
+    if (
+      !isModuleId(moduleId) ||
+      !isStream(stream) ||
+      !Number.isFinite(durationMinutes) ||
+      durationMinutes < 0
+    )
+      return;
     dispatch({
       type: ACTIONS.RECORD_ACTIVITY,
       payload: { moduleId, stream, duration: durationMinutes },
@@ -158,6 +161,7 @@ export function ActivityBankProvider({ children }) {
   const pause = useCallback(() => dispatch({ type: ACTIONS.PAUSE }), []);
   const resume = useCallback(() => dispatch({ type: ACTIONS.RESUME }), []);
   const setBookmark = useCallback((moduleId, stream, position) => {
+    if (!isModuleId(moduleId) || !isStream(stream)) return;
     dispatch({ type: ACTIONS.BOOKMARK, payload: { moduleId, stream, position } });
   }, []);
   const clearBookmark = useCallback(() => dispatch({ type: ACTIONS.CLEAR_BOOKMARK }), []);
@@ -165,7 +169,7 @@ export function ActivityBankProvider({ children }) {
     dispatch({ type: ACTIONS.RECORD_QUIZ, payload: { passed } });
   }, []);
   const addGoodQuestion = useCallback((text, moduleId) => {
-    if (!text || !text.trim()) return;
+    if (typeof text !== 'string' || !text.trim()) return;
     dispatch({ type: ACTIONS.RECORD_QUESTION, payload: { text: text.trim(), moduleId } });
   }, []);
   const resetAll = useCallback(() => dispatch({ type: ACTIONS.RESET_ALL }), []);
@@ -189,6 +193,7 @@ export function ActivityBankProvider({ children }) {
   return <ActivityBankContext.Provider value={value}>{children}</ActivityBankContext.Provider>;
 }
 
+/** Access device-local activity and pause actions. */
 export function useActivityBank() {
   const context = useContext(ActivityBankContext);
   if (!context) throw new Error('[useActivityBank] must be used within ActivityBankProvider');

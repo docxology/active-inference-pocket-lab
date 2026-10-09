@@ -40,6 +40,11 @@ export default function SearchPage() {
         score:
           score(m.title, q) +
           score(m.subtitle || '', q) * 0.5 +
+          score(
+            `${m.description} ${(m.outcomes || []).join(' ')} ${(m.glossary || []).join(' ')}`,
+            q,
+          ) *
+            0.3 +
           score((m.tags || []).join(' '), q) * 0.7,
       }))
       .filter((r) => r.score > 0)
@@ -66,12 +71,13 @@ export default function SearchPage() {
           <input
             className="search-page__input"
             type="search"
+            aria-label="Search modules and glossary"
             placeholder="free energy, precision, policy…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            autoFocus
           />
         </header>
+        {q && <p role="status">{results.modules.length + results.glossary.length} results</p>}
 
         {!q && (
           <div className="search-page__empty">

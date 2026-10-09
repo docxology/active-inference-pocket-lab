@@ -54,7 +54,7 @@ export default function HomePage() {
         {bookmarkedModule && (
           <motion.button
             className="home-page__resume glass"
-            onClick={() => navigate(`/modules/${bookmarkedModule.id}`)}
+            onClick={() => navigate(`/modules/${bookmarkedModule.id}`, { state: { resume: true } })}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -163,12 +163,16 @@ export default function HomePage() {
           transition={{ delay: 0.45 }}
           aria-labelledby="streams-heading"
         >
-          <h2 id="streams-heading" className="home-page__streams-title">Three ways to learn</h2>
+          <h2 id="streams-heading" className="home-page__streams-title">
+            Three ways to learn
+          </h2>
           <div className="home-page__streams-grid">
             <div className="home-page__stream-card home-page__stream-card--pulse">
               <span className="home-page__stream-icon">💓</span>
               <strong>Pulse</strong>
-              <p>Conversational. Analogies, stories, a single slider. For when you have 2 minutes.</p>
+              <p>
+                Conversational. Analogies, stories, a single slider. For when you have 2 minutes.
+              </p>
             </div>
             <div className="home-page__stream-card home-page__stream-card--vision">
               <span className="home-page__stream-icon">✨</span>

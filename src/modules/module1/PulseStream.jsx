@@ -17,6 +17,8 @@ import RewardAnimation from '../../components/interactive/RewardAnimation';
 import { useApp } from '../../contexts/AppContext';
 import { hapticLight, hapticMedium, hapticSuccess } from '../../utils/haptics';
 import GlossaryTermsLine from '../shared/GlossaryTermsLine';
+import { useLearningPosition } from '../shared/useLearningPosition';
+import { useStreamProgress } from '../shared/useStreamProgress';
 import './PulseStream.css';
 
 /**
@@ -58,11 +60,11 @@ const STEPS = [
     content: (
       <>
         <h2>
-          That gap? That's <em>surprise</em>.
+          That gap? That's a <em>prediction error</em>.
         </h2>
         <p>
-          The difference between what you predicted and what actually happened — that's the engine
-          of learning. Your brain is always trying to <strong>minimize this gap</strong>.
+          Prediction error is the gap between your guess and the observation. Surprise also depends
+          on how confident your model was. Explore that distinction in the Core sandbox.
         </p>
         <p>
           This is the core of Active Inference: you either update your beliefs or act to change the
@@ -78,12 +80,14 @@ const STEPS = [
  * @returns {JSX.Element}
  */
 export default function PulseStream() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useLearningPosition(1, 'pulse', STEPS.length);
   const [priorValue, setPriorValue] = useState(50);
   const [observedValue] = useState(() => Math.floor(Math.random() * 60) + 20);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(step > 0);
   const [showReward, setShowReward] = useState(false);
   const { updateProgress } = useApp();
+  const { onComplete } = useStreamProgress(1, 'pulse');
+  const [completed, setCompleted] = useState(false);
 
   const surprise = Math.abs(priorValue - observedValue);
   const normalizedSurprise = surprise / 100;
@@ -101,8 +105,9 @@ export default function PulseStream() {
   );
 
   const advanceStep = useCallback(() => {
+    if (completed) return;
     if (step < STEPS.length - 1) {
-      setStep((s) => s + 1);
+      setStep(step + 1);
       hapticMedium();
       // Update progress per-step
       updateProgress(1, 'pulse', Math.round(((step + 1) / STEPS.length) * 100));
@@ -111,27 +116,21 @@ export default function PulseStream() {
       // Module complete!
       setShowReward(true);
       hapticSuccess();
-      updateProgress(1, 'pulse', 100);
+      setCompleted(true);
+      onComplete();
       console.log('[PulseStream] Module 1 Pulse complete!');
     }
-  }, [step, updateProgress]);
+  }, [step, updateProgress, setStep, onComplete, completed]);
 
   const currentStep = STEPS[step];
 
   return (
-    <div className="pulse-stream stream-pulse" role="tabpanel" id="stream-panel-pulse">
-      {/* Step Content */}
-      <motion.div
-        key={currentStep.id}
-        className="pulse-stream__content"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      >
-        {currentStep.content}
-      </motion.div>
-
+    <div
+      className="pulse-stream stream-pulse"
+      role="tabpanel"
+      aria-labelledby="stream-tab-pulse"
+      id="stream-panel-pulse"
+    >
       {/* The Slider — The First Threshold */}
       <div className="pulse-stream__interaction">
         <InferenceSlider
@@ -153,7 +152,7 @@ export default function PulseStream() {
             animate={{ opacity: 1, y: 0 }}
           >
             <div className="pulse-stream__surprise-label">
-              <span>Surprise</span>
+              <span>Prediction error</span>
               <span className="pulse-stream__surprise-value">{surprise}</span>
             </div>
             <div className="pulse-stream__surprise-bar">
@@ -183,6 +182,18 @@ export default function PulseStream() {
         )}
       </div>
 
+      {/* Step Content */}
+      <motion.div
+        key={currentStep.id}
+        className="pulse-stream__content"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      >
+        {currentStep.content}
+      </motion.div>
+
       {/* Step Progress & Continue */}
       <div className="pulse-stream__footer">
         <div className="pulse-stream__progress">
@@ -194,12 +205,13 @@ export default function PulseStream() {
         {hasInteracted && (
           <motion.button
             className="pulse-stream__continue"
+            disabled={completed}
             onClick={advanceStep}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            {step < STEPS.length - 1 ? 'Continue →' : 'Complete 🌀'}
+            {completed ? 'Complete ✓' : step < STEPS.length - 1 ? 'Continue →' : 'Complete 🌀'}
           </motion.button>
         )}
       </div>

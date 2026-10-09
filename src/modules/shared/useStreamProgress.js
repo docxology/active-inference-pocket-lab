@@ -7,20 +7,33 @@
  *
  * @module modules/shared/useStreamProgress
  */
-import { useCallback } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 import { useApp } from '../../contexts/AppContext';
 import { useActivityBank } from '../../contexts/ActivityBankContext';
+import { usePageVisible } from '../../utils/useAnimationEnabled';
 
 /**
  * Returns { onProgress, onComplete } already bound to the given module + stream.
  *
  * @param {number} moduleId
  * @param {'pulse'|'vision'|'core'} streamKey
- * @param {number} [minutesEstimate=4]
+ * Legacy third-argument time estimates are ignored; activity uses measured visible, unpaused time.
  */
-export function useStreamProgress(moduleId, streamKey, minutesEstimate = 4) {
+export function useStreamProgress(moduleId, streamKey) {
   const { updateProgress } = useApp();
-  const { recordActivity } = useActivityBank();
+  const { recordActivity, isPaused } = useActivityBank();
+  const visible = usePageVisible();
+  const startedAt = useRef(null);
+  const elapsed = useRef(0);
+  const completed = useRef(false);
+  useEffect(() => {
+    if (isPaused || !visible) return;
+    startedAt.current = performance.now();
+    return () => {
+      if (startedAt.current !== null) elapsed.current += performance.now() - startedAt.current;
+      startedAt.current = null;
+    };
+  }, [isPaused, visible]);
 
   const onProgress = useCallback(
     (frac) => {
@@ -30,9 +43,12 @@ export function useStreamProgress(moduleId, streamKey, minutesEstimate = 4) {
   );
 
   const onComplete = useCallback(() => {
+    if (completed.current) return;
+    completed.current = true;
     updateProgress(moduleId, streamKey, 100);
-    recordActivity?.(moduleId, streamKey, minutesEstimate);
-  }, [moduleId, streamKey, minutesEstimate, updateProgress, recordActivity]);
+    const current = startedAt.current === null ? 0 : performance.now() - startedAt.current;
+    recordActivity(moduleId, streamKey, (elapsed.current + current) / 60000);
+  }, [moduleId, streamKey, updateProgress, recordActivity]);
 
   return { onProgress, onComplete };
 }

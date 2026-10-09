@@ -85,6 +85,7 @@ export default function SettingsPage() {
               {FONT_OPTIONS.map((o) => (
                 <button
                   key={o.value}
+                  aria-pressed={s.fontScale === o.value}
                   className={`settings-page__seg-btn${s.fontScale === o.value ? ' is-active' : ''}`}
                   onClick={() => s.set({ fontScale: o.value })}
                 >
@@ -112,6 +113,7 @@ export default function SettingsPage() {
               {STREAM_OPTIONS.map((o) => (
                 <button
                   key={o.value}
+                  aria-pressed={s.defaultStream === o.value}
                   className={`settings-page__seg-btn${s.defaultStream === o.value ? ' is-active' : ''}`}
                   onClick={() => s.set({ defaultStream: o.value })}
                 >

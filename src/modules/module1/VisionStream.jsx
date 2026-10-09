@@ -16,6 +16,8 @@ import InferenceSlider from '../../components/interactive/InferenceSlider';
 import RewardAnimation from '../../components/interactive/RewardAnimation';
 import GlossaryTermsLine from '../shared/GlossaryTermsLine';
 import { useApp } from '../../contexts/AppContext';
+import { useAnimationEnabled } from '../../utils/useAnimationEnabled';
+import { useStreamProgress } from '../shared/useStreamProgress';
 import './VisionStream.css';
 
 /**
@@ -104,27 +106,25 @@ export default function VisionStream() {
   const animRef = useRef(null);
   const [prior, setPrior] = useState(50);
   const [precision, setPrecision] = useState(50);
-  const [hasExplored, setHasExplored] = useState(false);
+  const { moduleProgress } = useApp();
+  const alreadyComplete = moduleProgress[1]?.vision === 100;
+  const [hasExplored, setHasExplored] = useState(alreadyComplete);
   const [showReward, setShowReward] = useState(false);
-  const [interactionCount, setInteractionCount] = useState(0);
-  const { updateProgress } = useApp();
+  const [interactionCount, setInteractionCount] = useState(alreadyComplete ? 10 : 0);
+  const countRef = useRef(alreadyComplete ? 10 : 0);
+  const animationEnabled = useAnimationEnabled();
+  const { onComplete } = useStreamProgress(1, 'vision');
 
-  const handlePriorChange = useCallback(
-    (value) => {
-      setPrior(value);
-      setInteractionCount((c) => {
-        const next = c + 1;
-        if (next >= 10 && !hasExplored) {
-          setHasExplored(true);
-          setShowReward(true);
-          updateProgress(1, 'vision', 100);
-          console.log('[VisionStream] Exploration threshold reached — reward!');
-        }
-        return next;
-      });
-    },
-    [hasExplored, updateProgress],
-  );
+  const recordInteraction = useCallback(() => {
+    const next = ++countRef.current;
+    setInteractionCount(next);
+    if (next >= 10 && !hasExplored) {
+      setHasExplored(true);
+      setShowReward(true);
+      onComplete();
+      console.log('[VisionStream] Exploration threshold reached — reward!');
+    }
+  }, [hasExplored, onComplete]);
 
   // Canvas animation loop
   useEffect(() => {
@@ -132,6 +132,7 @@ export default function VisionStream() {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     const dpr = window.devicePixelRatio || 1;
 
     const resize = () => {
@@ -147,19 +148,24 @@ export default function VisionStream() {
     const animate = (time) => {
       const rect = canvas.getBoundingClientRect();
       drawOrbits(ctx, rect.width, rect.height, time, prior, precision);
-      animRef.current = requestAnimationFrame(animate);
+      if (animationEnabled) animRef.current = requestAnimationFrame(animate);
     };
 
-    animRef.current = requestAnimationFrame(animate);
+    animate(0);
 
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, [prior, precision]);
+  }, [prior, precision, animationEnabled]);
 
   return (
-    <div className="vision-stream stream-vision" role="tabpanel" id="stream-panel-vision">
+    <div
+      className="vision-stream stream-vision"
+      role="tabpanel"
+      aria-labelledby="stream-tab-vision"
+      id="stream-panel-vision"
+    >
       {/* Canvas */}
       <div className="vision-stream__canvas-container">
         <canvas
@@ -179,7 +185,10 @@ export default function VisionStream() {
           min={0}
           max={100}
           value={prior}
-          onChange={handlePriorChange}
+          onChange={(value) => {
+            setPrior(value);
+            recordInteraction();
+          }}
           label="Prior Strength"
           leftLabel="Weak"
           rightLabel="Strong"
@@ -190,7 +199,10 @@ export default function VisionStream() {
           min={0}
           max={100}
           value={precision}
-          onChange={setPrecision}
+          onChange={(value) => {
+            setPrecision(value);
+            recordInteraction();
+          }}
           label="Precision"
           leftLabel="Uncertain"
           rightLabel="Precise"

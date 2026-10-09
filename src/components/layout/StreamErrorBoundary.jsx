@@ -22,7 +22,7 @@ export default class StreamErrorBoundary extends Component {
     if (this.state.error) {
       return (
         <div className="stream-error-boundary" role="alert">
-          <p className="stream-error-boundary__title">This stream could not load.</p>
+          <p className="stream-error-boundary__title">This part of the lab could not load.</p>
           <p className="stream-error-boundary__detail">
             {String(this.state.error?.message || this.state.error)}
           </p>
@@ -32,6 +32,9 @@ export default class StreamErrorBoundary extends Component {
             onClick={() => this.setState({ error: null })}
           >
             Try again
+          </button>
+          <button type="button" onClick={() => window.location.reload()}>
+            Reload the lab
           </button>
         </div>
       );

@@ -19,7 +19,7 @@
 
   --color-text-primary: #f0ede6;
   --color-text-secondary: #a8a3b8;
-  --color-text-muted: #6b6780;
+  --color-text-muted: #a8a3b8;
   --color-text-inverse: #0d0f14;
 
   /* Stream Colors — The Helix */
@@ -129,6 +129,11 @@
 
   /* ─── User-tunable scale (driven by SettingsContext) ─── */
   --font-scale: 1;
+  --toggle-track-height: 28px;
+  --toggle-thumb-size: 22px;
+  --toggle-thumb-inset: 3px;
+  --toggle-thumb-travel: 20px;
+  --drawer-height: 85dvh;
 
   /* ─── Semantic aliases (used by newer components) ─── */
   --color-background: var(--color-bg-primary);

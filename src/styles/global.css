@@ -342,3 +342,45 @@ input[type='range'] {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Shared operable surfaces and responsive visualizations. */
+button:not([disabled]),
+input[type='range'],
+input[type='search'],
+summary {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+.glossary-page__jump,
+.glossary-page__link,
+.glossary-link,
+.glossary-chips__chip,
+.proficiency-map-page__module-title {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+.container {
+  min-width: 0;
+}
+summary {
+  cursor: pointer;
+  padding: var(--space-3);
+}
+.app-shell__skip {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: calc(var(--z-modal) + 2);
+  padding: var(--space-3);
+  background: var(--color-bg-primary);
+  transform: translateY(-200%);
+}
+.app-shell__skip:focus {
+  transform: translateY(0);
+}

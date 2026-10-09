@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './RewardAnimation.css';
+import { useSettings } from '../../contexts/SettingsContext';
 
 /**
  * Generate particle positions for the burst animation.
@@ -34,6 +35,7 @@ function generateParticles(count = 12) {
  * @returns {JSX.Element}
  */
 export default function RewardAnimation({ active, onComplete, message = 'Spin!' }) {
+  const { motionReduced } = useSettings();
   const [particles] = useState(() => generateParticles());
 
   useEffect(() => {
@@ -50,6 +52,7 @@ export default function RewardAnimation({ active, onComplete, message = 'Spin!' 
       {active && (
         <motion.div
           className="reward-animation"
+          role="status"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -66,43 +69,46 @@ export default function RewardAnimation({ active, onComplete, message = 'Spin!' 
           </motion.div>
 
           {/* Particles */}
-          {particles.map((p, i) => {
-            const radians = (p.angle * Math.PI) / 180;
-            const x = Math.cos(radians) * p.distance;
-            const y = Math.sin(radians) * p.distance;
+          {!motionReduced &&
+            particles.map((p, i) => {
+              const radians = (p.angle * Math.PI) / 180;
+              const x = Math.cos(radians) * p.distance;
+              const y = Math.sin(radians) * p.distance;
 
-            return (
-              <motion.span
-                key={i}
-                className="reward-animation__particle"
-                style={{
-                  width: p.size,
-                  height: p.size,
-                  background: `hsl(${p.hue}, 80%, 65%)`,
-                }}
-                initial={{ x: 0, y: 0, opacity: 1, scale: 0 }}
-                animate={{
-                  x,
-                  y,
-                  opacity: [1, 1, 0],
-                  scale: [0, 1.5, 0.5],
-                }}
-                transition={{
-                  duration: 1.2,
-                  delay: p.delay,
-                  ease: 'easeOut',
-                }}
-              />
-            );
-          })}
+              return (
+                <motion.span
+                  key={i}
+                  className="reward-animation__particle"
+                  style={{
+                    width: p.size,
+                    height: p.size,
+                    background: `hsl(${p.hue}, 80%, 65%)`,
+                  }}
+                  initial={{ x: 0, y: 0, opacity: 1, scale: 0 }}
+                  animate={{
+                    x,
+                    y,
+                    opacity: [1, 1, 0],
+                    scale: [0, 1.5, 0.5],
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    delay: p.delay,
+                    ease: 'easeOut',
+                  }}
+                />
+              );
+            })}
 
           {/* Orbiting ring */}
-          <motion.div
-            className="reward-animation__ring"
-            initial={{ scale: 0, opacity: 0.8 }}
-            animate={{ scale: 2.5, opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-          />
+          {!motionReduced && (
+            <motion.div
+              className="reward-animation__ring"
+              initial={{ scale: 0, opacity: 0.8 }}
+              animate={{ scale: 2.5, opacity: 0 }}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+            />
+          )}
         </motion.div>
       )}
     </AnimatePresence>

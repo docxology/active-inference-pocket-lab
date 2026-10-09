@@ -53,7 +53,9 @@ export default function PausePage() {
               </div>
               <button
                 className="pause-page__resume-link"
-                onClick={() => navigate(`/modules/${bookmarkedModule.id}`)}
+                onClick={() =>
+                  navigate(`/modules/${bookmarkedModule.id}`, { state: { resume: true } })
+                }
               >
                 Resume →
               </button>

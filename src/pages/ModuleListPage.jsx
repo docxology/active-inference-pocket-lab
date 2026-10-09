@@ -51,12 +51,11 @@ export default function ModuleListPage() {
           </p>
         </header>
 
-        <div className="module-list-page__filters" role="tablist" aria-label="Filter by topic">
+        <div className="module-list-page__filters" role="group" aria-label="Filter by topic">
           {tags.map((t) => (
             <button
               key={t}
-              role="tab"
-              aria-selected={activeTag === t}
+              aria-pressed={activeTag === t}
               className={`module-list-page__tag${activeTag === t ? ' is-active' : ''}`}
               onClick={() => setActiveTag(t)}
             >
@@ -90,7 +89,9 @@ export default function ModuleListPage() {
                 <div className="module-card__header">
                   <span className="module-card__number">{String(mod.id).padStart(2, '0')}</span>
                   <span className="module-card__icon">{mod.icon}</span>
-                  {mod.minutes && <span className="module-card__minutes">{mod.minutes} min</span>}
+                  {mod.estMinutes && (
+                    <span className="module-card__minutes">~{mod.estMinutes} min</span>
+                  )}
                 </div>
                 <h3 className="module-card__title">{mod.title}</h3>
                 <p className="module-card__subtitle">{mod.subtitle}</p>

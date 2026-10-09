@@ -152,7 +152,7 @@
 }
 .module-list-page__tag.is-active {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-text-inverse);
   border-color: transparent;
 }
 

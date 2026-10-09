@@ -9,6 +9,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { makeFreeEnergyField, gradientStep, sampleField } from '../../utils/activeInference';
 import './FreeEnergyField.css';
+import { useAnimationEnabled } from '../../utils/useAnimationEnabled';
 
 /**
  * Map a value in [min, max] to a HSL colour stop for the heatmap.
@@ -32,6 +33,7 @@ function FreeEnergyFieldInner({
   running = true,
 }) {
   const canvasRef = useRef(null);
+  const animationEnabled = useAnimationEnabled();
   const rafRef = useRef(0);
   const field = useMemo(
     () => makeFreeEnergyField({ size: 40, muX: attractorX, muY: attractorY, spread }),
@@ -49,6 +51,7 @@ function FreeEnergyFieldInner({
     canvas.width = size * dpr;
     canvas.height = size * dpr;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const cellSize = size / field.length;
@@ -96,7 +99,7 @@ function FreeEnergyFieldInner({
   }, [field, particle, attractorX, attractorY, size]);
 
   useEffect(() => {
-    if (!running) return;
+    if (!running || !animationEnabled) return;
     function tick() {
       setParticle((p) => {
         const next = gradientStep(field, p.x, p.y, { step: 0.04, noise });
@@ -106,7 +109,7 @@ function FreeEnergyFieldInner({
     }
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [field, noise, running]);
+  }, [field, noise, running, animationEnabled]);
 
   const handleClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -124,7 +127,14 @@ function FreeEnergyFieldInner({
         className="fe-field__canvas"
         style={{ width: size, height: size }}
         onClick={handleClick}
-        role="img"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setParticle({ x: 0.1, y: 0.1 });
+          }
+        }}
         aria-label="Interactive free energy landscape — click to reset the particle"
       />
       <div className="fe-field__caption">

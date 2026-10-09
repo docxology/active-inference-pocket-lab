@@ -7,6 +7,8 @@
  * @module components/layout/Drawer
  */
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useEffectEvent } from 'react';
+import { createPortal } from 'react-dom';
 import './Drawer.css';
 
 /**
@@ -20,7 +22,54 @@ import './Drawer.css';
  * @returns {JSX.Element}
  */
 export default function Drawer({ isOpen, onClose, title, children }) {
-  return (
+  const panelRef = useRef(null);
+  const close = useEffectEvent(onClose);
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const root = document.getElementById('root');
+    const wasInert = root?.inert;
+    if (root) root.inert = true;
+    const panel = panelRef.current;
+    const focusable = () =>
+      [
+        ...panel.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]'),
+      ].filter((element) => !element.disabled);
+    (focusable()[0] || panel).focus();
+    const handleKey = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+      }
+      if (event.key !== 'Tab') return;
+      const elements = focusable();
+      const first = elements[0] || panel;
+      const last = elements.at(-1) || panel;
+      if (
+        event.shiftKey &&
+        (document.activeElement === first || document.activeElement === panel)
+      ) {
+        event.preventDefault();
+        last.focus();
+      } else if (
+        !event.shiftKey &&
+        (document.activeElement === last || document.activeElement === panel)
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    panel.addEventListener('keydown', handleKey);
+    return () => {
+      panel.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = previousOverflow;
+      if (root) root.inert = wasInert;
+      if (previousFocus?.isConnected) previousFocus.focus();
+    };
+  }, [isOpen]);
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -37,6 +86,8 @@ export default function Drawer({ isOpen, onClose, title, children }) {
 
           {/* Drawer Panel */}
           <motion.div
+            ref={panelRef}
+            tabIndex={-1}
             className="drawer"
             role="dialog"
             aria-modal="true"
@@ -52,25 +103,24 @@ export default function Drawer({ isOpen, onClose, title, children }) {
             }}
           >
             {/* Handle */}
-            <div className="drawer__handle-area" onClick={onClose}>
+            <div className="drawer__handle-area" aria-hidden="true">
               <span className="drawer__handle" />
             </div>
 
             {/* Header */}
-            {title && (
-              <header className="drawer__header">
-                <h3 className="drawer__title">{title}</h3>
-                <button className="drawer__close" onClick={onClose} aria-label="Close drawer">
-                  ✕
-                </button>
-              </header>
-            )}
+            <header className="drawer__header">
+              <h3 className="drawer__title">{title || 'Drawer'}</h3>
+              <button className="drawer__close" onClick={onClose} aria-label="Close drawer">
+                ✕
+              </button>
+            </header>
 
             {/* Content */}
             <div className="drawer__content">{children}</div>
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

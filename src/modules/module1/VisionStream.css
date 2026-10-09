@@ -38,7 +38,7 @@
   color: var(--color-vision-soft);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* ─── Controls ─── */

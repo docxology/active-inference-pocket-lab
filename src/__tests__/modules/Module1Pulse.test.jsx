@@ -8,13 +8,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppProvider } from '../../contexts/AppContext';
 import { ActivityBankProvider } from '../../contexts/ActivityBankContext';
 import PulseStream from '../../modules/module1/PulseStream';
+import { SettingsProvider } from '../../contexts/SettingsContext';
 
 function renderWithProviders(ui) {
   return render(
     <BrowserRouter>
-      <AppProvider>
-        <ActivityBankProvider>{ui}</ActivityBankProvider>
-      </AppProvider>
+      <SettingsProvider>
+        <AppProvider>
+          <ActivityBankProvider>{ui}</ActivityBankProvider>
+        </AppProvider>
+      </SettingsProvider>
     </BrowserRouter>,
   );
 }

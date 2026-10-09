@@ -1,0 +1,12 @@
+.pwa-status {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-elevated);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-elevated);
+  border-bottom: var(--space-1) solid var(--color-core);
+  text-align: center;
+}
+.pwa-status p {
+  color: var(--color-text-primary);
+}

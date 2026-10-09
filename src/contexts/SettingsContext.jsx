@@ -9,6 +9,9 @@
  * @module contexts/SettingsContext
  */
 import { createContext, useContext, useEffect, useReducer, useCallback } from 'react';
+import { MotionConfig, useReducedMotion } from 'framer-motion';
+import { normalizeSettings, readStored, writeStored } from '../utils/persistence';
+import { configureFeedback } from '../utils/haptics';
 
 const STORAGE_KEY = 'spin_settings';
 
@@ -30,19 +33,13 @@ const defaults = {
 };
 
 function load() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...defaults, ...JSON.parse(raw) };
-  } catch (err) {
-    console.warn('[Settings] Failed to load:', err.message);
-  }
-  return defaults;
+  return readStored(STORAGE_KEY, (value) => normalizeSettings(value, defaults), defaults);
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET:
-      return { ...state, ...action.payload };
+      return normalizeSettings({ ...state, ...action.payload }, defaults);
     case ACTIONS.RESET:
       return { ...defaults };
     default:
@@ -58,22 +55,21 @@ const SettingsContext = createContext(null);
  */
 export function SettingsProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, null, load);
+  const systemReducedMotion = useReducedMotion();
+  const motionReduced = state.reducedMotion || !!systemReducedMotion;
 
   // Persist
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch (err) {
-      console.warn('[Settings] Failed to persist:', err.message);
-    }
+    writeStored(STORAGE_KEY, state);
+    configureFeedback(state);
   }, [state]);
 
   // Apply global CSS variable for font scale
   useEffect(() => {
     document.documentElement.style.setProperty('--font-scale', String(state.fontScale));
-    document.documentElement.dataset.reducedMotion = String(state.reducedMotion);
+    document.documentElement.dataset.reducedMotion = String(motionReduced);
     document.documentElement.dataset.highContrast = String(state.highContrast);
-  }, [state.fontScale, state.reducedMotion, state.highContrast]);
+  }, [state.fontScale, motionReduced, state.highContrast]);
 
   const set = useCallback((patch) => {
     dispatch({ type: ACTIONS.SET, payload: patch });
@@ -83,9 +79,13 @@ export function SettingsProvider({ children }) {
     dispatch({ type: ACTIONS.RESET });
   }, []);
 
-  const value = { ...state, set, reset };
+  const value = { ...state, motionReduced, set, reset };
 
-  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
+  return (
+    <SettingsContext.Provider value={value}>
+      <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>{children}</MotionConfig>
+    </SettingsContext.Provider>
+  );
 }
 
 /**

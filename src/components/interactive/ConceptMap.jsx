@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getGlossaryEntry } from '../../data/glossary';
 import './ConceptMap.css';
+import { useAnimationEnabled } from '../../utils/useAnimationEnabled';
 
 /**
  * Node seed positions arranged by module affiliation (lightly clustered).
@@ -80,12 +81,14 @@ const MOD_COLORS = [
  * ConceptMap — tap a node to learn its meaning.
  */
 export default function ConceptMap() {
+  const animationEnabled = useAnimationEnabled();
   const svgRef = useRef(null);
   const [selected, setSelected] = useState(null);
   const [positions, setPositions] = useState(NODES);
 
   // Very-light force simulation — just enough springiness to feel alive.
   useEffect(() => {
+    if (!animationEnabled) return;
     let raf;
     let t = 0;
     function tick() {
@@ -103,7 +106,7 @@ export default function ConceptMap() {
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [animationEnabled]);
 
   const nodeMap = Object.fromEntries(positions.map((n) => [n.id, n]));
   const selNode = selected ? nodeMap[selected] : null;
@@ -115,7 +118,7 @@ export default function ConceptMap() {
         ref={svgRef}
         viewBox="0 0 320 600"
         className="concept-map__svg"
-        role="img"
+        role="group"
         aria-label="Concept map of active inference"
       >
         {EDGES.map(([a, b], i) => {
@@ -142,8 +145,17 @@ export default function ConceptMap() {
             onClick={() => setSelected(n.id)}
             className={`concept-map__node ${selected === n.id ? 'sel' : ''}`}
             role="button"
-            aria-label={`Concept: ${n.id}`}
+            tabIndex={0}
+            aria-label={`Concept: ${getGlossaryEntry(n.id)?.term || n.id}`}
+            aria-pressed={selected === n.id}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setSelected(n.id);
+              }
+            }}
           >
+            <circle r="24" fill="transparent" />
             <circle r="9" fill={MOD_COLORS[n.mod - 1]} opacity={0.85} />
             <text y="22" textAnchor="middle" fontSize="9" fill="var(--color-text-secondary)">
               {n.id}

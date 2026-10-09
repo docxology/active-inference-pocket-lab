@@ -21,7 +21,7 @@ Module 1 "The First Orbit" — Overview of Active Inference via three stream exp
 
 ## Key Functions
 
-- `computeMetrics(observation, prior, precision)` — CoreStream utility, returns surprise/KL/freeEnergy
+- `computeMetrics(observation, prior, precision, approximateMean)` — Explicit Gaussian model; returns marginal surprisal, posterior KL gap and free energy
 - `drawOrbits(ctx, width, height, time, prior, precision)` — VisionStream canvas renderer
 
 ## Logging

@@ -7,6 +7,7 @@
  * @module pages/ProficiencyMapPage
  */
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { getAllModules } from '../data/modules';
 import { useApp, STREAMS } from '../contexts/AppContext';
 import './ProficiencyMapPage.css';
@@ -62,12 +63,17 @@ export default function ProficiencyMapPage() {
                     {String(mod.id).padStart(2, '0')}
                   </span>
                 </div>
-                <span className="proficiency-map-page__module-title">{mod.title}</span>
+                <Link to={`/modules/${mod.id}`} className="proficiency-map-page__module-title">
+                  {mod.title}
+                </Link>
 
                 {/* Stream progress bars */}
                 <div className="proficiency-map-page__streams">
                   {STREAM_META.map((s) => (
                     <div key={s.key} className="proficiency-map-page__stream-bar">
+                      <span className="sr-only">
+                        {s.label}: {progress[s.key] || 0}%
+                      </span>
                       <div
                         className="proficiency-map-page__stream-fill"
                         style={{
@@ -78,6 +84,10 @@ export default function ProficiencyMapPage() {
                     </div>
                   ))}
                 </div>
+                <p className="text-label">
+                  {['pulse', 'vision', 'core'].filter((s) => progress[s] === 100).length} of 3
+                  streams complete
+                </p>
               </motion.div>
             );
           })}

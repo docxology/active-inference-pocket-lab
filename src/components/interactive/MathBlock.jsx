@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import './MathBlock.css';
+import { useSettings } from '../../contexts/SettingsContext';
 
 /**
  * MathBlock — Renders a LaTeX equation with optional derivation steps.
@@ -22,7 +23,8 @@ import './MathBlock.css';
  * @returns {JSX.Element}
  */
 export default function MathBlock({ latex, displayMode = true, label, description, steps }) {
-  const [stepsOpen, setStepsOpen] = useState(false);
+  const { showMathByDefault } = useSettings();
+  const [stepsOpen, setStepsOpen] = useState(showMathByDefault);
 
   const { html: mainHtml, error: mainError } = useMemo(() => {
     if (!latex) return { html: '', error: null };
@@ -31,7 +33,8 @@ export default function MathBlock({ latex, displayMode = true, label, descriptio
         displayMode,
         throwOnError: false,
         errorColor: 'var(--color-error)',
-        trust: true,
+        trust: false,
+        maxExpand: 1000,
       });
       return { html, error: null };
     } catch (err) {
@@ -46,6 +49,8 @@ export default function MathBlock({ latex, displayMode = true, label, descriptio
 
       <div
         className="math-block__equation"
+        role="math"
+        tabIndex={0}
         aria-label={`Mathematical equation: ${description || latex}`}
         dangerouslySetInnerHTML={{ __html: mainHtml }}
       />

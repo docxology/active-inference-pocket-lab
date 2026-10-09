@@ -37,7 +37,7 @@ export default function GlossaryPage() {
 
   useEffect(() => {
     const raw = location.hash?.replace(/^#/, '') || '';
-    if (!raw || raw.startsWith('gl-')) return;
+    if (!raw) return;
     const el = document.getElementById(raw);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -62,7 +62,7 @@ export default function GlossaryPage() {
               onChange={(e) => setQuery(e.target.value)}
             />
           </label>
-          <div className="glossary-page__meta">
+          <div className="glossary-page__meta" role="status">
             Showing {filtered.length} / {entries.length} terms
           </div>
         </header>
@@ -76,6 +76,7 @@ export default function GlossaryPage() {
         </div>
 
         <div className="glossary-page__list">
+          {filtered.length === 0 && <p>No terms match. Try a shorter term.</p>}
           {letters.map(({ L, items }) => (
             <section key={L} id={`gl-${L}`} className="glossary-page__section">
               <h2 className="glossary-page__letter">{L}</h2>

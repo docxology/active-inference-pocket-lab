@@ -79,4 +79,32 @@ describe('AppContext', () => {
       renderHook(() => useApp());
     }).toThrow('[useApp] Must be used within an AppProvider');
   });
+
+  it('loads progress at provider mount, including after an earlier provider unmounts', () => {
+    const first = renderHook(() => useApp(), { wrapper });
+    act(() => first.result.current.updateProgress(2, 'core', 75));
+    first.unmount();
+    const second = renderHook(() => useApp(), { wrapper });
+    expect(second.result.current.moduleProgress[2].core).toBe(75);
+  });
+
+  it('validates persisted shape and ignores unknown modules and invalid numbers', () => {
+    localStorage.setItem(
+      'spin_module_progress',
+      JSON.stringify({
+        1: { pulse: '100', vision: 200, core: 50 },
+        99: { pulse: 100 },
+        2: null,
+      }),
+    );
+    const { result } = renderHook(() => useApp(), { wrapper });
+    expect(result.current.moduleProgress).toEqual({ 1: { vision: 100, core: 50 } });
+  });
+
+  it('does not erase completed progress when reviewing an earlier step', () => {
+    const { result } = renderHook(() => useApp(), { wrapper });
+    act(() => result.current.updateProgress(1, 'pulse', 100));
+    act(() => result.current.updateProgress(1, 'pulse', 33));
+    expect(result.current.moduleProgress[1].pulse).toBe(100);
+  });
 });

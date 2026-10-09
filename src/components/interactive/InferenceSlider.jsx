@@ -8,7 +8,7 @@
  *
  * @module components/interactive/InferenceSlider
  */
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useId } from 'react';
 import { motion } from 'framer-motion';
 import './InferenceSlider.css';
 
@@ -47,6 +47,7 @@ export default function InferenceSlider({
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [isInteracting, setIsInteracting] = useState(false);
   const inputRef = useRef(null);
+  const inputId = useId();
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
   const percentage = ((value - min) / (max - min)) * 100;
@@ -78,7 +79,7 @@ export default function InferenceSlider({
       </motion.div>
 
       {/* Label */}
-      <label className="inference-slider__label" htmlFor={`slider-${label}`}>
+      <label className="inference-slider__label" htmlFor={inputId}>
         {label}
       </label>
 
@@ -98,7 +99,7 @@ export default function InferenceSlider({
         </div>
         <input
           ref={inputRef}
-          id={`slider-${label}`}
+          id={inputId}
           type="range"
           min={min}
           max={max}

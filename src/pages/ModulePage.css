@@ -67,8 +67,8 @@
 
 /* Progress Bar */
 .module-page__progress {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-2);
   padding: var(--space-3) 0;
 }
@@ -181,7 +181,7 @@
 }
 
 .module-page__nav-btn:hover {
-  background: var(--color-surface-glass-hover, rgba(255,255,255,0.1));
+  background: var(--color-surface-glass-hover, rgba(255, 255, 255, 0.1));
 }
 
 .module-page__nav-arrow {
@@ -206,4 +206,11 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-primary);
+}
+
+.module-page__overview {
+  display: block;
+}
+.module-page__overview ul {
+  padding: var(--space-3) var(--space-6);
 }

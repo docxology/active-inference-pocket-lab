@@ -11,7 +11,10 @@
  * @module components/layout/StreamTemplate
  */
 import { useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useApp } from '../../contexts/AppContext';
+import { useLearningPosition } from '../../modules/shared/useLearningPosition';
 import { hapticLight, hapticMedium, hapticSuccess } from '../../utils/haptics';
 import './StreamTemplate.css';
 
@@ -39,10 +42,17 @@ export default function StreamTemplate({
   onComplete,
   finalLabel = 'Spin 🌀',
 }) {
-  const [index, setIndex] = useState(0);
+  const { moduleId } = useParams();
+  const { currentModuleId } = useApp();
+  const [index, setIndex] = useLearningPosition(
+    moduleId || currentModuleId,
+    streamKey,
+    beats.length,
+  );
   const [done, setDone] = useState(false);
 
   const advance = useCallback(() => {
+    if (done) return;
     const isLast = index === beats.length - 1;
     if (isLast) {
       setDone(true);
@@ -54,8 +64,8 @@ export default function StreamTemplate({
     hapticMedium();
     const next = index + 1;
     setIndex(next);
-    onProgress?.(next / (beats.length - 1));
-  }, [index, beats.length, onProgress, onComplete]);
+    onProgress?.(next / beats.length);
+  }, [index, beats.length, onProgress, onComplete, setIndex, done]);
 
   const go = useCallback(
     (i) => {
@@ -63,7 +73,7 @@ export default function StreamTemplate({
       hapticLight();
       setIndex(i);
     },
-    [index],
+    [index, setIndex],
   );
 
   const beat = beats[index];
@@ -73,6 +83,8 @@ export default function StreamTemplate({
       <AnimatePresence mode="wait">
         <motion.div
           key={beat.id}
+          data-beat-id={beat.id}
+          id={`beat-${beat.id}`}
           className="stream-t__beat"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,16 +97,23 @@ export default function StreamTemplate({
       </AnimatePresence>
 
       <footer className="stream-t__footer">
-        <div className="stream-t__dots" role="tablist" aria-label="Stream progress">
+        <p className="text-label" role="status">
+          Step {index + 1} of {beats.length}
+          {done ? ' · Complete' : ''}
+        </p>
+        <div className="stream-t__dots" role="group" aria-label="Stream steps">
           {beats.map((b, i) => (
             <button
               key={b.id}
-              role="tab"
-              aria-selected={i === index}
+              aria-current={i === index ? 'step' : undefined}
               aria-label={`Beat ${i + 1}`}
+              aria-controls={i === index ? `beat-${b.id}` : undefined}
+              data-beat-id={b.id}
               className={`stream-t__dot ${i <= index ? 'active' : ''}`}
               onClick={() => go(i)}
-            />
+            >
+              <span aria-hidden="true" />
+            </button>
           ))}
         </div>
         <button className="stream-t__continue" onClick={advance} disabled={done}>

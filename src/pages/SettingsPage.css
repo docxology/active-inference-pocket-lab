@@ -51,29 +51,32 @@
 .settings-page__toggle {
   position: relative;
   display: inline-block;
-  width: 48px;
-  height: 28px;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
   cursor: pointer;
 }
 .settings-page__toggle input {
   opacity: 0;
-  width: 0;
-  height: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-elevated);
 }
 .settings-page__toggle-track {
   position: absolute;
-  inset: 0;
-  background: #333;
-  border-radius: 999px;
+  inset: var(--space-2) 0;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-full);
   transition: background 180ms ease;
 }
 .settings-page__toggle-thumb {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
-  background: white;
+  top: var(--toggle-thumb-inset);
+  left: var(--toggle-thumb-inset);
+  width: var(--toggle-thumb-size);
+  height: var(--toggle-thumb-size);
+  background: var(--color-text-primary);
   border-radius: 50%;
   transition: transform 180ms ease;
 }
@@ -81,7 +84,7 @@
   background: var(--color-accent);
 }
 .settings-page__toggle input:checked + .settings-page__toggle-track .settings-page__toggle-thumb {
-  transform: translateX(20px);
+  transform: translateX(var(--toggle-thumb-travel));
 }
 
 .settings-page__seg {
@@ -92,7 +95,7 @@
   border-radius: var(--radius-md);
 }
 .settings-page__seg-btn {
-  min-height: 32px;
+  min-height: var(--touch-target-min);
   padding: 4px 12px;
   border: 0;
   background: transparent;
@@ -102,7 +105,7 @@
 }
 .settings-page__seg-btn.is-active {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 .settings-page__danger {
@@ -125,4 +128,20 @@
   font-size: var(--font-size-sm);
   text-align: center;
   padding: var(--space-xl) 0;
+}
+
+.settings-page__toggle input:focus-visible + .settings-page__toggle-track {
+  outline: var(--space-1) solid var(--color-core);
+  outline-offset: var(--space-1);
+}
+.settings-page__seg {
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .settings-page__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .settings-page__toggle {
+    justify-self: end;
+  }
 }

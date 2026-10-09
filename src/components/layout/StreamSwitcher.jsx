@@ -32,9 +32,24 @@ export default function StreamSwitcher() {
             role="tab"
             id={`stream-tab-${option.key}`}
             aria-selected={isActive}
-            aria-controls={`stream-panel-${option.key}`}
+            aria-controls={isActive ? `stream-panel-${option.key}` : undefined}
+            tabIndex={isActive ? 0 : -1}
             className={`stream-switcher__tab ${option.className} ${isActive ? 'active' : ''}`}
             onClick={() => setStream(option.key)}
+            onKeyDown={(event) => {
+              const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+              if (!keys.includes(event.key)) return;
+              event.preventDefault();
+              const index = STREAM_OPTIONS.findIndex((item) => item.key === activeStream);
+              const next =
+                event.key === 'Home'
+                  ? 0
+                  : event.key === 'End'
+                    ? 2
+                    : (index + (event.key === 'ArrowRight' ? 1 : 2)) % 3;
+              setStream(STREAM_OPTIONS[next].key);
+              event.currentTarget.parentElement.querySelectorAll('[role="tab"]')[next].focus();
+            }}
           >
             {isActive && (
               <motion.span

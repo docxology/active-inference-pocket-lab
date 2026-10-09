@@ -34,7 +34,7 @@ const PAUSE_MESSAGES = [
  */
 export default function PauseButton({ moduleId, position }) {
   const { isPaused, pause, resume, setBookmark } = useActivityBank();
-  const { activeStream } = useApp();
+  const { activeStream, streamPositions, setStreamPosition } = useApp();
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -46,7 +46,9 @@ export default function PauseButton({ moduleId, position }) {
     } else {
       // Save bookmark
       if (moduleId) {
-        setBookmark(moduleId, activeStream, position || 'start');
+        const step = position ?? streamPositions[moduleId]?.[activeStream] ?? 0;
+        setBookmark(moduleId, activeStream, step);
+        if (Number.isInteger(step)) setStreamPosition(moduleId, activeStream, step);
       }
       pause();
 

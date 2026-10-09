@@ -9,6 +9,15 @@
  * @module contexts/AppContext
  */
 import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
+import { modules } from '../data/modules';
+import {
+  isModuleId,
+  isStream,
+  normalizeProgress,
+  normalizeStreamChoices,
+  readStored,
+  writeStored,
+} from '../utils/persistence';
 
 /** @enum {string} Stream types for the Triple-Stream Architecture */
 export const STREAMS = {
@@ -23,6 +32,7 @@ const ACTIONS = {
   SET_MODULE: 'SET_MODULE',
   SET_MODULE_PROGRESS: 'SET_MODULE_PROGRESS',
   RESTORE_PROGRESS: 'RESTORE_PROGRESS',
+  SET_POSITION: 'SET_POSITION',
 };
 
 /** localStorage key for persisted progress */
@@ -33,19 +43,7 @@ const STORAGE_KEY = 'spin_module_progress';
  * @returns {Object} Persisted module progress or empty object
  */
 function loadPersistedProgress() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      console.log('[AppContext] Restored persisted progress', {
-        moduleCount: Object.keys(parsed).length,
-      });
-      return parsed;
-    }
-  } catch (error) {
-    console.error('[AppContext] Failed to load persisted progress:', error);
-  }
-  return {};
+  return readStored(STORAGE_KEY, normalizeProgress, {});
 }
 
 /**
@@ -53,18 +51,16 @@ function loadPersistedProgress() {
  * @param {Object} progress - Module progress object
  */
 function persistProgress(progress) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  } catch (error) {
-    console.error('[AppContext] Failed to persist progress:', error);
-  }
+  writeStored(STORAGE_KEY, progress);
 }
 
 /** @type {Object} Initial app state */
 const initialState = {
   activeStream: STREAMS.PULSE,
   currentModuleId: null,
-  moduleProgress: loadPersistedProgress(),
+  moduleProgress: {},
+  streamPositions: {},
+  streamChoices: {},
 };
 
 /**
@@ -76,18 +72,47 @@ const initialState = {
 function appReducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_STREAM:
-      return { ...state, activeStream: action.payload };
+      if (!isStream(action.payload)) return state;
+      return {
+        ...state,
+        activeStream: action.payload,
+        streamChoices: state.currentModuleId
+          ? { ...state.streamChoices, [state.currentModuleId]: action.payload }
+          : state.streamChoices,
+      };
 
     case ACTIONS.SET_MODULE:
-      return { ...state, currentModuleId: action.payload };
+      return isModuleId(action.payload)
+        ? { ...state, currentModuleId: Number(action.payload) }
+        : state;
+
+    case ACTIONS.SET_POSITION: {
+      const { moduleId, stream, position } = action.payload;
+      if (!isModuleId(moduleId) || !isStream(stream) || !Number.isInteger(position) || position < 0)
+        return state;
+      if (state.streamPositions[moduleId]?.[stream] === position) return state;
+      return {
+        ...state,
+        streamPositions: {
+          ...state.streamPositions,
+          [moduleId]: { ...state.streamPositions[moduleId], [stream]: position },
+        },
+      };
+    }
 
     case ACTIONS.SET_MODULE_PROGRESS: {
       const { moduleId, stream, progress } = action.payload;
+      if (!isModuleId(moduleId) || !isStream(stream) || !Number.isFinite(progress)) return state;
+      const value = Math.max(
+        state.moduleProgress[moduleId]?.[stream] || 0,
+        Math.min(100, Math.max(0, progress)),
+      );
+      if (state.moduleProgress[moduleId]?.[stream] === value) return state;
       const nextProgress = {
         ...state.moduleProgress,
         [moduleId]: {
           ...state.moduleProgress[moduleId],
-          [stream]: Math.min(100, Math.max(0, progress)),
+          [stream]: value,
         },
       };
       return { ...state, moduleProgress: nextProgress };
@@ -111,12 +136,33 @@ const AppContext = createContext(null);
  * @param {React.ReactNode} props.children
  */
 export function AppProvider({ children }) {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  const [state, dispatch] = useReducer(appReducer, null, () => ({
+    ...initialState,
+    moduleProgress: loadPersistedProgress(),
+    streamPositions: readStored(
+      'spin_stream_positions',
+      (value) => normalizeProgress(value, 1000),
+      {},
+    ),
+    streamChoices: readStored('spin_stream_choices', normalizeStreamChoices, {}),
+  }));
 
   // Persist progress on change
   useEffect(() => {
     persistProgress(state.moduleProgress);
   }, [state.moduleProgress]);
+
+  useEffect(() => {
+    writeStored('spin_stream_positions', state.streamPositions);
+  }, [state.streamPositions]);
+
+  useEffect(() => {
+    writeStored('spin_stream_choices', state.streamChoices);
+  }, [state.streamChoices]);
+
+  const setStreamPosition = useCallback((moduleId, stream, position) => {
+    dispatch({ type: ACTIONS.SET_POSITION, payload: { moduleId, stream, position } });
+  }, []);
 
   const setStream = useCallback((stream) => {
     console.log(`[AppContext] Stream switched to: ${stream}`);
@@ -144,8 +190,10 @@ export function AppProvider({ children }) {
     try {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem('spin_activity_bank');
-    } catch {
-      /* ignore storage unavailable / quota */
+      localStorage.removeItem('spin_stream_positions');
+      localStorage.removeItem('spin_stream_choices');
+    } catch (error) {
+      console.warn('[AppContext] Failed to clear device storage:', error.message);
     }
     dispatch({ type: ACTIONS.RESTORE_PROGRESS, payload: {} });
     // Full reload ensures hooks that cached persisted state reinitialize.
@@ -175,7 +223,7 @@ export function AppProvider({ children }) {
     const ids = Object.keys(state.moduleProgress);
     if (ids.length === 0) return 0;
     const total = ids.reduce((sum, id) => sum + getModuleProgress(id), 0);
-    return Math.round(total / 10); // 10 total modules
+    return Math.round(total / modules.length);
   }, [state.moduleProgress, getModuleProgress]);
 
   const value = {
@@ -186,6 +234,7 @@ export function AppProvider({ children }) {
     getModuleProgress,
     getOverallProgress,
     resetApp,
+    setStreamPosition,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

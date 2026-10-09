@@ -6,11 +6,13 @@
  *
  * @module pages/ModulePage
  */
-import { lazy, Suspense, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { getModuleById, getAllModules } from '../data/modules';
 import { useApp, STREAMS } from '../contexts/AppContext';
+import { useSettings } from '../contexts/SettingsContext';
+import { useActivityBank } from '../contexts/ActivityBankContext';
 import StreamSwitcher from '../components/layout/StreamSwitcher';
 import PauseButton from '../components/interactive/PauseButton';
 import RouteFallback from '../components/layout/RouteFallback';
@@ -96,29 +98,43 @@ function ModuleNav({ currentId }) {
       {prev ? (
         <motion.button
           className="module-page__nav-btn module-page__nav-btn--prev"
-          onClick={() => { hapticMedium(); navigate(`/modules/${prev.id}`); }}
+          onClick={() => {
+            hapticMedium();
+            navigate(`/modules/${prev.id}`);
+          }}
           whileTap={{ scale: 0.96 }}
         >
           <span className="module-page__nav-arrow">←</span>
           <span className="module-page__nav-info">
             <span className="module-page__nav-label">Previous</span>
-            <span className="module-page__nav-title">{prev.icon} {prev.title}</span>
+            <span className="module-page__nav-title">
+              {prev.icon} {prev.title}
+            </span>
           </span>
         </motion.button>
-      ) : <div />}
+      ) : (
+        <div />
+      )}
       {next ? (
         <motion.button
           className="module-page__nav-btn module-page__nav-btn--next"
-          onClick={() => { hapticMedium(); navigate(`/modules/${next.id}`); }}
+          onClick={() => {
+            hapticMedium();
+            navigate(`/modules/${next.id}`);
+          }}
           whileTap={{ scale: 0.96 }}
         >
           <span className="module-page__nav-info">
             <span className="module-page__nav-label">Next</span>
-            <span className="module-page__nav-title">{next.icon} {next.title}</span>
+            <span className="module-page__nav-title">
+              {next.icon} {next.title}
+            </span>
           </span>
           <span className="module-page__nav-arrow">→</span>
         </motion.button>
-      ) : <div />}
+      ) : (
+        <div />
+      )}
     </div>
   );
 }
@@ -129,17 +145,33 @@ function ModuleNav({ currentId }) {
  */
 export default function ModulePage() {
   const { moduleId } = useParams();
+  return <ModuleExperience key={moduleId} moduleId={moduleId} />;
+}
+
+/** Initialize one module's entry stream before mounting any stream that can save bookmarks. */
+function ModuleExperience({ moduleId }) {
   const navigate = useNavigate();
-  const { activeStream, moduleProgress, setModule } = useApp();
+  const location = useLocation();
+  const { activeStream, currentModuleId, moduleProgress, streamChoices, setModule, setStream } =
+    useApp();
+  const { defaultStream } = useSettings();
+  const { bookmark, resume } = useActivityBank();
   const mod = getModuleById(moduleId);
+  const [entryStream] = useState(() =>
+    location.state?.resume && String(bookmark?.moduleId) === moduleId
+      ? bookmark.stream
+      : streamChoices[moduleId] || defaultStream,
+  );
 
   // Set current module in context
   useEffect(() => {
     if (mod) {
       setModule(mod.id);
+      setStream(entryStream);
+      if (location.state?.resume) resume();
       console.log(`[ModulePage] Entered Module ${mod.id}: ${mod.title}`);
     }
-  }, [mod, setModule]);
+  }, [mod, setModule, setStream, entryStream, resume, location.state?.resume]);
 
   // Module not found
   if (!mod) {
@@ -157,6 +189,7 @@ export default function ModulePage() {
   }
 
   // Get the stream component
+  if (currentModuleId !== mod.id) return <RouteFallback />;
   const streams = MODULE_STREAMS[mod.id];
   const StreamComponent = streams?.[activeStream];
   const progress = moduleProgress[mod.id] || {};
@@ -191,54 +224,26 @@ export default function ModulePage() {
         <ProgressBar progress={progress} />
       </div>
 
-      {/* Overview */}
-      {(mod.outcomes?.length > 0 || mod.glossary?.length > 0) && (
-        <div className="container">
-          <section className="module-page__overview" aria-label="Module overview">
-            {mod.outcomes?.length > 0 && (
-              <div className="module-page__overview-card">
-                <h3>You'll leave able to…</h3>
-                <ul>
-                  {mod.outcomes.map((o, i) => (
-                    <li key={i}>{o}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {mod.glossary?.length > 0 && (
-              <div className="module-page__overview-card">
-                <h3>Vocabulary lit up</h3>
-                <div className="module-page__overview-tags">
-                  {mod.glossary.map((g) => (
-                    <span key={g} className="module-page__overview-tag">
-                      {g}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </section>
-        </div>
-      )}
-
       {/* Stream Switcher */}
       <div className="container">
         <StreamSwitcher />
       </div>
 
-      {/* Stream Content — AnimatePresence for smooth transitions */}
+      {/* Stream Content — keyed entry animation keeps inactive controls unmounted */}
       <div className="module-page__content">
         <div className="container">
-          <AnimatePresence mode="wait">
+          <>
             {StreamComponent ? (
               <motion.div
-                key={activeStream}
+                key={`${mod.id}-${activeStream}`}
+                role={mod.id === 1 ? undefined : 'tabpanel'}
+                id={mod.id === 1 ? undefined : `stream-panel-${activeStream}`}
+                aria-labelledby={`stream-tab-${activeStream}`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
-                <StreamErrorBoundary>
+                <StreamErrorBoundary key={`${mod.id}-${activeStream}`}>
                   <Suspense fallback={<RouteFallback />}>
                     <StreamComponent />
                   </Suspense>
@@ -250,14 +255,25 @@ export default function ModulePage() {
                 className="module-page__placeholder"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
               >
                 <p>✨ This stream is being built. Check back soon!</p>
-                <p className="text-label">{mod.streams[activeStream]}</p>
+                <p className="text-label">{mod.streams[activeStream]?.summary}</p>
               </motion.div>
             )}
-          </AnimatePresence>
+          </>
         </div>
+      </div>
+
+      <div className="container">
+        <details className="module-page__overview">
+          <summary>Learning goals and vocabulary</summary>
+          <ul>
+            {mod.outcomes?.map((outcome) => (
+              <li key={outcome}>{outcome}</li>
+            ))}
+          </ul>
+          <p>{mod.glossary?.join(' · ')}</p>
+        </details>
       </div>
 
       {/* Pause Button */}

@@ -87,12 +87,11 @@ export default function ModelRecipe() {
 
   return (
     <div className="model-recipe">
-      <nav className="model-recipe__tabs" role="tablist">
+      <nav className="model-recipe__tabs" role="group" aria-label="Model ingredients">
         {INGREDIENTS.map((ing, i) => (
           <button
             key={ing.symbol}
-            role="tab"
-            aria-selected={i === idx}
+            aria-pressed={i === idx}
             className={`model-recipe__tab ${i === idx ? 'active' : ''}`}
             onClick={() => setIdx(i)}
           >
@@ -134,7 +133,7 @@ export default function ModelRecipe() {
                     <td
                       key={c}
                       style={{
-                        background: `rgba(124,107,255,${Math.min(1, Math.max(0, v))})`,
+                        background: `rgba(124,107,255,${Math.min(0.3, Math.max(0, v) * 0.3)})`,
                       }}
                     >
                       {v.toFixed(2)}

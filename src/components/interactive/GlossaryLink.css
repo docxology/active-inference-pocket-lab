@@ -1,12 +1,12 @@
 .glossary-link {
-  color: var(--color-vision);
+  color: var(--color-vision-soft);
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: var(--font-weight-medium);
 }
 
 .glossary-link:focus-visible {
-  outline: 2px solid var(--color-vision);
+  outline: 2px solid var(--color-vision-soft);
   outline-offset: 2px;
   border-radius: var(--radius-xs);
 }

@@ -106,7 +106,7 @@
   background: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  opacity: 0.4;
+  opacity: 1;
   min-width: 100px;
 }
 
@@ -258,3 +258,5 @@
   color: var(--color-text-muted);
   font-size: var(--font-size-xs);
 }
+
+.hearth-page__badge:not(.earned) .hearth-page__badge-icon { opacity: 0.4; }

@@ -6,6 +6,7 @@
  * @module components/interactive/MessagePassingCircuit
  */
 import { useEffect, useRef } from 'react';
+import { useAnimationEnabled } from '../../utils/useAnimationEnabled';
 import './MessagePassingCircuit.css';
 
 /**
@@ -24,6 +25,7 @@ export default function MessagePassingCircuit({
   size = 320,
 }) {
   const canvasRef = useRef(null);
+  const animationEnabled = useAnimationEnabled();
   const rafRef = useRef(0);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function MessagePassingCircuit({
     canvas.width = size * dpr;
     canvas.height = size * dpr;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const L = 3;
@@ -108,12 +111,12 @@ export default function MessagePassingCircuit({
       }
 
       if (running) t += 1;
-      rafRef.current = requestAnimationFrame(frame);
+      if (running && animationEnabled) rafRef.current = requestAnimationFrame(frame);
     }
-    rafRef.current = requestAnimationFrame(frame);
+    frame();
 
     return () => cancelAnimationFrame(rafRef.current);
-  }, [precision, drive, running, size]);
+  }, [precision, drive, running, size, animationEnabled]);
 
   return (
     <div className="mp-circuit">

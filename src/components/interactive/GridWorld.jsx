@@ -9,6 +9,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { softmax } from '../../utils/activeInference';
 import './GridWorld.css';
+import { useAnimationEnabled } from '../../utils/useAnimationEnabled';
 
 /**
  * @typedef {Object} GridCell
@@ -62,6 +63,7 @@ function defaultGrid(size = 4) {
  * @returns {JSX.Element}
  */
 export default function GridWorld({ size = 4, risk = 1, ambiguity = 1, running = true }) {
+  const animationEnabled = useAnimationEnabled();
   const [grid] = useState(() => defaultGrid(size));
   const [agent, setAgent] = useState({ x: 0, y: 0 });
   const [revealed, setRevealed] = useState(() => new Set());
@@ -94,29 +96,27 @@ export default function GridWorld({ size = 4, risk = 1, ambiguity = 1, running =
 
   const reachedGoal = agent.x === goal?.x && agent.y === goal?.y;
 
-  // Step loop
+  const step = useCallback(() => {
+    if (reachedGoal) return;
+    const best = scores.reduce((best, score) => (score.G < best.G ? score : best), { G: Infinity });
+    if (best.G === Infinity) return;
+    setAgent({ x: best.nx, y: best.ny });
+    setTrail((t) => [...t.slice(-20), { x: best.nx, y: best.ny }]);
+    setRevealed((r) => new Set([...r, `${best.nx},${best.ny}`]));
+    setStepNo((s) => s + 1);
+  }, [reachedGoal, scores]);
+
+  // Step loop; reduced motion keeps the simulation explicitly operable.
   useEffect(() => {
-    if (!running || reachedGoal) {
+    if (!running || reachedGoal || !animationEnabled) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       return;
     }
-    intervalRef.current = setInterval(() => {
-      // Pick action argmax (deterministic for smooth demo).
-      const best = scores.reduce((best, s) => (s.G < best.G ? s : best), { G: Infinity });
-      if (!best || best.G === Infinity) return;
-      setAgent({ x: best.nx, y: best.ny });
-      setTrail((t) => [...t.slice(-20), { x: best.nx, y: best.ny }]);
-      setRevealed((r) => {
-        const n = new Set(r);
-        n.add(`${best.nx},${best.ny}`);
-        return n;
-      });
-      setStepNo((s) => s + 1);
-    }, 650);
+    intervalRef.current = setInterval(step, 650);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [running, scores, reachedGoal]);
+  }, [running, reachedGoal, animationEnabled, step]);
 
   const reset = useCallback(() => {
     setAgent({ x: 0, y: 0 });
@@ -180,12 +180,19 @@ export default function GridWorld({ size = 4, risk = 1, ambiguity = 1, running =
       </div>
 
       <footer className="grid-world__footer">
+        <button onClick={step} disabled={reachedGoal}>
+          Step agent
+        </button>
         <span>step {stepNo}</span>
         <span>{reachedGoal ? '✦ reached — hearth kept' : 'thinking…'}</span>
         <button className="grid-world__reset" onClick={reset}>
           reset
         </button>
       </footer>
+      <p className="text-label">
+        Greedy toy score: distance to goal − bonus for unexplored fog. The bars show softmax
+        weights; this demo chooses the lowest score deterministically.
+      </p>
     </div>
   );
 }

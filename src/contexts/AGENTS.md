@@ -8,6 +8,7 @@ React Context providers for global state management.
 
 - `AppContext.jsx` — Triple-Stream state (`activeStream`, `currentModule`, `moduleProgress`)
 - `ActivityBankContext.jsx` — Pause/resume, bookmarks, sessions, streak tracking
+- `SettingsContext.jsx` — Validated preferences, motion policy and feedback configuration
 
 ## State Management Pattern
 
@@ -18,7 +19,7 @@ React Context providers for global state management.
 ## Persistence
 
 - ActivityBankContext persists to `localStorage` key: `spin_activity_bank`
-- AppContext is ephemeral (module progress resets on reload — TODO: persist)
+- AppContext persists completion, narrative steps and per-module stream choices. Read `../../docs/architecture.md` before changing initialization or resume behavior; streams can write automatic bookmarks when mounted.
 
 ## Hooks
 
