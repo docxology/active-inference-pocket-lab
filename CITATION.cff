@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "active-inference-pocket-lab"
+authors:
+  - family-names: Friedman
+    given-names: Daniel Ari
+    orcid: "https://orcid.org/0000-0001-6232-9096"
+repository-code: "https://github.com/docxology/active-inference-pocket-lab"
+abstract: "Spin — a browser-based pocket lab for learning active inference and the free energy principle, with chapter modules each rendered in three switchable streams (conversational, animated, LaTeX academic). Installable PWA built on React, Vite, Framer Motion, and KaTeX, with a Vitest suite."
+license: MIT
