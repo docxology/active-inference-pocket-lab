@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" width="1120" height="650" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">Spin — The Active Inference Pocket Lab Architecture Overview</title>
+  <desc id="svg-desc">Architecture of Spin: React 19 context spine, 10-module curriculum across Triple-Stream Helix (Pulse, Vision, Core), and pure numerical Active Inference core.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/></marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb"/></marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0d9488"/></marker>
+    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4f46e5"/></marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/></marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#059669"/></marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#e11d48"/></marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#7c3aed"/></marker>
+  </defs>
+  <rect x="4" y="4" width="1112" height="642" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="4" y="4" width="1112" height="68" rx="16" fill="#0f172a"/>
+  <rect x="4" y="56" width="1112" height="16" fill="#0f172a"/>
+  <line x1="4" y1="72" x2="1116" y2="72" stroke="#38bdf8" stroke-width="2.5"/>
+  <rect x="895" y="21" width="203" height="30" rx="15" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2"/>
+  <text x="996.5" y="40.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.5" font-weight="700" fill="#38bdf8" text-anchor="middle">React 19 · Vite 8 · KaTeX</text>
+  <text x="26.0" y="32.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#f8fafc" text-anchor="start">Spin — The Active Inference Pocket Lab</text>
+  <text x="26.0" y="54.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#cbd5e1" text-anchor="start">Browser-native curriculum mapping Parr, Pezzulo &amp; Friston (2022) Ch. 1–10 into a Triple-Stream Helix</text>
+  <rect x="20" y="88" width="326" height="508" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="20" y="88" width="326" height="32" rx="12" fill="#2563eb" fill-opacity="0.10"/>
+  <line x1="20" y1="120" x2="346" y2="120" stroke="#2563eb" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="245" y="94" width="91" height="20" rx="6" fill="#2563eb" fill-opacity="0.16" stroke="#2563eb" stroke-width="0.8"/>
+  <text x="290.5" y="108.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">src/App.jsx</text>
+  <text x="34.0" y="109.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">1. Context &amp; Routing Spine</text>
+  <rect x="36" y="134" width="294" height="76" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="1.3"/>
+  <rect x="36" y="134" width="5" height="76" rx="2.5" fill="#2563eb"/>
+  <text x="50.0" y="154.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">SettingsProvider → AppProvider</text>
+  <text x="50.0" y="172.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">CSS design tokens bound on &lt;html&gt;</text>
+  <text x="50.0" y="188.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">activeStream + 10-module progress state</text>
+  <path d="M 183.0 210.0 L 183.0 232.0" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <rect x="36" y="234" width="294" height="86" rx="8" fill="#f8fafc" stroke="#0284c7" stroke-width="1.3"/>
+  <rect x="36" y="234" width="5" height="86" rx="2.5" fill="#0284c7"/>
+  <text x="50.0" y="254.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">ActivityBankProvider</text>
+  <text x="50.0" y="272.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Seasonal Rhythms &amp; Hibernate mode</text>
+  <text x="50.0" y="288.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">isPaused · bookmark · session history</text>
+  <text x="50.0" y="305.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Quiz flags &amp; zero-penalty rest cycles</text>
+  <path d="M 183.0 320.0 L 183.0 342.0" fill="none" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <rect x="36" y="344" width="294" height="106" rx="8" fill="#f8fafc" stroke="#4f46e5" stroke-width="1.3"/>
+  <rect x="36" y="344" width="5" height="106" rx="2.5" fill="#4f46e5"/>
+  <text x="50.0" y="364.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">AppShell &amp; Lazy Route Map</text>
+  <text x="50.0" y="382.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">/ HomePage (eager) · /modules/:id</text>
+  <text x="50.0" y="398.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">/map Proficiency · /hearth Hearth</text>
+  <text x="50.0" y="415.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">/pause Pause · /glossary Glossary</text>
+  <text x="50.0" y="431.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">TopBar · StreamSwitcher · BottomNav</text>
+  <rect x="36" y="466" width="294" height="114" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.3"/>
+  <text x="50.0" y="486.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="start">Constitutional Design Invariants</text>
+  <text x="50.0" y="504.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• First Threshold: tactile slider/drag</text>
+  <text x="50.0" y="520.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• Physics of the Drawer: spring motion</text>
+  <text x="50.0" y="537.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• Visible Pathing: zero hidden gates</text>
+  <text x="50.0" y="553.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• Seed: initial-pocket-lab-prompt.md</text>
+  <rect x="370" y="88" width="366" height="508" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="370" y="88" width="366" height="32" rx="12" fill="#7c3aed" fill-opacity="0.10"/>
+  <line x1="370" y1="120" x2="736" y2="120" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="641" y="94" width="85" height="20" rx="6" fill="#7c3aed" fill-opacity="0.16" stroke="#7c3aed" stroke-width="0.8"/>
+  <text x="683.5" y="108.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle">modules.js</text>
+  <text x="384.0" y="109.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">2. Triple-Stream Helix (10 Modules)</text>
+  <rect x="386" y="134" width="334" height="74" rx="8" fill="#f8fafc" stroke="#7c3aed" stroke-width="1.3"/>
+  <rect x="386" y="134" width="5" height="74" rx="2.5" fill="#7c3aed"/>
+  <text x="400.0" y="154.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Canonical Module Registry (Ch. 1–10)</text>
+  <text x="400.0" y="172.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Outcomes, glossary keys, firstAction,</text>
+  <text x="400.0" y="188.7" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">3-item micro-quiz &amp; StreamMeta beats</text>
+  <path d="M 553.0 208.0 L 553.0 230.0" fill="none" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <rect x="386" y="232" width="334" height="82" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="1.3"/>
+  <rect x="386" y="232" width="5" height="82" rx="2.5" fill="#e11d48"/>
+  <text x="400.0" y="252.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Pulse Stream — Enthusiast Path</text>
+  <text x="400.0" y="270.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Conversational framing &amp; 2-min micro-labs</text>
+  <text x="400.0" y="286.7" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Intuitive priors vs. sensory surprise sliders</text>
+  <rect x="386" y="326" width="334" height="82" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.3"/>
+  <rect x="386" y="326" width="5" height="82" rx="2.5" fill="#d97706"/>
+  <text x="400.0" y="346.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Vision Stream — Generative &amp; Spatial</text>
+  <text x="400.0" y="364.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Framer Motion physics &amp; interactive canvases</text>
+  <text x="400.0" y="380.7" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Variable Hearth controls &amp; 2-D energy fields</text>
+  <rect x="386" y="420" width="334" height="82" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <rect x="386" y="420" width="5" height="82" rx="2.5" fill="#0d9488"/>
+  <text x="400.0" y="440.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Core Stream — Formal Derivations</text>
+  <text x="400.0" y="458.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">Client-side KaTeX equations &amp; step-by-step</text>
+  <text x="400.0" y="474.7" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.2" font-weight="500" fill="#334155" text-anchor="start">variational/expected free-energy sandboxes</text>
+  <rect x="386" y="514" width="334" height="68" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.3"/>
+  <rect x="386" y="514" width="5" height="68" rx="2.5" fill="#475569"/>
+  <text x="400.0" y="534.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Shared Pedagogical Components</text>
+  <text x="400.0" y="552.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">InferenceSlider · Drawer · Quiz · Continuity</text>
+  <rect x="760" y="88" width="340" height="508" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="760" y="88" width="340" height="32" rx="12" fill="#059669" fill-opacity="0.10"/>
+  <line x1="760" y1="120" x2="1100" y2="120" stroke="#059669" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="952" y="94" width="138" height="20" rx="6" fill="#059669" fill-opacity="0.16" stroke="#059669" stroke-width="0.8"/>
+  <text x="1021.0" y="108.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#059669" text-anchor="middle">activeInference.js</text>
+  <text x="774.0" y="109.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">3. Pure Numerical Core</text>
+  <rect x="776" y="134" width="308" height="96" rx="10" fill="#0f172a" stroke="#34d399" stroke-width="1.3"/>
+  <text x="790.0" y="154.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="start">1-D Precision Gaussian Inference</text>
+  <text x="790.0" y="172.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">π_post = π_A + π_B</text>
+  <text x="790.0" y="188.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">μ_post = (π_A·μ_A + π_B·μ_B) / π_post</text>
+  <text x="790.0" y="205.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">Surprise = −ln N(o ; μ, 1/π)</text>
+  <rect x="776" y="244" width="308" height="108" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.3"/>
+  <text x="790.0" y="264.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="start">Variational Free Energy (Core)</text>
+  <text x="790.0" y="282.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">F(q) = D_KL[q(s) || p(s)] − Accuracy</text>
+  <text x="790.0" y="298.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">Accuracy = ln N(o; μ_q, 1/π_o)</text>
+  <text x="790.0" y="315.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">           − 0.5 · (π_o / π_q)</text>
+  <rect x="776" y="366" width="308" height="104" rx="8" fill="#f8fafc" stroke="#059669" stroke-width="1.3"/>
+  <rect x="776" y="366" width="5" height="104" rx="2.5" fill="#059669"/>
+  <text x="790.0" y="386.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Discrete POMDP &amp; Policy Engine</text>
+  <text x="790.0" y="404.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">softmax · logSoftmax · H(p) entropy</text>
+  <text x="790.0" y="420.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Generative A = P(o|s), B = P(s'|s,a)</text>
+  <text x="790.0" y="437.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Expected Free Energy G(π) &amp; fields</text>
+  <rect x="776" y="484" width="308" height="98" rx="8" fill="#f8fafc" stroke="#0d9488" stroke-width="1.3"/>
+  <rect x="776" y="484" width="5" height="98" rx="2.5" fill="#0d9488"/>
+  <text x="790.0" y="504.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Zero-Dependency Persistence &amp; QA</text>
+  <text x="790.0" y="522.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">persistence.js · haptics.js · logger.js</text>
+  <text x="790.0" y="538.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Unit/DOM: Vitest 4 + Testing Library</text>
+  <text x="790.0" y="555.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">A11y &amp; E2E: Playwright + axe-core</text>
+  <path d="M 346.0 396.0 L 370.0 396.0" fill="none" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <path d="M 736.0 366.0 L 760.0 366.0" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)"/>
+  <rect x="16" y="612" width="1088" height="28" rx="8" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="28.0" y="630.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1e293b" text-anchor="start">CI Gate: ./run.sh verify (eslint --max-warnings=0 · vitest run · vite build) + ./run.sh browser</text>
+  <text x="1092.0" y="630.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="end">Zero external APIs · MIT License</text>
+</svg>

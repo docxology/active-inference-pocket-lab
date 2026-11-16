@@ -6,6 +6,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Spin — The Active Inference Pocket Lab Architecture Overview](docs/assets/architecture-overview.svg)
+
 ## Overview
 
 **Spin** is a mobile-first, browser-based interactive laboratory for learning [Active Inference](https://en.wikipedia.org/wiki/Free_energy_principle#Active_inference). It transforms the 10 chapters of *Active Inference: The Free Energy Principle in Mind, Brain, and Behavior* (Parr, Pezzulo & Friston, MIT Press 2022) into hands-on learning modules with three parallel experience streams.
