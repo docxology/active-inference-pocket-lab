@@ -5,14 +5,15 @@ Thank you for contributing to the Active Inference Pocket Lab!
 ## Development Setup
 
 ```bash
-git clone <repo-url>
-npm install
-npm run dev
+git clone https://github.com/docxology/active-inference-pocket-lab.git
+cd active-inference-pocket-lab
+npm ci
+./run.sh dev
 ```
 
 ## Project Structure
 
-See [README.md](README.md) for the full architecture overview.
+See the [setup guide](docs/README.md) and [architecture](docs/architecture.md).
 
 ## Adding a New Module
 
@@ -42,8 +43,9 @@ See [README.md](README.md) for the full architecture overview.
 ## Testing
 
 ```bash
-npm test           # Run tests
-npm run test:watch # Watch mode
+./run.sh verify
+npm exec -- playwright install chromium
+./run.sh browser
 ```
 
 - Tests use real methods (no mocks)

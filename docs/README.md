@@ -1,40 +1,34 @@
-# docs/
+# Spin documentation
 
-Comprehensive documentation for Spin — The Active Inference Pocket Lab.
+Spin is a browser lab for learning active inference. Learners can switch
+between conversational activities in Pulse, visual interactives in Vision,
+and derivations and retrieval questions in Core.
 
-## The Seed
+## Start the lab locally
 
-> This project began with a single creative brief. The document [**initial-pocket-lab-prompt.md**](initial-pocket-lab-prompt.md) is the original seed from which every architectural decision, design token, and interaction pattern in Spin was grown. It defines the constitutional narrative ("the Vibe"), the 6 core rules, the Triple-Stream Architecture ("the Helix"), and the mandate for Module 1: The First Orbit. **Do not edit the body of this file** — it is the read-only founding document. Current product behavior (all 10 modules, registry quiz and glossary, PWA) is described in [modules-guide.md](modules-guide.md), [architecture.md](architecture.md), and the root [README.md](../README.md).
+Install the Node.js version in [`.node-version`](../.node-version). From
+the repository root, install the lockfile and launch the development server.
 
-## Contents
+```bash
+npm ci
+./run.sh dev
+```
 
-| Document | Description |
+Open `http://localhost:5173` in a browser. The default `./run.sh` also runs
+the Vitest suite before launching. For a production preview with the offline
+worker, use `./run.sh preview` and open `http://localhost:4173`.
+
+## Guides
+
+| Guide | What it covers |
 | --- | --- |
-| [initial-pocket-lab-prompt.md](initial-pocket-lab-prompt.md) | The Seed — Janna's original creative brief (read-only) |
-| [philosophy.md](philosophy.md) | The 6 constitutional rules with implementation mapping |
-| [architecture.md](architecture.md) | System architecture, providers, routes, lazy module streams, data flow |
-| [design-system.md](design-system.md) | Design tokens, color palette, typography, spacing, accessibility |
-| [modules-guide.md](modules-guide.md) | Module structure, registry (`quiz`, `glossary`), stream specs, expansion |
-| [api-reference.md](api-reference.md) | Component props, context APIs, data layer exports |
-| [testing.md](testing.md) | Test strategy, inventory (counts from `vitest run`), adding tests |
-| [configuration.md](configuration.md) | Vite config, environment, build, deployment, PWA |
-| [logging.md](logging.md) | Logging conventions, component prefixes |
-
-**Registry integration** (quiz questions + glossary keys per module, deep links to `/glossary#key`) is specified in [modules-guide.md](modules-guide.md) and reflected in code under `src/data/modules.js` and `src/data/glossary.js`.
-
-## Reading Order
-
-For newcomers:
-
-1. **[initial-pocket-lab-prompt.md](initial-pocket-lab-prompt.md)** — Understand the *why* (immutable)
-2. **[philosophy.md](philosophy.md)** — See how the seed became rules
-3. **[architecture.md](architecture.md)** — Understand the *how*
-4. **[modules-guide.md](modules-guide.md)** — Understand the *what* (all 10 modules, streams, quality bar)
-
-Then [design-system.md](design-system.md), [api-reference.md](api-reference.md), [testing.md](testing.md), and others as needed.
-
-## Quick Links
-
-- **Getting Started**: root [README.md](../README.md)
-- **Contributing**: [CONTRIBUTING.md](../CONTRIBUTING.md)
-- **Agent context (repo root)**: [AGENTS.md](../AGENTS.md)
+| [Modules](modules-guide.md) | Curriculum, stream registry, quiz, and glossary integration |
+| [Architecture](architecture.md) | Providers, routes, lazy modules, and state |
+| [Configuration](configuration.md) | Runtime versions, scripts, local storage, offline bundle, and deployment |
+| [Testing](testing.md) | Lint, build, Vitest checks, and Playwright browser verification |
+| [Design system](design-system.md) | Tokens, layout, motion, and access |
+| [API reference](api-reference.md) | Components, contexts, and helpers |
+| [Logging](logging.md) | Diagnostic logging and prefixes |
+| [Philosophy](philosophy.md) | Design commitments traced to the original brief |
+| [The Seed](initial-pocket-lab-prompt.md) | Original creative brief, preserved as written |
+| [Technical manuscript](manuscript/README.md) | Software architecture and evidence, with a pinned render command |

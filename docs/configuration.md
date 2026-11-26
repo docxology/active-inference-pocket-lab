@@ -1,150 +1,51 @@
 # Configuration
 
-Build configuration, environment settings, and deployment options for Spin.
+## Runtime and scripts
 
-## Vite Configuration (`vite.config.js`)
+Use the Node.js version in [`.node-version`](../.node-version) to match
+[GitHub Actions](../.github/workflows/verify.yml). The orchestrator accepts
+Node 20.19+ in the 20 line, 22.12+ in the 22 line, and major versions 24 and
+later. The [Netlify build environment](../netlify.toml) selects Node 24.
+[`package.json`](../package.json) declares package ranges, including KaTeX
+`^0.19.0`. `npm ci` installs the locked versions.
 
-```js
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,       // Dev server port
-    host: true,       // Expose to LAN (for mobile testing)
-  },
-  test: {
-    globals: true,           // No explicit imports for describe/it/expect
-    environment: 'jsdom',    // DOM simulation for tests
-    setupFiles: './src/test/setup.js',
-    css: true,               // Import CSS in tests
-  },
-});
-```
+| Command | Behavior |
+| --- | --- |
+| `./run.sh` | Install missing dependencies, test, and start the development server |
+| `./run.sh dev` | Start Vite on port 5173 with LAN access when allowed |
+| `./run.sh verify` | Enforce lint with zero warnings, run Vitest, and produce `dist/` |
+| `./run.sh preview` | Build, then preview the production bundle on port 4173 by default |
+| `./run.sh browser` | Run the production browser and accessibility suite |
+| `npm run format` | Apply `prettier --write "src/**/*.{js,jsx,css,md}"` |
 
-### Key Settings
+See [Testing](testing.md) for browser setup and environment overrides. The
+app requires no environment variables.
 
-| Setting | Value | Purpose |
-| --- | --- | --- |
-| `server.port` | 5173 | Dev server port |
-| `server.host` | true | Accessible from LAN devices (mobile testing) |
-| `test.globals` | true | Vitest globals without imports |
-| `test.environment` | jsdom | Browser-like DOM |
-| `test.setupFiles` | `./src/test/setup.js` | real DOM Storage + jest-dom |
-| `test.css` | true | Allow importing CSS in test modules |
+## Production build and hosting
 
-## Package Scripts (`package.json`)
+[`vite.config.js`](../vite.config.js) uses the React plugin and
+`offlineBundle`. The latter generates `dist/sw.js` from
+[`public/sw.js`](../public/sw.js) with a bundle-specific cache version and
+a list of build assets. After a successful production worker install, the
+cache includes the shell and bundled lazy module chunks. A waiting worker
+can be activated through the update control. The worker retains one
+previous Spin cache to serve retired chunks for existing tabs.
 
-| Script | Command | Purpose |
-| --- | --- | --- |
-| `dev` | `vite` | Start development server |
-| `build` | `vite build` | Production build to `dist/` |
-| `preview` | `vite preview` | Preview production build |
-| `test` | `vitest run` | Run tests once |
-| `test:watch` | `vitest` | Watch mode testing |
-| `test:coverage` | `vitest run --coverage` | Tests with coverage report |
-| `lint` | `eslint .` | Run ESLint |
-| `format` | `prettier --write .` | Format code with Prettier |
+Deploy `dist/` with a fallback to `index.html` for client-side routes.
+[`netlify.toml`](../netlify.toml) runs `./run.sh verify`, publishes
+`dist/`, configures SPA routing, and sets cache headers. The PWA shell
+and app icons are in [`public/`](../public/).
 
-## Environment Variables
+## Browser storage
 
-Currently none required. Future variables:
+| LocalStorage key | Data |
+| --- | --- |
+| `spin_module_progress` | Completion per module and stream |
+| `spin_stream_positions` | Saved step per module and stream |
+| `spin_stream_choices` | Last selected stream per module |
+| `spin_activity_bank` | Pause, bookmark, activity, and saved questions |
+| `spin_settings` | Display, feedback, default stream, and bookmark preferences |
 
-| Variable | Purpose | Status |
-| --- | --- | --- |
-| `VITE_API_URL` | Backend API endpoint | TODO |
-| `VITE_ANALYTICS_ID` | Analytics tracking | TODO |
-
-## Prettier Configuration (`.prettierrc`)
-
-```json
-{
-  "singleQuote": true,
-  "trailingComma": "all",
-  "tabWidth": 2,
-  "semi": true,
-  "printWidth": 100
-}
-```
-
-## Dependencies
-
-### Runtime
-| Package | Version | Purpose |
-| --- | --- | --- |
-| react | ^19 | UI framework |
-| react-dom | ^19 | DOM rendering |
-| react-router-dom | ^7 | Client-side routing |
-| framer-motion | ^12 | Physics-based animations |
-| katex | ^0.16 | LaTeX mathematical rendering |
-
-### Development
-| Package | Version | Purpose |
-| --- | --- | --- |
-| vite | ^8 | Build tool + dev server |
-| @vitejs/plugin-react | ^6 | React plugin for Vite |
-| vitest | ^4 | Test runner |
-| @testing-library/react | ^16 | Component test utilities |
-| @testing-library/jest-dom | ^6 | DOM assertion matchers |
-| jsdom | ^29 | Test DOM environment |
-| eslint | ^9 | Code linting |
-| prettier | ^3 | Code formatting |
-
-## Deployment
-
-### Static Hosting (Recommended)
-Build and deploy `dist/`:
-```bash
-./run.sh verify
-# Upload dist/ to Netlify, Vercel, GitHub Pages, etc.
-```
-
-This repo includes **`netlify.toml`** at the root (build command, `publish = dist`, SPA redirect `/*` → `/index.html` 200, security headers). **`public/_redirects`** also supports Netlify-style hosting.
-
-### SPA Routing
-Configure your host to redirect all routes to `index.html` (since we use BrowserRouter):
-- **Netlify**: `netlify.toml` + `_redirects` (see above)
-- **Vercel**: `vercel.json` with `rewrites`
-- **GitHub Pages**: Use HashRouter instead (requires code change)
-
-## LocalStorage Keys
-
-| Key | Context | Data |
-| --- | --- | --- |
-| `spin_activity_bank` | ActivityBankContext | Pause state, bookmarks, sessions, streak |
-| `spin_module_progress` | AppContext | Progress per module per stream (0-100) |
-| `spin_settings` | SettingsContext | Validated motion, haptics, sound, font scale, default stream, math and bookmark preferences |
-| `spin_stream_positions` | AppContext | Step index per module and stream |
-| `spin_stream_choices` | AppContext | Last selected stream per module |
-
-## PWA (`public/`)
-
-- `manifest.webmanifest` — installability and display metadata
-- `sw.js` — service worker (registered from [`src/main.jsx`](../src/main.jsx) in production)
-- `public/_redirects` — SPA fallback on Netlify (`/* /index.html 200`)
-
-## Orchestration (`run.sh`)
-
-Use the `run.sh` thin orchestrator at the repository root as the primary command interface:
-- `./run.sh` - Full pipeline (install, test, dev server)
-- `./run.sh test` - Execute tests
-- `./run.sh build` - Production bundle
-
-## Future Configuration TODOs
-
-- [x] PWA shell — `manifest.webmanifest` + `sw.js` under `public/` (offline cache strategy can deepen over time)
-- [ ] IndexedDB for larger offline data (beyond the installable shell)
-- [ ] Dark/light theme toggle (currently dark-only; Settings has high-contrast + font scale)
-- [ ] Optional env vars (`VITE_*`) when a backend or analytics layer lands
-
-
-## Release gates and offline builds
-
-Use Node.js 24 LTS in CI and Netlify. The orchestrator also accepts 20.19+, 22.12+, and newer even majors. `npm ci` installs the exact lockfile when dependencies are absent.
-
-- `./run.sh lint` is non-mutating and fails on lint errors or warnings.
-- `./run.sh verify` runs lint, unit/integration tests, and the production build; Netlify uses this command.
-- `./run.sh browser` runs the Chromium mobile/desktop workflow in `tests/browser/app.spec.js`; install its browser with `npm exec playwright install chromium` first.
-- GitHub Actions additionally checks dependency advisories and runs browser QA.
-
-Vite generates `dist/sw.js` with the build's full asset inventory and a cache version derived from the bundle. Installation must fetch every bundled asset successfully. This covers unvisited modules and KaTeX fonts after installation. The worker serves its matching cached HTML shell, so a redeploy cannot mix new HTML with old JavaScript. `PwaStatus` offers waiting updates explicitly and displays connectivity. Only Spin caches are managed; one previous bundle is retained for other open tabs. Fonts requested from Google are optional and fall back to system fonts offline.
-
-Progress remains device-local. Clearing site data removes it; IndexedDB and server synchronization are still backlog decisions, not implemented features.
+Progress is saved in the browser for the current origin. Clearing site
+data removes it. Storage reads validate records and fall back when
+the stored values cannot be read or used.

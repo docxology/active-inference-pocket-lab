@@ -18,14 +18,14 @@ Comprehensive project documentation for Spin — The Active Inference Pocket Lab
 | `design-system.md` | Tokens, typography, touch targets, accessibility |
 | `modules-guide.md` | Triple streams, `quiz` / `glossary` registry, expansion |
 | `api-reference.md` | Props and exports mirroring source |
-| `testing.md` | Policy, inventory — **refresh test counts when the suite changes** |
+| `testing.md` | Native and browser verification commands |
 | `configuration.md` | Vite, scripts, deployment, `public/` PWA assets |
 | `logging.md` | `[ComponentName]` prefixes and logger usage |
 
 ## Maintenance
 
 - After adding components, contexts, or data exports: update `api-reference.md`.
-- After adding or removing tests: run `npm test` and update numeric lines in `testing.md` and root `README.md` if they quote totals.
+- Keep the commands in `testing.md` aligned with `run.sh` and the CI workflow. The test runners report current totals.
 - After routing or provider changes: update `architecture.md` and `configuration.md` as needed.
 - Keep `modules-guide.md` aligned with `src/data/modules.js` and `src/pages/ModulePage.jsx`.
 - Never edit the Seed body; link to other docs for “current Spin” instead.

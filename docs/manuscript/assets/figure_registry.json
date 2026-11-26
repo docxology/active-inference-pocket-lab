@@ -1,0 +1,14 @@
+{
+  "schema_version": "spin-figure-registry-v1",
+  "figures": [
+    {
+      "filename": "learning-continuity.png",
+      "label": "fig:learning_continuity",
+      "caption": "The module route offers three streams. Stream position and activity records write through separate contexts to browser storage.",
+      "generated_by": "Graphviz: docs/manuscript/assets/learning-continuity.dot",
+      "metadata": {
+        "alt_text": "The module route branches to Pulse, Vision, and Core. Progress and pause or bookmark state flow into validated browser storage."
+      }
+    }
+  ]
+}
