@@ -1,5 +1,9 @@
 # Architecture
 
+See the [architecture overview diagram](assets/architecture-overview.svg) for
+the original visual map and the [technical manuscript](manuscript/README.md)
+for the continuity and verification walkthrough.
+
 Spin's system architecture for the Active Inference Pocket Lab.
 
 ## Technology Stack

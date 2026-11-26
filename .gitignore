@@ -34,3 +34,6 @@ spin-update.patch
 test-results/
 playwright-report/
 .netlify/
+
+# Local manuscript outputs
+/output/

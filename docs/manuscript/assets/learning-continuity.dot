@@ -1,0 +1,19 @@
+digraph learning_continuity {
+  graph [bgcolor=white, ranksep=0.43, nodesep=0.38, dpi=168];
+  node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=11,
+        margin="0.15,0.10", color="#284A5D", fillcolor="#EDF4F6"];
+  edge [color="#284A5D", arrowsize=0.7];
+  module [label="Module route and registry", fillcolor="#D5E9EF"];
+  pulse [label="Pulse\nConversational activity"];
+  vision [label="Vision\nVisual interaction"];
+  core [label="Core\nDerivation and retrieval"];
+  progress [label="Stream positions and progress\nApp context"];
+  pause [label="Pause and bookmark\nActivity Bank"];
+  store [label="Validated browser storage", fillcolor="#D5E9EF"];
+  { rank=same; pulse; vision; core; }
+  { rank=same; progress; pause; }
+  module -> {pulse vision core};
+  {pulse vision core} -> progress;
+  module -> pause [constraint=false];
+  {progress pause} -> store;
+}

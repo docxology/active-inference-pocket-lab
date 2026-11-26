@@ -1,0 +1,25 @@
+paper:
+  title: "Spin: The Active Inference Pocket Lab"
+  subtitle: "Curriculum structure, browser continuity, and verification"
+
+authors:
+  - name: "Daniel Ari Friedman"
+    orcid: "0000-0001-6232-9096"
+
+publication:
+  repository_url: "https://github.com/docxology/active-inference-pocket-lab"
+  release_status: "unreleased"
+
+metadata:
+  language: "en"
+  license: "MIT"
+
+manuscript_dir: "docs/manuscript"
+
+render:
+  formats:
+    pdf: true
+    html: false
+    slides: false
+    docx: false
+    epub: false
