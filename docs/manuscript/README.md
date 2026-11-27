@@ -13,7 +13,8 @@ dot -Tpng docs/manuscript/assets/learning-continuity.dot -o docs/manuscript/asse
 
 ## Render and validate
 
-Use a clean source checkout and a separate copy of the
+Use a clean source checkout whose physical directory name is `active-inference-pocket-lab`.
+Stage 04 uses this directory name to locate the combined PDF. Use a separate copy of the
 [pinned template renderer](https://github.com/docxology/template/tree/87704feae0a4490ef7dad9c931d268e8c30273c2).
 Install Git, uv, Pandoc, XeLaTeX, and the TeX packages in the template
 [setup guide](https://github.com/docxology/template/blob/87704feae0a4490ef7dad9c931d268e8c30273c2/docs/guides/startup-and-setup.md).
