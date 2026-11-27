@@ -5,7 +5,7 @@ Pulse, Vision, and Core streams. Its modules follow the chapters in Parr,
 Pezzulo, and Friston's *Active Inference*.
 
 - [Open the live lab](https://active-inference-pocket-lab.netlify.app)
-- [Start the lab locally and explore the docs](docs/README.md)
+- [Start the lab locally](docs/README.md#start-the-lab-locally) with the pinned [.node-version](.node-version) and npm lockfile.
 - [Read and render the technical manuscript](docs/manuscript/README.md)
 - [Contribute](CONTRIBUTING.md) or [review the backlog](TODO.md)
 
